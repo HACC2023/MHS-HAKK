@@ -25,7 +25,20 @@ const LeafletMap: React.FC = () => {
                             'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors',
                         maxZoom: 18,
                     }).addTo(map);
-
+                    const LeafIcon = L.Icon.extend({
+                        options: {
+                           iconSize:     [38, 95],
+                           shadowSize:   [50, 64],
+                           iconAnchor:   [22, 94],
+                           shadowAnchor: [4, 62],
+                           popupAnchor:  [-3, -76]
+                        }
+                    });
+                    const greenIcon = new LeafIcon({
+                        iconUrl: 'http://leafletjs.com/examples/custom-icons/leaf-green.png',
+                        shadowUrl: 'http://leafletjs.com/examples/custom-icons/leaf-shadow.png'
+                    })
+                    const marker = L.marker([21.306944, -157.858337], {icon: greenIcon}).addTo(map)
                     function onMapClick(e) {
                         L.marker(e.latlng).addTo(map)
                     }
