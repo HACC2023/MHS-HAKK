@@ -1,6 +1,16 @@
 import React, { useRef, useEffect } from "react";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
+import markerIcon2x from 'leaflet/dist/images/marker-icon-2x.png';
+import markerIcon from 'leaflet/dist/images/marker-icon.png';
+import markerShadow from 'leaflet/dist/images/marker-shadow.png';
+
+delete L.Icon.Default.prototype._getIconUrl;
+L.Icon.Default.mergeOptions({
+    iconUrl: markerIcon.src,
+    iconRetinaUrl: markerIcon2x.src,
+    shadowUrl: markerShadow.src,
+})
 
 const LeafletMap: React.FC = () => {
     const mapRef = useRef<HTMLDivElement>(null);
@@ -17,10 +27,7 @@ const LeafletMap: React.FC = () => {
                     }).addTo(map);
 
                     function onMapClick(e) {
-                        popup
-                            .setLatLng(e.latlng)
-                            .setContent("You clicked the map at " + e.latlng.toString())
-                            .openOn(map);
+                        L.marker(e.latlng).addTo(map)
                     }
                     map.locate({ setView: true, maxZoom: 16 });
                     map.on('click', onMapClick);

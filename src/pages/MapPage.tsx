@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import dynamic from 'next/dynamic';
+import "leaflet/dist/leaflet.css";
 
 const LeafletMap = dynamic(() => import('../components/LeafletMap'), { ssr: false });
 

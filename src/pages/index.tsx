@@ -1,5 +1,6 @@
 import Head from "next/head";
 import MapPageLazy from './MapPage';
+import "leaflet/dist/leaflet.css";
 
 
 export default function Home() {
