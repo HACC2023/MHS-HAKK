@@ -1,10 +1,12 @@
-import React, { useRef, useEffect } from "react";
+import React, { useRef, useEffect, useState } from "react";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
 import markerIcon2x from 'leaflet/dist/images/marker-icon-2x.png';
 import markerIcon from 'leaflet/dist/images/marker-icon.png';
 import markerShadow from 'leaflet/dist/images/marker-shadow.png';
 import geoJsonData from './geoJSON.json'
+
+console.log(geoJsonData.features[0])
 
 delete L.Icon.Default.prototype._getIconUrl;
 L.Icon.Default.mergeOptions({
@@ -26,11 +28,11 @@ const LeafletMap: React.FC = () => {
                             'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors',
                         maxZoom: 18,
                     }).addTo(map);
-                    function onMapClick(e) {
-                        L.marker(e.latlng, {riseOnHover: true}).addTo(map).bindPopup(L.popup().setLatLng(e.latlng).setContent(e.latlng.toString() + '<br><a href="http://www.google.com">Google<a/>'));
-                    }
-                    map.locate({ setView: true, maxZoom: 16 });
-                    map.on('click', onMapClick);
+                    // function onMapClick(e) {
+                    //     L.marker(e.latlng, {riseOnHover: true}).addTo(map).bindPopup(L.popup().setLatLng(e.latlng).setContent(e.latlng.toString() + '<br><a href="http://www.google.com">Google<a/>'));
+                    // }
+                    // map.locate({ setView: true, maxZoom: 16 });
+                    // map.on('click', onMapClick);
                     function onLocationFound(e) {
                         var radius = parseInt(e.accuracy);
 
@@ -75,7 +77,7 @@ const LeafletMap: React.FC = () => {
         initializeMap();
     }, []);
 
-    return <div ref={mapRef} style={{ height: "800px", width: "1200px" }}></div>;
+    return <div ref={mapRef} style={{ height: "800px", width: "1000px" }}></div>;
 };
 
 export default LeafletMap;
