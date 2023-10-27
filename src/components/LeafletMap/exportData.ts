@@ -6,7 +6,12 @@ const prisma = new PrismaClient();
 async function getDataFromPrisma() {
     const allData = await prisma.centers.findMany();
 
-    const features = allData.map((entry) => {
+    const features = allData.map((entry: {
+        Geocoding_Artifact_Address_Primary_X_Coordinate: number;
+        Geocoding_Artifact_Address_Primary_Y_Coordinate: number;
+        Health_Center_Name: string;
+        Health_Center_Organization_Street_Address: string;
+    }) => {
         return {
             type: 'Feature',
             geometry: {
