@@ -4,7 +4,8 @@ import "leaflet/dist/leaflet.css";
 import markerIcon2x from 'leaflet/dist/images/marker-icon-2x.png';
 import markerIcon from 'leaflet/dist/images/marker-icon.png';
 import markerShadow from 'leaflet/dist/images/marker-shadow.png';
-import geoJsonData from './geoJSON.json'
+import geoJsonData from './geoJSON.json';
+
 
 delete L.Icon.Default.prototype._getIconUrl;
 L.Icon.Default.mergeOptions({
@@ -47,12 +48,26 @@ const LeafletMap: React.FC = () => {
 
                     map.on('locationerror', onLocationError);
 
+
+
                     // GeoJSON - FILE
                     const geoJSONLayer = L.geoJSON(geoJsonData, {
+                        pointToLayer: function (feature, latlng) {
+                            const name = feature.properties.name;
+                            const address = feature.properties.address
+                            const marker = L.marker(latlng, {
+                                title: name,
+                            });
+
+                            marker.bindPopup(feature.properties.name + `<br/>` + address);
+
+                            return marker;
+                        },
                         coordsToLatLng: function (coords) {
                             return new L.LatLng(coords[1], coords[0], coords[2]);
                         }
                     });
+
                     geoJSONLayer.addTo(map);
 
                     // GeoJSON - URL
@@ -65,7 +80,7 @@ const LeafletMap: React.FC = () => {
                     //     .catch(error => {
                     //         console.error('Error fetching GeoJSON data:', error)
                     //     })
-                    
+
                 }
             } catch (error) {
                 console.log("Error initializing map:", error);
