@@ -13,6 +13,13 @@ L.Icon.Default.mergeOptions({
     shadowUrl: markerShadow.src,
 });
 
+function onLocationFound(dbmap: L.Map, e:LocationEvent) {
+    const radius = e.accuracy;
+
+    L.marker(e.latlng).addTo(dbmap).bindPopup(`You are within ${radius} meters from this point`)
+    L.circle(e.latlng, radius).addTo(dbmap)
+}
+
 const LeafletMap: React.FC = () => {
     const mapRef = useRef<HTMLDivElement>(null);
 
@@ -26,14 +33,12 @@ const LeafletMap: React.FC = () => {
                             'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors',
                         maxZoom: 18,
                     }).addTo(map);
-                    
+                    map.locate({setView: true, maxZoom: 16});
                     function onLocationFound(e: LocationEvent) {
-                        var radius = e.accuracy;
-
-                        L.marker(e.latlng).addTo(map)
-                            .bindPopup("You are within " + radius + " meters from this point").openPopup();
-
-                        L.circle(e.latlng, radius).addTo(map);
+                        const radius = e.accuracy;
+                    
+                        L.marker(e.latlng).addTo(map).bindPopup(`You are within ${radius} meters from this point`)
+                        L.circle(e.latlng, radius).addTo(map)
                     }
 
                     map.on('locationfound', onLocationFound);

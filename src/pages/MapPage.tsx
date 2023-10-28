@@ -11,9 +11,12 @@ const MapPageLazy: React.FC = () => {
         setMapKey((prevKey) => prevKey + 1);
     };
 
+    
+
     return (
         <div>
             {/* Other page content */}
+            {/* <button onClick={}>Geolocation</button> */}
             <button onClick={handleMapReload}>Reload Map</button>
             <LeafletMap key={mapKey} />
         </div>
