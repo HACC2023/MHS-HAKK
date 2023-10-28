@@ -1,6 +1,4 @@
 import Head from "next/head";
-import "leaflet/dist/leaflet.css";
-
 
 export default function Home() {
 
