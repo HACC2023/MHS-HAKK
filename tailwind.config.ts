@@ -4,6 +4,10 @@ import { type Config } from "tailwindcss";
 
 export default {
   content: ["./src/**/*.tsx"],
+  /**
+   * @todo tell tailwind to purge unused css when publishing 
+   * @example purge: ['./public/index.html']
+   * */
   theme: {
     extend: {},
   },
