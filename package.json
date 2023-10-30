@@ -28,6 +28,7 @@
     "react-dom": "18.2.0",
     "react-leaflet": "^4.2.1",
     "superjson": "^1.13.1",
+    "tailwind-scrollbar-hide": "^1.1.7",
     "zod": "^3.22.4"
   },
   "devDependencies": {
