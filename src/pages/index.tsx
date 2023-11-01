@@ -1,5 +1,5 @@
 import Head from "next/head";
-import MapPageLazy from './Search';
+import MapPageLazy from './search';
 import "leaflet/dist/leaflet.css";
 
 
