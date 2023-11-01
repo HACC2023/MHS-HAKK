@@ -1,5 +1,5 @@
 import Head from "next/head";
-import Link from "next/link"
+import Link from "next/link";
 import { useState } from 'react';
 
 export default function Home() {
@@ -9,8 +9,8 @@ export default function Home() {
   return (
     <>
       <Head>
-        <title>MHS HAKK</title>
-        <meta name="description" content="created by the MHS HAKK team" />
+        <title>Search</title>
+        <meta name="description" content="WIP" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
       {/**@todo make navbar a component and export */}
@@ -34,9 +34,10 @@ export default function Home() {
         <div className="navbar-center">
           {/* search */}
           <div className="join">
-            {/**@todo create clear input icon that appears upon user input */}
+            {/**@todo: create clear input icon that appears upon user input */}
             <input className="input input-bordered join-item" placeholder="Search" value={searchInput}
               onChange={(e) => setSearchInput(e.target.value)} />
+            {/**@todo fix default procedure type */}
             <select className="select select-bordered join-item" defaultValue={"Procedure Type"}
               onChange={(e) => setSelectedProcedure(e.target.value)}>
               <option disabled>Procedure Type</option>
@@ -56,12 +57,13 @@ export default function Home() {
           <a className="btn btn-ghost normal-case text-xl" href="https://github.com/jhung-mililani/MHSHAKK">MHS-HAKK</a>
         </div>
       </div>
-      <footer className="footer footer-center p-4 bg-base-300 text-base-content">
-        {/* copyright */}
-        <aside>
-          <p>© 2023 <a href="https://www.mililanihs.org/" className="link">Mililani High School.</a> All Rights Reserved.</p>
-        </aside>
-      </footer>
-    </>
+      <main className="flex min-h-screen flex-col items-center justify-center bg-gradient-to-b from-[#2e026d] to-[#15162c]">
+        <div className="container flex flex-col items-center justify-center gap-12 px-4 py-16 ">
+          <h1 className="text-5xl font-extrabold tracking-tight text-white sm:text-[5rem]">
+            Make <span className="text-[hsl(280,100%,70%)]">Search</span> Function 😵
+          </h1>
+        </div>
+      </main>
+    </> 
   );
-} 
+}
