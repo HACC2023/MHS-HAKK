@@ -1,5 +1,5 @@
 generator client {
-  provider        = "prisma-client-js"
+  provider = "prisma-client-js"
 }
 
 datasource db {
@@ -7,11 +7,56 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Post {
-  id        String   @id @default(auto()) @map("_id") @db.ObjectId
-  createdAt DateTime @db.Date
-  name      String
-  updatedAt DateTime @db.Date
+model Data {
+  id                          String @id @default(auto()) @map("_id") @db.ObjectId
+  ACCEPTING_NEW_PATIENTS      String @map("ACCEPTING NEW PATIENTS")
+  ADDITIONAL_INFO_FOR_PAGE    String @map("ADDITIONAL INFO FOR PAGE")
+  ADDRESS                     String
+  DOCTOR_NAME                 String @map("DOCTOR NAME")
+  DOCTOR_NUMBER               String @map("DOCTOR NUMBER")
+  HEALTH_CENTER_NAME          String @map("HEALTH CENTER NAME")
+  HOSPITAL_NUMBER             String @map("HOSPITAL NUMBER")
+  HOSPITAL_WEBSITE            String @map("HOSPITAL WEBSITE")
+  INSURANCE_PLAN              String @map("INSURANCE PLAN")
+  NON_ENGLISH_LANGUAGE_SPOKEN String @map("NON-ENGLISH LANGUAGE SPOKEN")
+  SERVICE_NAME                String @map("SERVICE NAME")
+}
+
+model HealthcareCenter {
+  id              String @id @default(auto()) @map("_id") @db.ObjectId
+  address         String
+  /// Could not determine type: the field only had null or empty values in the sample set.
+  hospitalNumbers Json?
+  insurancePlan   String
+  name            String
+  website         String
+}
+
+model ProcedureType {
+  id                   String   @id @default(auto()) @map("_id") @db.ObjectId
+  acceptingNewPatients Boolean
+  healthcareCenterID   String   @db.ObjectId
+  name                 String
+  reviewIDs            String[]
+}
+
+model Review {
+  id                 String   @id @default(auto()) @map("_id") @db.ObjectId
+  createdAt          DateTime @db.Date
+  hadQuest           Boolean
+  healthcareCenterID String   @db.ObjectId
+  procedureIDs       String[]
+}
+
+model ReviewedProcedure {
+  id                 String  @id @default(auto()) @map("_id") @db.ObjectId
+  covered            Boolean
+  hadQuest           Boolean
+  healthcareCenterID String  @db.ObjectId
+  name               String
+  procedureTypeID    String  @db.ObjectId
+  reviewID           String  @db.ObjectId
+  type               String
 }
 
 model centers {
