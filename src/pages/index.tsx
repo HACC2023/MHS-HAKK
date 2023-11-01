@@ -20,7 +20,9 @@ export default function Home() {
             </button>
           </Link>
           <Link href="/map"><button className="btn btn-circle">
-            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" /></svg>
+            <svg fill="none" stroke="currentColor" className="h-10 w-10" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path d="m10 10q0-1.06 0.75-1.81t1.81-0.75 1.81 0.75 0.75 1.81-0.75 1.81-1.81 0.75-1.81-0.75-0.75-1.81zm-2.56 0q0 1.09 0.33 1.79l3.64 7.74q0.16 0.33 0.475 0.52t0.675 0.19 0.675-0.19 0.465-0.52l3.65-7.74q0.33-0.7 0.33-1.79-0-2.12-1.5-3.62t-3.62-1.5-3.62 1.5-1.5 3.62z" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" />
+            </svg>
           </button></Link>
         </div>
         <div className="navbar-center">
