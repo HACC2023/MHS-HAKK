@@ -9,8 +9,8 @@ export default function Home() {
 
   const router = useRouter();
 
-  const handleButtonClick = () => {
-    router.push({
+  const handleButtonClick = async () => {
+    await router.push({
       pathname: '/search',
       query: { input: searchInput, procedure: selectedProcedure },
     });
