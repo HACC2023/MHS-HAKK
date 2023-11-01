@@ -1,10 +1,21 @@
 import Head from "next/head";
 import Link from "next/link"
 import { useState } from 'react';
+import { useRouter } from "next/router";
 
 export default function Home() {
   const [searchInput, setSearchInput] = useState('');
   const [selectedProcedure, setSelectedProcedure] = useState('');
+
+  const router = useRouter();
+
+  const handleButtonClick = () => {
+    router.push({
+      pathname: '/search',
+      query: { input: searchInput, procedure: selectedProcedure },
+    });
+  };
+
 
   return (
     <>
@@ -44,11 +55,9 @@ export default function Home() {
               <option>Radiology</option>
               <option>...</option>
             </select>
-            <Link href={`/search?input=${searchInput}&procedure=${selectedProcedure}`}>
-              <button className="btn btn-success btn-outline btn-circle join-item">
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" /></svg>
-              </button>
-            </Link>
+            <button className="btn btn-success btn-outline btn-circle join-item" onClick={handleButtonClick}>
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" /></svg>
+            </button>
           </div>
         </div>
         <div className="navbar-end">
