@@ -9,12 +9,18 @@ const Navbar = () => {
 
     const router = useRouter();
 
-    const handleButtonClick = async () => {
+    const handleSearchSubmit = async () => {
         await router.push({
             pathname: '/search',
             query: { input: searchInput, procedure: selectedProcedure },
-        });
-    };
+        })
+    }
+
+    const handleReviewClick =async () => {
+        await router.push({
+            pathname: '/review'
+        })
+    }
 
     return (
         <div className="navbar bg-base-100">
@@ -47,12 +53,14 @@ const Navbar = () => {
                         <option>Radiology</option>
                         <option>...</option>
                     </select>
-                    <button className="btn btn-success btn-outline btn-circle join-item" onClick={handleButtonClick}>
+                    <button className="btn btn-success btn-outline btn-circle join-item" onClick={handleSearchSubmit}>
                         <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" /></svg>
                     </button>
                 </div>
             </div>
             <div className="navbar-end">
+                {/* review */}
+                <button className="btn btn-xs sm:btn-sm md:btn-md" onClick={handleReviewClick}>Review a Clinic</button>
                 {/* link */}
                 <a className="btn btn-ghost normal-case text-xl" href="https://github.com/jhung-mililani/MHSHAKK">MHS-HAKK</a>
             </div>
