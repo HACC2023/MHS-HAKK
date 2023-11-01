@@ -1,8 +1,8 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import dynamic from 'next/dynamic';
 import "leaflet/dist/leaflet.css";
 
-const LeafletMap = dynamic(() => import('~/components'), { ssr: false });
+const LeafletMap = dynamic(() => import('src\\components\\mapCreation'), { ssr: false });
 
 const mapPage: React.FC = () => {
     const [mapKey] = useState(0);

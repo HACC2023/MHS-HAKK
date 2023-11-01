@@ -1,5 +1,5 @@
 // https://github.com/smeijer/leaflet-geosearch
-import React, { useRef, useEffect, useState } from "react";
+import React, { useRef, useEffect } from "react";
 import L, { type LocationEvent, type ErrorEvent } from "leaflet";
 import "leaflet/dist/leaflet.css";
 import markerIcon2x from 'leaflet/dist/images/marker-icon-2x.png';
@@ -109,8 +109,8 @@ const LeafletMap: React.FC = () => {
             }
 
         };
-        initializeMap();
-    }, [geoJsonData]); // Add empty dependency array here
+        initializeMap(); /**@todo mark as void promise? */
+    }, [geoJsonData]); /**@todo Add empty dependency array here */
 
     return <div ref={mapRef} style={{ height: "800px", width: "1000px" }}></div>;
 };
