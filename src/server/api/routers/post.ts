@@ -11,6 +11,7 @@ export const postRouter = createTRPCRouter({
       };
     }),
 
+  /*
   create: publicProcedure
     .input(z.object({ name: z.string().min(1) }))
     .mutation(async ({ ctx, input }) => {
@@ -22,7 +23,8 @@ export const postRouter = createTRPCRouter({
           name: input.name,
         },
       });
-    }),
+    }), 
+    */
 
   getLatest: publicProcedure.query(({ ctx }) => {
     return ctx.db.post.findFirst({
