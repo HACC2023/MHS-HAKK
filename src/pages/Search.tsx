@@ -13,7 +13,7 @@ const MapPageLazy: React.FC = () => {
     const [insurance, setInsurance] = useState<InsuranceProviders | undefined>();
     const [mapKey, setMapKey] = useState(0);
 
-    // if no insurance selected, select first 10 clinics.
+    // if no insurance selected, select first 100 clinics.
     // if there is, plug it into our api.
     // this really needs to be one procedure with the insurance being optional.
     // this is unsorted. it is sorted however mongodb wants to sort it :)
@@ -28,16 +28,15 @@ const MapPageLazy: React.FC = () => {
     };
 
     return (
-        <body className="h-screen">
+        <body className="h-screen overflow-hidden">
             <div className="h-20 w-full bg-slate-400">
                 NAV GOES HERE (Consider making it a component?)
             </div>
             <div className="w-screen h-full flex">
-                {/* why the hell does this overflow 80 px over the page? fix the navbar or play with random tailwind properties here.  */}
-                <div className="h-full bg-slate-30
+                <div className="h-[calc(100%-5rem)] bg-slate-30
                 0 flex-col bg-slate-300 w-1/5">
                     <div>
-                        <details className="dropdown">
+                        <details className="dropdown flex justify-center">
                             {/* copy pasted drop down from daisyui / tailwinds because i am lazy. */}
                             <summary className="m-1 btn">CHOOSE YOUR INSURANCE</summary>
                             <ul className="p-2 shadow menu dropdown-content z-[1] bg-base-100 rounded-box w-52">
@@ -50,7 +49,7 @@ const MapPageLazy: React.FC = () => {
                         </details>
                     </div>
                 </div>
-                <div className="h-full w-1/2 bg-slate-500
+                <div className="h-[calc(100%-5rem)] w-1/2 bg-slate-500
                 0 flex-col overflow-y-scroll">
                     { /* tell the user to wait if we are still waiting on data to come in. 
                     DO NOT USE STATIC SITE GENERATION BECAUSE YOUTUBE DOESN'T DO THIS WHEN YOU SEARCH FOR VIDEOS
@@ -59,10 +58,17 @@ const MapPageLazy: React.FC = () => {
                     {isLoading ? "Pls wait" : centers?.map(c => (
                         <div className={'m-2 bg-slate-100 h-40 rounded-3xl p-2'} key={c.id}>
                             <div className='text-2xl border-b-2'>{c.HEALTH_CENTER_NAME + " (" + (c.SERVICE_NAME || "Comprehensive Care") + ')'}</div>
-                            <div>{c.DOCTOR_NAME}</div>
-                            <div>{c.ADDRESS}</div>
-                            <div>{c.HOSPITAL_NUMBER}</div>
-                            <div>{c.INSURANCE_PLAN}</div>
+
+                            <div className='flex'>
+                            <div>
+                                <div>{c.DOCTOR_NAME}</div>
+                                <div>{c.ADDRESS}</div>
+                                <div>{c.HOSPITAL_NUMBER}</div>
+                                <div>{c.INSURANCE_PLAN}</div>
+                            </div>
+                            <a target="_blank" rel="noopener noreferrer" href={"https://www.google.com/maps/dir//" + c.ADDRESS} 
+                            className="btn-success rounded-xl ml-auto h-fit mt-4 p-2 align-middle inline-block">Get Directions</a>
+                            </div>
                         </div>
                     ))
                     }

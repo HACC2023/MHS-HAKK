@@ -71,7 +71,7 @@ const LeafletMap = () => {
         initializeMap();
     }, []);
     
-    return <div ref={mapRef} style={{ height: "800px"}} className="w-2/5 ml-auto"></div>;
+    return <div ref={mapRef} className="w-2/5 h-[calc(100%-5rem)] ml-auto"></div>;
 };
 
 export default LeafletMap;
