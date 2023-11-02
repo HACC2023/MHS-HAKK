@@ -7,6 +7,8 @@ const InsuranceValidator = z.union([
     z.literal("QI")
 ]);
 
+export type InsuranceProviders = z.infer<typeof InsuranceValidator>;
+
 const HealthcareRouter = createTRPCRouter({
     getRandom: publicProcedure
     .query(async () => {
@@ -23,11 +25,19 @@ const HealthcareRouter = createTRPCRouter({
             where: {
                 INSURANCE_PLAN: input.insurance
             },
-            take: 10
+            take: 100
         });
 
         return a;
-    })
+    }),
+    getSome: publicProcedure
+    .query(async () => {
+        const a = await db.data.findMany({
+            take: 100
+        });
+
+        return a;
+    }),
 })
 
 export default HealthcareRouter;
