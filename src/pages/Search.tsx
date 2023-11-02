@@ -58,10 +58,10 @@ const MapPageLazy: React.FC = () => {
                     */ }
                     {isLoading ? "Pls wait" : centers?.map(c => (
                         <div className={'m-2 bg-slate-100 h-40 rounded-3xl p-2'} key={c.id}>
-                            <div className='text-2xl border-b-2'>{c.HEALTH_CENTER_NAME}</div>
+                            <div className='text-2xl border-b-2'>{c.HEALTH_CENTER_NAME + " (" + (c.SERVICE_NAME || "Comprehensive Care") + ')'}</div>
+                            <div>{c.DOCTOR_NAME}</div>
                             <div>{c.ADDRESS}</div>
                             <div>{c.HOSPITAL_NUMBER}</div>
-                            <div>{c.SERVICE_NAME || "Comprehensive Care"}</div>
                             <div>{c.INSURANCE_PLAN}</div>
                         </div>
                     ))
