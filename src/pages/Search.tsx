@@ -57,14 +57,18 @@ const MapPageLazy: React.FC = () => {
                     */ }
                     {isLoading ? "Pls wait" : centers?.map(c => (
                         <div className={'m-2 bg-slate-100 h-40 rounded-3xl p-2'} key={c.id}>
-                            <div className='text-2xl border-b-2'>{c.HEALTH_CENTER_NAME + " (" + (c.SERVICE_NAME || "Comprehensive Care") + ')'}</div>
+                            <div className='text-2xl border-b-2'>
+                                <a href={'/location/' + c.id} className={c.insurancePlans.includes("QI") ? "text-red-600" : "text-blue-500"}>
+                                    {c.names[0] + " (" + (false || "Comprehensive Care") + ')'}
+                                </a>
+                            </div>
 
                             <div className='flex'>
                             <div>
-                                <div>{c.DOCTOR_NAME}</div>
-                                <div>{c.ADDRESS}</div>
-                                <div>{c.HOSPITAL_NUMBER}</div>
-                                <div>{c.INSURANCE_PLAN}</div>
+                                <div>{c.website}</div>
+                                <div>{c.address}</div>
+                                <div>{c.healthCenterNumbers}</div>
+                                <div>{c.insurancePlans}</div>
                             </div>
                             <button 
                             onClick={async (_) => {
@@ -74,11 +78,14 @@ const MapPageLazy: React.FC = () => {
                                     loc = await new Promise((res) => 
                                         navigator.geolocation.getCurrentPosition(
                                             p=>res(p.coords.latitude + ',' + p.coords.longitude),
-                                            _err=>res("")
+                                            _err=>res(""),
+                                            {
+                                                enableHighAccuracy: true
+                                            }
                                         )
                                     );
                                 };
-                                window.open("https://www.google.com/maps/dir/" + loc + "/" + c.ADDRESS);
+                                window.open("https://www.google.com/maps/dir/" + loc + "/" + c.address);
                             }}
                             rel="noopener noreferrer" className="btn-success rounded-xl ml-auto h-fit mt-4 p-2 align-middle inline-block">Get Directions</button>
                             </div>

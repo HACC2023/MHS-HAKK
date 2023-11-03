@@ -1,6 +1,7 @@
 import { db } from "~/server/db";
 import { createTRPCRouter, publicProcedure } from "../trpc";
 import { z } from "zod";
+import { TRPCError } from "@trpc/server";
 
 const InsuranceValidator = z.union([
     z.literal("FQHC"),
@@ -10,30 +11,39 @@ const InsuranceValidator = z.union([
 export type InsuranceProviders = z.infer<typeof InsuranceValidator>;
 
 const HealthcareRouter = createTRPCRouter({
-    getRandom: publicProcedure
-    .query(async () => {
-        const randInd = Math.random() * await db.data.count();
-        return await db.data.findFirst({
-            skip: randInd
+    getById: publicProcedure
+    .input(z.object({ id: z.string() }))
+    .query(async ({ input }) => {
+        const entry = await db.healthCenter.findFirst({
+            where: {
+                id: input.id
+            },
+            include: {
+                procedureTypes: true
+            }
         });
+        if(!entry) throw new TRPCError({ code: "NOT_FOUND", message: "Clinic not found." });
+        return entry;
     }),
     // must be FQHC or QI for 'quest insurance'
     getByPlan: publicProcedure
     .input(z.object({ insurance: InsuranceValidator }))
     .query(async ({ input }) => {
-        const a = await db.data.findMany({
+        const a = await db.healthCenter.findMany({
             where: {
-                INSURANCE_PLAN: input.insurance
+                insurancePlans: {
+                    has: input.insurance
+                }
             },
-            take: 100
+            take: 100,
         });
 
         return a;
     }),
     getSome: publicProcedure
     .query(async () => {
-        const a = await db.data.findMany({
-            take: 100
+        const a = await db.healthCenter.findMany({
+            take: 100,
         });
 
         return a;
