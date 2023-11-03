@@ -13,7 +13,7 @@ L.Icon.Default.mergeOptions({
     shadowUrl: markerShadow.src,
 });
 
-const LeafletMap: React.FC = () => {
+const LeafletMap = () => {
     const mapRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
@@ -70,8 +70,8 @@ const LeafletMap: React.FC = () => {
 
         initializeMap();
     }, []);
-
-    return <div ref={mapRef} style={{ height: "800px", width: "1000px" }}></div>;
+    
+    return <div ref={mapRef} className="w-2/5 h-[calc(100%-5rem)] ml-auto"></div>;
 };
 
 export default LeafletMap;
