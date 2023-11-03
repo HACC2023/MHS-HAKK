@@ -61,7 +61,7 @@ export default function searchPage() {
                     </div>
                 </div>
                 <div className="w-1/2">
-                    <img className="h-full w-3/4 object-cover" src="https://cdn.shopify.com/s/files/1/0155/9294/7760/files/Jurassic_Waters_1024x1024.jpg?v=1679440299"></img>
+                    <img className="h-full w-3/4 object-cover" src="https://images.unsplash.com/photo-1591068929753-4d1cf8fc6ff7?auto=format&fit=crop&q=80&w=1932&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"></img>
                 </div>
             </div>
         </>
