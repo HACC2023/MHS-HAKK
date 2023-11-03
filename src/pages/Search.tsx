@@ -28,7 +28,7 @@ const MapPageLazy: React.FC = () => {
     };
 
     return (
-        <body className="h-screen overflow-hidden">
+        <div className="h-screen overflow-hidden">
             <div className="h-20 w-full bg-slate-400">
                 NAV GOES HERE (Consider making it a component?)
             </div>
@@ -66,8 +66,21 @@ const MapPageLazy: React.FC = () => {
                                 <div>{c.HOSPITAL_NUMBER}</div>
                                 <div>{c.INSURANCE_PLAN}</div>
                             </div>
-                            <a target="_blank" rel="noopener noreferrer" href={"https://www.google.com/maps/dir//" + c.ADDRESS} 
-                            className="btn-success rounded-xl ml-auto h-fit mt-4 p-2 align-middle inline-block">Get Directions</a>
+                            <button 
+                            onClick={async (_) => {
+                                let loc = "";
+                                console.log(navigator.geolocation)
+                                if(navigator.geolocation) {
+                                    loc = await new Promise((res) => 
+                                        navigator.geolocation.getCurrentPosition(
+                                            p=>res(p.coords.latitude + ',' + p.coords.longitude),
+                                            _err=>res("")
+                                        )
+                                    );
+                                };
+                                window.open("https://www.google.com/maps/dir/" + loc + "/" + c.ADDRESS);
+                            }}
+                            rel="noopener noreferrer" className="btn-success rounded-xl ml-auto h-fit mt-4 p-2 align-middle inline-block">Get Directions</button>
                             </div>
                         </div>
                     ))
@@ -77,7 +90,7 @@ const MapPageLazy: React.FC = () => {
                 that are in the search results, but I bring up the problem of pagination again. */}
                 <LeafletMap key={mapKey} />
             </div>
-        </body>
+        </div>
     );
 };
 
