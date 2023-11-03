@@ -3,15 +3,15 @@ import dynamic from 'next/dynamic';
 import "leaflet/dist/leaflet.css";
 import type { InsuranceProviders } from '~/server/api/routers/HealthcareRouter';
 import { api } from '~/utils/api';
+import Navbar from '~/components/Navbar';
 
 const LeafletMap = dynamic(() => import('../components/LeafletMap'), { ssr: false });
 
-const MapPageLazy: React.FC = () => {
+const SearchPage: React.FC = () => {
 
     // this is used for filtering.
     // allow user to set insurance status (QUEST, none, or both)
     const [insurance, setInsurance] = useState<InsuranceProviders | undefined>();
-    const [mapKey, setMapKey] = useState(0);
 
     // if no insurance selected, select first 100 clinics.
     // if there is, plug it into our api.
@@ -21,19 +21,11 @@ const MapPageLazy: React.FC = () => {
         api.healthcare.getByPlan.useQuery({ insurance }) :
         api.healthcare.getSome.useQuery();
 
-
-    // useless coz idk how to put the reload map button in the same flex as our map
-    const handleMapReload = () => {
-        setMapKey((prevKey) => prevKey + 1);
-    };
-
     return (
-        <div className="h-screen overflow-hidden">
-            <div className="h-20 w-full bg-slate-400">
-                NAV GOES HERE (Consider making it a component?)
-            </div>
-            <div className="w-screen h-full flex">
-                <div className="h-[calc(100%-5rem)] bg-slate-30
+        <div className="overflow-hidden h-screen">
+            <Navbar/>
+            <div className="w-screen h-[calc(100%-5rem)] flex">
+                <div className="h-full bg-slate-30
                 0 flex-col bg-slate-300 w-1/5">
                     <div>
                         <details className="dropdown flex justify-center">
@@ -49,7 +41,7 @@ const MapPageLazy: React.FC = () => {
                         </details>
                     </div>
                 </div>
-                <div className="h-[calc(100%-5rem)] w-1/2 bg-slate-500
+                <div className="h-full w-1/2 bg-slate-500
                 0 flex-col overflow-y-scroll">
                     { /* tell the user to wait if we are still waiting on data to come in. 
                     DO NOT USE STATIC SITE GENERATION BECAUSE YOUTUBE DOESN'T DO THIS WHEN YOU SEARCH FOR VIDEOS
@@ -95,10 +87,10 @@ const MapPageLazy: React.FC = () => {
                 </div>
                 { /* possibly feed the list of locations into here, it was requested/needed that the leaflet map should only show endpoints
                 that are in the search results, but I bring up the problem of pagination again. */}
-                <LeafletMap key={mapKey} />
+                <LeafletMap key={0} />
             </div>
         </div>
     );
 };
 
-export default MapPageLazy;
+export default SearchPage;

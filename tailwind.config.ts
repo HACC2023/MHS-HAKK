@@ -15,10 +15,10 @@ export default {
         'med-blue': '#50AEC6'
       },
       fontFamily: {
-        sans: ["var(--font-sans)", ...fontFamily.sans],
-        tyler: ['"Raleway"', 'sans-serif']
-      },
-    },
+        sans: ['"Raleway"', 'sans-serif'],
+        serif: ['"Raleway"', 'sans-serif']
+      }
+    }
   },
   plugins: [
     require("daisyui"),
