@@ -5,8 +5,18 @@ export default {
   content: ["./src/**/*.tsx"],
   theme: {
     extend: {
+      colors: {
+        'white': '#ffffff',
+        'green-gray': '#202F1D',
+        'med-green': '#3B7237',
+        'light-green': '#88AF37',
+        'hover-green': '#9ac73e',
+        'dark-blue': '#2C6191',
+        'med-blue': '#50AEC6'
+      },
       fontFamily: {
         sans: ["var(--font-sans)", ...fontFamily.sans],
+        tyler: ['"Raleway"', 'sans-serif']
       },
     },
   },
