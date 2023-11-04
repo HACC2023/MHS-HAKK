@@ -47,44 +47,6 @@ const SearchPage: React.FC = () => {
                     DO NOT USE STATIC SITE GENERATION BECAUSE YOUTUBE DOESN'T DO THIS WHEN YOU SEARCH FOR VIDEOS
                     then, when we get the data we can map it out into a DIV for each center. rn we are missing a more info <button className=""></button>
                     */ }
-<<<<<<< Updated upstream
-                    {isLoading ? "Pls wait" : centers?.map(center => (
-                        <div className={'m-2 bg-slate-100 h-40 rounded-3xl p-2'} key={center.id}>
-                            <div className='text-2xl border-b-2'>
-                                <a href={'/location/' + center.id} className={center.insurancePlans.includes("QI") ? "text-red-600" : "text-blue-500"}>
-                                    {center.names[0] + " (" + (false || "Comprehensive Care") + ')'}
-                                </a>
-                            </div>
-
-                            <div className='flex'>
-                            <div>
-                                <div>{center.website}</div>
-                                <div>{center.address}</div>
-                                <div>{center.healthCenterNumbers}</div>
-                                <div>{center.insurancePlans}</div>
-                            </div>
-                            <button 
-                            onClick={async (_) => {
-                                let loc = "";
-                                if(navigator.geolocation) {
-                                    // getCurrentPosition requires a callback function.
-                                    loc = await new Promise((res) => 
-                                        navigator.geolocation.getCurrentPosition(
-                                            // if they consent, get their latlon.
-                                            p=>res(p.coords.latitude + ',' + p.coords.longitude),
-                                            // otherwise, show google maps
-                                            _err=>res(""),
-                                            {
-                                                enableHighAccuracy: true
-                                            }
-                                        )
-                                    );
-                                };
-                                // open in new tab
-                                window.open("https://www.google.com/maps/dir/" + loc + "/" + center.address);
-                            }}
-                            rel="noopener noreferrer" className="btn-success rounded-xl ml-auto h-fit mt-4 p-2 align-middle inline-block">Get Directions</button>
-=======
                     {isLoading ? "Pls wait" : centers?.map(c => (
                         <div className={'mb-6 border-2 rounded-xl p-4 mx-12 border-gray-100 bg-gray-100'} key={c.id}>
                             <div className='text-2xl font-semibold l-20'>
@@ -119,7 +81,6 @@ const SearchPage: React.FC = () => {
                                     }}
                                     rel="noopener noreferrer" className="btn bg-light-green hover:bg-hover-green text-green-gray border-0 
                             ml-auto w-36 h-12 text-md font-bold mt-4 p-2 align-middle inline-block">Get Directions</button>
->>>>>>> Stashed changes
                             </div>
                         </div>
                     ))
