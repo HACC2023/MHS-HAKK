@@ -22,31 +22,32 @@ const SearchPage: React.FC = () => {
         api.healthcare.getSome.useQuery();
 
     return (
-        <div className="overflow-hidden h-screen">
-            <Navbar/>
+        <div className="overflow-hidden h-screen font-tyler">
+            <Navbar />
             <div className="w-screen h-[calc(100%-5rem)] flex">
-                <div className="h-full bg-slate-30
-                0 flex-col bg-slate-300 w-1/5">
-                    <div>
-                        <details className="dropdown flex justify-center">
-                            {/* copy pasted drop down from daisyui / tailwinds because i am lazy. */}
-                            <summary className="m-1 btn">CHOOSE YOUR INSURANCE</summary>
-                            <ul className="p-2 shadow menu dropdown-content z-[1] bg-base-100 rounded-box w-52">
-                                { /* this does NOT filter the entries you have already fetched. clicking on any of these buttons will query the DB again.
-                                 Consider fetching entries on page load and filtering based on this. but HOW WOULD PAGINATION WORK??? */}
-                                <li><a onClick={p => setInsurance("FQHC")}>Uninsured</a></li>
-                                <li><a onClick={p => setInsurance("QI")}>Med-QUEST</a></li>
-                                <li><a onClick={p => setInsurance(undefined)}>Any</a></li>
-                            </ul>
-                        </details>
+                <div className="h-full 
+                0 flex-col bg-gray-100 w-1/5">
+                    <p className="text-center mt-4 mb-2 font-semibold text-xl">Search Filters:</p>
+                    <div className="form-control w-full px-6">
+                        <label className="label">
+                            <span className="label-text text-base font-semibold">Insurance type</span>
+                        </label>
+                        <select className="select select-bordered text-base">
+                            <option disabled selected>Pick one</option>
+                            <option onClick={p => setInsurance("FQHC")}>Uninsured</option>
+                            <option onClick={p => setInsurance("QI")}>Med-QUEST</option>
+                            <option onClick={p => setInsurance(undefined)}>Any</option>
+                        </select>
                     </div>
                 </div>
-                <div className="h-full w-1/2 bg-slate-500
+                <div className="h-full w-1/2 bg-white border-l-2 border-r-2
                 0 flex-col overflow-y-scroll">
+                    <p className="text-center mt-4 mb-6 font-semibold text-4xl rounded-xl">Search Results:</p>
                     { /* tell the user to wait if we are still waiting on data to come in. 
                     DO NOT USE STATIC SITE GENERATION BECAUSE YOUTUBE DOESN'T DO THIS WHEN YOU SEARCH FOR VIDEOS
                     then, when we get the data we can map it out into a DIV for each center. rn we are missing a more info <button className=""></button>
                     */ }
+<<<<<<< Updated upstream
                     {isLoading ? "Pls wait" : centers?.map(center => (
                         <div className={'m-2 bg-slate-100 h-40 rounded-3xl p-2'} key={center.id}>
                             <div className='text-2xl border-b-2'>
@@ -83,6 +84,42 @@ const SearchPage: React.FC = () => {
                                 window.open("https://www.google.com/maps/dir/" + loc + "/" + center.address);
                             }}
                             rel="noopener noreferrer" className="btn-success rounded-xl ml-auto h-fit mt-4 p-2 align-middle inline-block">Get Directions</button>
+=======
+                    {isLoading ? "Pls wait" : centers?.map(c => (
+                        <div className={'mb-6 border-2 rounded-xl p-4 mx-12 border-gray-100 bg-gray-100'} key={c.id}>
+                            <div className='text-2xl font-semibold l-20'>
+                                <a href={'/location/' + c.id} className={c.insurancePlans.includes("QI") ? "text-dark-blue" : "text-dark-blue"}>
+                                    {c.names[0] + " (" + (false || "Comprehensive Care") + ')'}
+                                </a>
+                            </div>
+
+                            <div className='flex x-20'>
+                                <div>
+                                    <div>{c.website}</div>
+                                    <div>{c.address}</div>
+                                    <div>{c.healthCenterNumbers}</div>
+                                    <div>{c.insurancePlans}</div>
+                                </div>
+                                <button
+                                    onClick={async (_) => {
+                                        let loc = "";
+                                        console.log(navigator.geolocation)
+                                        if (navigator.geolocation) {
+                                            loc = await new Promise((res) =>
+                                                navigator.geolocation.getCurrentPosition(
+                                                    p => res(p.coords.latitude + ',' + p.coords.longitude),
+                                                    _err => res(""),
+                                                    {
+                                                        enableHighAccuracy: true
+                                                    }
+                                                )
+                                            );
+                                        };
+                                        window.open("https://www.google.com/maps/dir/" + loc + "/" + c.address);
+                                    }}
+                                    rel="noopener noreferrer" className="btn bg-light-green hover:bg-hover-green text-green-gray border-0 
+                            ml-auto w-36 h-12 text-md font-bold mt-4 p-2 align-middle inline-block">Get Directions</button>
+>>>>>>> Stashed changes
                             </div>
                         </div>
                     ))
