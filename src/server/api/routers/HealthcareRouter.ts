@@ -26,24 +26,24 @@ const HealthcareRouter = createTRPCRouter({
     }),
     // must be FQHC or QI for 'quest insurance'
     getByPlan: publicProcedure
-    .input(z.object({ insurance: InsuranceValidator }))
-    .query(async ({ input }) => {
-        const a = await db.healthCenter.findMany({
-            where: {
-                insurancePlans: {
-                    has: input.insurance
-                }
-            },
-            take: 100,
-        });
+        .input(z.object({ insurance: InsuranceValidator }))
+        .query(async ({ input }) => {
+            const a = await db.healthCenter.findMany({
+                where: {
+                    insurancePlans: {
+                        has: input.insurance
+                    }
+                },
+                take: 100,
+            });
 
-        return a;
-    }),
+            return a;
+        }),
     getSome: publicProcedure
-    .query(async () => {
-        const a = await db.healthCenter.findMany({
-            take: 100,
-        });
+        .query(async () => {
+            const a = await db.healthCenter.findMany({
+                take: 100,
+            });
 
         return a;
     }),
