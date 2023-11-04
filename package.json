@@ -19,6 +19,7 @@
     "@trpc/next": "^10.37.1",
     "@trpc/react-query": "^10.37.1",
     "@trpc/server": "^10.37.1",
+    "classnames": "^2.3.2",
     "fs": "^0.0.1-security",
     "jquery": "^3.7.1",
     "leaflet": "^1.9.4",

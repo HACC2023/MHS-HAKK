@@ -4,7 +4,7 @@ import "leaflet/dist/leaflet.css";
 import type { InsuranceProviders } from '~/server/api/routers/HealthcareRouter';
 import { api } from '~/utils/api';
 import Navbar from '~/components/Navbar';
-
+import Serachbar from '~/components/SearchBar/Autocomplete';
 const LeafletMap = dynamic(() => import('../components/LeafletMap'), { ssr: false });
 
 const SearchPage: React.FC = () => {
@@ -88,6 +88,9 @@ const SearchPage: React.FC = () => {
                 { /* possibly feed the list of locations into here, it was requested/needed that the leaflet map should only show endpoints
                 that are in the search results, but I bring up the problem of pagination again. */}
                 <LeafletMap key={0} />
+            </div>
+            <div>
+                <Serachbar/>
             </div>
         </div>
     );

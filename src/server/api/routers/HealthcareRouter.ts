@@ -48,6 +48,19 @@ const HealthcareRouter = createTRPCRouter({
 
         return a;
     }),
+    getData: publicProcedure
+    .query(async() => {
+        const allData = await db.healthCenter.findMany();
+        const features = allData
+            .map((entry: {
+                names: string[],
+            }) => {
+                return[
+                    entry.names
+                ];
+            });
+        return features;
+    })
 })
 
 export default HealthcareRouter;
