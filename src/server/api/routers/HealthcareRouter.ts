@@ -19,7 +19,8 @@ const HealthcareRouter = createTRPCRouter({
                 id: input.id
             },
             include: {
-                procedureTypes: true
+                procedureTypes: true,
+                reviews: true,
             }
         });
         if(!entry) throw new TRPCError({ code: "NOT_FOUND", message: "Clinic not found." });
