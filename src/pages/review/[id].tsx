@@ -13,7 +13,7 @@ const ReviewPage: NextPage<{ id: string }> = ({ id }) => {
       <Navbar />
       <div className="h-[calc(100%-5rem)] w-screen p-4">
         <div className="text-2xl">
-          {JSON.stringify(data ?? !{ "not found": "bruh" }, null, "\t")}
+          {JSON.stringify(data ?? { "not found": "bruh" }, null, "\t")}
         </div>
       </div>
     </>
