@@ -14,7 +14,7 @@ const HealthcareRouter = createTRPCRouter({
     getById: publicProcedure
     .input(z.object({ id: z.string() }))
     .query(async ({ input }) => {
-        const entry = await db.healthCenter.findFirst({
+        return await db.healthCenter.findFirst({
             where: {
                 id: input.id
             },
@@ -23,8 +23,6 @@ const HealthcareRouter = createTRPCRouter({
                 reviews: true,
             }
         });
-        if(!entry) throw new TRPCError({ code: "NOT_FOUND", message: "Clinic not found." });
-        return entry;
     }),
     // must be FQHC or QI for 'quest insurance'
     getByPlan: publicProcedure
@@ -48,6 +46,30 @@ const HealthcareRouter = createTRPCRouter({
         });
 
         return a;
+    }),
+
+    createReview: publicProcedure
+    .input(z.object({hadQuest: z.boolean(), healthCenterID: z.string().min(1), reviewedProcedures: z.array(z.object({type: z.string().min(1), name: z.string().min(1), covered: z.boolean(), hadQuest: z.boolean(), healthCenterID: z.string().min(1), procedureTypeID: z.string().min(1)}))}))
+    .mutation(async ({ ctx, input }) => {      
+      const returnedProcedureTypeIDs = (input.reviewedProcedures.reduce((returnedProcedureTypeIDs, reviewedProcedure) => {
+        if (!returnedProcedureTypeIDs.includes({id: reviewedProcedure.procedureTypeID})) {
+          returnedProcedureTypeIDs.push({id: reviewedProcedure.procedureTypeID});
+        }
+        return returnedProcedureTypeIDs;
+      }, [] as Array<{id: string}>))
+      
+      return await ctx.db.review.create({
+        data: {
+          hadQuest: input.hadQuest,
+          healthCenterID: input.healthCenterID,
+          procedureReviews: {
+            create: input.reviewedProcedures
+          },
+          procedureTypes: {
+            connect: returnedProcedureTypeIDs
+          }
+        }
+      })
     }),
 })
 
