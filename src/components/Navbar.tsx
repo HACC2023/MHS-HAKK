@@ -1,15 +1,17 @@
+import Link from "next/link";
+
 export default function Navbar() {
   return (
     <div className="navbar sticky top-0 flex h-20 flex-row border-b-2 bg-white">
       <div className="navbar-start">
-        <a href="landing" className="btn btn-ghost my-auto h-16">
+        <Link href="/Landing" className="btn btn-ghost my-auto h-16">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             alt="tyler Hawaii logo"
             className="h-12"
             src="https://upload.wikimedia.org/wikipedia/en/thumb/b/bf/Tyler_Technologies_logo.svg/640px-Tyler_Technologies_logo.svg.png"
           />
-        </a>
+        </Link>
       </div>
       <div className="join navbar-center w-1/2 justify-center">
         <div className="w-2/5">
