@@ -15,7 +15,7 @@ export default {
         'med-blue': '#50AEC6'
       },
       fontFamily: {
-        sans: ["var(--font-sans)", ...fontFamily.sans],
+        sans: ['"Raleway"', ...fontFamily.sans],
         tyler: ['"Raleway"', 'sans-serif']
       },
     },
