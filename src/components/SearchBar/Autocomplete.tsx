@@ -1,12 +1,11 @@
 import classNames from "classnames";
-import {api} from "../../utils/api"
-import React, { memo, useRef, useState} from "react";
+import React, { memo, useRef, useState } from "react";
 import { constants } from "buffer";
 
 type Props = {
-    items: string[];
+    items: (string | undefined)[];
     value: string;
-    onChange(val: string): void;
+    onChange(val: string | undefined): void;
 };
 
 //we are using dropdown, input and menu component from daisyui
@@ -26,9 +25,9 @@ const Autocomplete = (props: Props) => {
             <input
                 type="text"
                 className="input input-bordered w-full"
-                value={value}
-                onChange={(e) => onChange(e.target.value)}
-                placeholder="Type something.."
+                // value={value}
+                // onChange={(e) => onChange(e.target.value)}
+                placeholder="Search Locations..."
                 tabIndex={0}
             />
             {/* add this part */}
@@ -43,10 +42,10 @@ const Autocomplete = (props: Props) => {
                             <li
                                 key={index}
                                 tabIndex={index + 1}
-                                onClick={() => {
-                                    onChange(item);
-                                    setOpen(false);
-                                }}
+                                // onClick={() => {
+                                //     onChange(item);
+                                //     setOpen(false);
+                                // }}
                                 className="border-b border-b-base-content/10 w-full"
                             >
                                 <button>{item}</button>
@@ -60,12 +59,4 @@ const Autocomplete = (props: Props) => {
     );
 };
 
-const Serachbar: React.FC = () => {
-    const data = api.healthcare.getData.useQuery()
-    memo(Autocomplete)
-    console.log(data)
-    // console.log(data.data);
-    return <div></div>
-}
-
-export default Serachbar;
+export default memo(Autocomplete);
