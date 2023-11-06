@@ -1,71 +1,47 @@
-import classNames from "classnames";
-import {api} from "../../utils/api"
-import React, { memo, useRef, useState} from "react";
-import { constants } from "buffer";
+import React, { useEffect, useState } from "react";
+import Autocomplete from './Searchbar'
+import { api } from '~/utils/api'
 
-type Props = {
-    items: string[];
-    value: string;
-    onChange(val: string): void;
-};
+const SearchBarAutocomplete: React.FC = () => {
+    const [val, setVal] = useState<string | undefined>("");
+    const [places, setPlaces] = useState<(string | undefined)[]>([]);
+    const [items, setItems] = useState<(string | undefined)[]>([]);
+    const data = api.healthcare.getData.useQuery();
+    const placesArray: (string | undefined)[] = [];
+    if (placesArray.length == 0) {
+        data.data?.forEach(item => {
+            item.forEach(item => {
+                return places.push(item[0])
+            })
+        });
+    }
 
-//we are using dropdown, input and menu component from daisyui
-const Autocomplete = (props: Props) => {
-    const { items, value, onChange } = props;
-    const ref = useRef<HTMLDivElement>(null);
-    const [open, setOpen] = useState(false);
-    return (
-        <div
-            // use classnames here to easily toggle dropdown open 
-            className={classNames({
-                "dropdown w-full": true,
-                "dropdown-open": open,
-            })}
-            ref={ref}
-        >
-            <input
-                type="text"
-                className="input input-bordered w-full"
-                value={value}
-                onChange={(e) => onChange(e.target.value)}
-                placeholder="Type something.."
-                tabIndex={0}
-            />
-            {/* add this part */}
-            <div className="dropdown-content bg-base-200 top-14 max-h-96 overflow-auto flex-col rounded-md">
-                <ul
-                    className="menu menu-compact "
-                    // use ref to calculate the width of parent
-                    style={{ width: ref.current?.clientWidth }}
-                >
-                    {items.map((item, index) => {
-                        return (
-                            <li
-                                key={index}
-                                tabIndex={index + 1}
-                                onClick={() => {
-                                    onChange(item);
-                                    setOpen(false);
-                                }}
-                                className="border-b border-b-base-content/10 w-full"
-                            >
-                                <button>{item}</button>
-                            </li>
-                        );
-                    })}
-                </ul>
-                {/* add this part */}
-            </div>
-        </div>
-    );
-};
 
-const Serachbar: React.FC = () => {
-    const data = api.healthcare.getData.useQuery()
-    memo(Autocomplete)
-    console.log(data)
-    // console.log(data.data);
-    return <div></div>
+    useEffect(() => {
+        async function fetchData() {
+            if (places.length == 0) {
+                return setPlaces(placesArray)
+            } else return
+        }
+        fetchData();
+    }, []);
+
+    useEffect(() => {
+        if (!val) {
+            setItems(places);
+            return;
+        }
+
+        const newItems = places
+            .filter((p) => p?.toLowerCase().includes(val.toLowerCase()))
+            .sort()
+            .filter((value, index, self) => {
+                return self.indexOf(value) === index;
+            });
+        setItems(newItems)
+    }, [places, val])
+
+    return <Autocomplete items={items} value={val} onChange={setVal} />;
 }
 
-export default Serachbar;
+export default SearchBarAutocomplete;

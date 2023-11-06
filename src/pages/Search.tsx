@@ -4,7 +4,7 @@ import "leaflet/dist/leaflet.css";
 import type { InsuranceProviders } from "~/server/api/routers/HealthcareRouter";
 import { api } from "~/utils/api";
 import Navbar from "~/components/Navbar";
-import Serachbar from "~/components/SearchBar/Autocomplete";
+import SearchBarAutocomplete from "~/components/SearchBar/AutoComplete";
 import { LoadingSpinner } from "~/components/Loading";
 const LeafletMap = dynamic(() => import("../components/LeafletMap"), {
   ssr: false,
@@ -27,6 +27,9 @@ const SearchPage: React.FC = () => {
   return (
     <div className="h-screen overflow-hidden font-tyler">
       <Navbar />
+      <div>
+        <SearchBarAutocomplete />
+      </div>
       <div className="flex h-[calc(100%-5rem)] w-screen">
         <div
           className="0 
@@ -104,8 +107,8 @@ const SearchPage: React.FC = () => {
                                 (p) =>
                                   res(
                                     p.coords.latitude +
-                                      "," +
-                                      p.coords.longitude,
+                                    "," +
+                                    p.coords.longitude,
                                   ),
                                 (_err) => res(""),
                                 {
@@ -116,9 +119,9 @@ const SearchPage: React.FC = () => {
                           }
                           window.open(
                             "https://www.google.com/maps/dir/" +
-                              loc +
-                              "/" +
-                              c.address,
+                            loc +
+                            "/" +
+                            c.address,
                           );
                         }}
                         rel="noopener noreferrer"
@@ -136,9 +139,6 @@ const SearchPage: React.FC = () => {
         {/* possibly feed the list of locations into here, it was requested/needed that the leaflet map should only show endpoints
                 that are in the search results, but I bring up the problem of pagination again. */}
         <LeafletMap key={0} />
-      </div>
-      <div>
-        <Serachbar />
       </div>
     </div>
   );

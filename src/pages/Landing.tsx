@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import Navbar from "~/components/Navbar";
+import SearchBarAutocomplete from "~/components/SearchBar/AutoComplete";
 
 export default function searchPage() {
 
@@ -9,6 +10,9 @@ export default function searchPage() {
     return (
         <>
             <Navbar />
+            <div>
+                <SearchBarAutocomplete />
+            </div>
             <div className="font-tyler">
                 <div className="h-80 w-full bg-dark-blue flex flex-row font-tyler">
                     <div className="ml-60 pt-16 w-2/3">
