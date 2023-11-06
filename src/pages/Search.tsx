@@ -4,22 +4,13 @@ import "leaflet/dist/leaflet.css";
 import type { InsuranceProviders } from "~/server/api/routers/HealthcareRouter";
 import { api } from "~/utils/api";
 import Navbar from "~/components/Navbar";
-import Autocomplete from "~/components/SearchBar/Autocomplete";
+import SearchBarAutocomplete from "~/components/SearchBar/AutoComplete";
 import { LoadingSpinner } from "~/components/Loading";
 const LeafletMap = dynamic(() => import("../components/LeafletMap"), {
   ssr: false,
 });
 
 const SearchPage: React.FC = () => {
-  // Search Bar data grabbing
-  const data = api.healthcare.getData.useQuery();
-  const places: (string | undefined)[] = [];
-  data.data?.forEach(item => {
-    item.forEach(item => {
-      return places.push(item[0])
-    })
-  })
-
   // this is used for filtering.
   // allow user to set insurance status (QUEST, none, or both)
   const [insurance, setInsurance] = useState<InsuranceProviders | undefined>();
@@ -35,10 +26,10 @@ const SearchPage: React.FC = () => {
 
   return (
     <div className="h-screen overflow-hidden font-tyler">
-      <div>
-        <Autocomplete items={places} value="" onChange={function(val: string | undefined): void{}} />
-      </div>
       <Navbar />
+      <div>
+        <SearchBarAutocomplete />
+      </div>
       <div className="flex h-[calc(100%-5rem)] w-screen">
         <div
           className="0 
