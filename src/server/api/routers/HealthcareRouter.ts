@@ -97,6 +97,23 @@ const HealthcareRouter = createTRPCRouter({
     });
     return features;
   }),
+  getCoords: publicProcedure.query(async () => {
+    const data = await db.coordinates.findMany();
+    const coords = data.map((c) => {
+      return {
+        "type": "Feature",
+        "geometry": {
+          "type": "Point",
+          "coordinates": [c.Latitude, c.Longitude]
+        },
+        "properties": {
+          "id": c.id,
+          "address": c.address
+        }
+      }
+    })
+    return coords;
+  })
 });
 
 export default HealthcareRouter;

@@ -1,10 +1,11 @@
-import React, { useRef, useEffect, useState } from "react";
-import L, { IconOptions, LeafletMouseEvent, LocationEvent, ErrorEvent } from "leaflet";
+import React, { useRef, useEffect } from "react";
+import L, { LocationEvent, ErrorEvent } from "leaflet";
 import "leaflet/dist/leaflet.css";
 import markerIcon2x from 'leaflet/dist/images/marker-icon-2x.png';
 import markerIcon from 'leaflet/dist/images/marker-icon.png';
 import markerShadow from 'leaflet/dist/images/marker-shadow.png';
 import geoJsonData from './geoJSON.json';
+import { api } from "~/utils/api";
 
 delete (L.Icon.Default.prototype as any)._getIconUrl;
 L.Icon.Default.mergeOptions({
@@ -15,6 +16,8 @@ L.Icon.Default.mergeOptions({
 
 const LeafletMap = () => {
     const mapRef = useRef<HTMLDivElement>(null);
+    const data = api.healthcare.getCoords.useQuery();
+    console.log(data.data)
 
     useEffect(() => {
         const initializeMap = () => {
