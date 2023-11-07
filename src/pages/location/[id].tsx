@@ -11,7 +11,7 @@ const LocationDestination: NextPage<{ id: string }> = ({ id }) => {
             <div className="w-full font-tyler ">
                 {data ? (
                     <>
-                        <div className="flex flex-col w-screen text-white bg-dark-blue gap-4 py-16 px-60">
+                        <div className="flex flex-col w-screen text-white bg-dark-blue gap-4 py-16 px-60 ">
 
                             <div className=" items-center text-6xl font-bold ">
                                 {data.names[0]}
@@ -25,9 +25,9 @@ const LocationDestination: NextPage<{ id: string }> = ({ id }) => {
 
                         {/* <div className="grid grid-cols-2 h-full py-6 px-60"> */}
                         <div className="flex">
-                            <div className="w-3/5 pl-60 pt-16 relative">
+                            <div className="w-3/5 ml-60 mt-10 relative bg-gray-100 rounded-l-xl">
 
-                                <div className="pt-10x h-96">
+                                <div className="h-96 p-4">
 
                                     <h1 className="w-full text-3xl font-semibold">Clinic Description:</h1>
                                     <div className="mr-4 pb-6 flex flex-col">
@@ -60,19 +60,19 @@ const LocationDestination: NextPage<{ id: string }> = ({ id }) => {
                                             </div>
                                         } */}
                                     
-                                        <div className="flex flex-row absolute bottom-0 ">
+                                        <div className="absolute bottom-0 pb-4">
 
-                                            <a target="_blank" className="normal-case mx-10 mt-3 btn w-48 h-16 text-xl bg-med-blue hover:bg-hover-blue text-black border-0 " href={data.website} >
+                                            <a target="_blank" className="normal-case mx-24 btn w-48 h-16 text-xl bg-med-blue hover:bg-hover-blue text-black border-0 " href={data.website} >
                                                 Clinic Website
                                             </a>
 
                                             {/* send user to the corresponding review page when clicked */}
-                                            <a className="normal-case mx-10 mt-3 btn w-48 h-16 text-xl bg-med-blue hover:bg-dark-blue text-black border-0 "
+                                            <a target="_Blank" className="normal-case btn w-48 h-16 text-xl bg-med-blue hover:bg-dark-blue text-black border-0 "
                                                 href={"/review/" + data.id}>
                                                 Review clinic
                                             </a>
 
-                                            <button className="normal-case mx-10 mt-3 btn w-48 h-16 text-xl bg-med-blue hover:bg-dark-blue text-black border-0 "
+                                            <button className="normal-case mx-24 btn w-48 h-16 text-xl bg-med-blue hover:bg-dark-blue text-black border-0 "
                                                 onClick={async (_) => {
                                                     let loc = "";
                                                     console.log(navigator.geolocation)
@@ -98,7 +98,7 @@ const LocationDestination: NextPage<{ id: string }> = ({ id }) => {
                                 </div>
                             </div>
                             <div className="w-2/5 pr-60 pt-10">
-                                <iframe className="w-full h-full ml-auto"
+                                <iframe className="w-full h-full ml-auto rounded-r-xl"
                                     src={
                                         "https://www.google.com/maps/?output=embed&q=" +
                                         data.address

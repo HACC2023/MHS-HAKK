@@ -1,5 +1,7 @@
 import Link from "next/link";
 import { api } from "~/utils/api";
+import SearchBarAutocomplete from "~/components/SearchBar/Autocomplete";
+
 
 export default function Navbar() {
 
@@ -28,10 +30,21 @@ export default function Navbar() {
           </select>
         </div>
         <div className="w-2/5">
-          <input
+          {/* <input
             className="input join-item input-bordered h-14 w-full text-xl"
             placeholder="Search Locations"
-          />
+          /> */}
+          <SearchBarAutocomplete />
+        </div>
+        <div className="w-1/4">
+          <select className="select join-item select-bordered h-14 w-full text-xl" defaultValue={"Procedures"}>
+            <option disabled>
+              Procedures
+            </option>
+            <option>Ex1</option>
+            <option>Ex2</option>
+            <option>Ex3</option>
+          </select>
         </div>
         <div className="indicator">
           <button className="btn btn-secondary join-item h-14 w-16 border-0 bg-med-blue text-white hover:bg-dark-blue">

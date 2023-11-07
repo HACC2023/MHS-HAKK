@@ -27,9 +27,6 @@ const SearchPage: React.FC = () => {
   return (
     <div className="h-screen overflow-hidden font-tyler">
       <Navbar />
-      <div>
-        <SearchBarAutocomplete />
-      </div>
       <div className="flex h-[calc(100%-5rem)] w-screen">
         <div
           className="0 

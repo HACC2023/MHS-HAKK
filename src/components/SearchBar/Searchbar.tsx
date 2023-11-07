@@ -26,14 +26,14 @@ const Autocomplete = (props: Props) => {
         >
             <input
                 type="text"
-                className="input input-bordered w-full"
+                className="input input-bordered h-14 w-full text-xl rounded-r-none"
                 value={value}
                 onChange={(e) => onChange(e.target.value)}
                 placeholder="Search Location..."
                 tabIndex={0}
             />
             {/* add this part */}
-            <div className="dropdown-content bg-base-200 top-14 max-h-96 overflow-auto flex-col rounded-md">
+            <div className="dropdown-content bg-gray-100 top-14 max-h-96 overflow-auto flex-col rounded-md border">
                 <ul
                     className="menu menu-compact "
                     // use ref to calculate the width of parent
