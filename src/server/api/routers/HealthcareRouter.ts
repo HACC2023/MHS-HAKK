@@ -1,6 +1,7 @@
 import { db } from "~/server/db";
 import { createTRPCRouter, publicProcedure } from "../trpc";
 import { z } from "zod";
+import { Prisma } from "@prisma/client";
 
 const InsuranceValidator = z.union([z.literal("FQHC"), z.literal("QI")]);
 
@@ -97,6 +98,23 @@ const HealthcareRouter = createTRPCRouter({
     });
     return features;
   }),
+  getDataByName: publicProcedure.input(z.object({ name: z.string().min(1) })).query(async ({ ctx, input }) => {
+    const lol: Prisma.HealthCenterGroupByOutputType[] = await db.healthCenter.findRaw({
+        filter: {
+            names: {
+                // prisma doesnt have an elegant way of filtering if a letter occurs in a string[] so we use regexes.
+                $regex: input.name.replace(/[/\-\\^$*+?.()|[\]{}]/g, '\\$&'),
+                $options: 'i'
+            }
+        }
+    }) as unknown as [];
+    console.log(lol);
+    return lol.flatMap(e => e.names);
+  }),
+  getAllProcedureTypes: publicProcedure.query(async () => {
+    const t = await db.procedureType.findMany();
+    return t.filter((item,index,self) => self.findIndex(e=>item.name === e.name) === index);
+  })
 });
 
 export default HealthcareRouter;

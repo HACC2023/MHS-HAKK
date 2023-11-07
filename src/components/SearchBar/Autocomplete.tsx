@@ -6,24 +6,17 @@ const SearchBarAutocomplete: React.FC = () => {
     const [val, setVal] = useState<string | undefined>("");
     const [places, setPlaces] = useState<(string | undefined)[]>([]);
     const [items, setItems] = useState<(string | undefined)[]>([]);
-    const data = api.healthcare.getData.useQuery();
+    const data = val?.length ? api.healthcare.getDataByName.useQuery({ name: val }).data : api.healthcare.getSome.useQuery().data?.flatMap(e=>e.names);
     const placesArray: (string | undefined)[] = [];
     if (placesArray.length == 0) {
-        data.data?.forEach(item => {
-            item.forEach(item => {
-                return places.push(item[0])
-            })
-        });
+        if(data) places.push(...data);
     }
 
 
     useEffect(() => {
-        async function fetchData() {
-            if (places.length == 0) {
-                return setPlaces(placesArray)
-            } else return
-        }
-        fetchData();
+        if (places.length == 0) {
+            return setPlaces(placesArray)
+        } else return
     }, []);
 
     useEffect(() => {

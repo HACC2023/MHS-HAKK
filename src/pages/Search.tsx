@@ -44,8 +44,8 @@ const SearchPage: React.FC = () => {
                 Insurance type
               </span>
             </label>
-            <select className="select select-bordered text-base">
-              <option disabled selected>
+            <select className="select select-bordered text-base" defaultValue={"Pick one"}>
+              <option disabled>
                 Pick one
               </option>
               <option onClick={(p) => setInsurance("FQHC")}>Uninsured</option>
