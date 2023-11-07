@@ -4,7 +4,20 @@ import "leaflet/dist/leaflet.css";
 import markerIcon2x from 'leaflet/dist/images/marker-icon-2x.png';
 import markerIcon from 'leaflet/dist/images/marker-icon.png';
 import markerShadow from 'leaflet/dist/images/marker-shadow.png';
-import geoJsonData from './geoJSON.json';
+import * as geoJsonData from './Coordinates.json';
+
+const data = geoJsonData.map((c) => {
+    return {
+        "type": "Feature",
+        "geometry": {
+          "type": "Point",
+          "coordinates": [c.Longitude, c.Latitude]
+        },
+        "properties": {
+          "address": c.address
+        }
+      }
+})
 
 delete (L.Icon.Default.prototype as any)._getIconUrl;
 L.Icon.Default.mergeOptions({
@@ -20,7 +33,25 @@ const LeafletMap = () => {
         const initializeMap = () => {
             try {
                 if (mapRef.current) {
+                    const geoJSONLayer = L.geoJSON(data, {
+                        pointToLayer: function (feature, latlng) {
+                            const address = feature.properties.address
+                            const marker = L.marker(latlng, {
+                                title: address,
+                            });
+
+                            marker.bindPopup(address);
+
+                            return marker;
+                        },
+                        coordsToLatLng: function (coords) {
+                            return new L.LatLng(coords[1], coords[0], coords[2]);
+                        }
+                    });
+
+
                     const map = L.map(mapRef.current).setView([21.306944, -157.858337], 13);
+                    geoJSONLayer.addTo(map);
                     L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
                         attribution:
                             'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors',
@@ -44,24 +75,6 @@ const LeafletMap = () => {
 
                     map.on('locationerror', onLocationError);
 
-                    const geoJSONLayer = L.geoJSON(geoJsonData, {
-                        pointToLayer: function (feature, latlng) {
-                            const name = feature.properties.name;
-                            const address = feature.properties.address
-                            const marker = L.marker(latlng, {
-                                title: name,
-                            });
-
-                            marker.bindPopup(feature.properties.name + `<br/>` + address);
-
-                            return marker;
-                        },
-                        coordsToLatLng: function (coords) {
-                            return new L.LatLng(coords[1], coords[0], coords[2]);
-                        }
-                    });
-
-                    geoJSONLayer.addTo(map);
                 }
             } catch (error) {
                 console.log("Error initializing map:", error);
