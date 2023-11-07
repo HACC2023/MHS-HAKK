@@ -10,7 +10,7 @@ export default function Navbar() {
   return (
     <div className="navbar sticky top-0 flex h-20 flex-row border-b-2 bg-white">
       <div className="navbar-start">
-        <Link href="/Landing" className="btn btn-ghost my-auto h-16">
+        <Link href="/Landing" className="btn btn-ghost my-auto h-16 ml-60">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             alt="tyler Hawaii logo"
@@ -53,8 +53,8 @@ export default function Navbar() {
         </div>
       </div>
       <div className="navbar-end">
-        <a href="" className="btn btn-ghost h-14 text-lg">
-          Review a Clinic
+        <a target="_blank"href="https://www.tylertech.com/client-support" className="btn btn-ghost h-14 text-lg mr-60">
+          Contact us
         </a>
       </div>
     </div>

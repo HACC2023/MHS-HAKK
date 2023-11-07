@@ -1,0 +1,808 @@
+[{
+  "_id": {
+    "$oid": "6549a8f0d4eb4971e9475a78"
+  },
+  "address": "302 California Ave STE 214, Wahiawa, HI 96786-1841",
+  "Latitude": 21.4957119,
+  "Longitude": -158.0313462
+},
+{
+  "_id": {
+    "$oid": "6549a8f0d4eb4971e9475a79"
+  },
+  "address": "86-032 Farrington Hwy STE 101, Waianae, HI 96792-3099",
+  "Latitude": 21.440227,
+  "Longitude": -158.1857139
+},
+{
+  "_id": {
+    "$oid": "6549a8f0d4eb4971e9475a7a"
+  },
+  "address": "41-1347 Kalanianaʻole Hwy, Waimanalo, HI 96795",
+  "Latitude": 21.3472863,
+  "Longitude": -157.7163087
+},
+{
+  "_id": {
+    "$oid": "6549a8f0d4eb4971e9475a7b"
+  },
+  "address": "1600 Kapiolani Blvd STE 1401&AMP1404, Honolulu, HI 96814-3714",
+  "Latitude": 21.292087,
+  "Longitude": -157.83915
+},
+{
+  "_id": {
+    "$oid": "6549a8f0d4eb4971e9475a7c"
+  },
+  "address": "599 Farrington Hwy, Kapolei, HI 96707",
+  "Latitude": 21.339421,
+  "Longitude": -158.0763957
+},
+{
+  "_id": {
+    "$oid": "6549a8f0d4eb4971e9475a7d"
+  },
+  "address": "89-980 Nanakuli Ave, Waianae, HI 96792-3999",
+  "Latitude": 21.3877492,
+  "Longitude": -158.1339449
+},
+{
+  "_id": {
+    "$oid": "6549a8f0d4eb4971e9475a7e"
+  },
+  "address": "86-120 Farrington Hwy STE C301, Waianae, HI 96792-3072",
+  "Latitude": 21.4362174,
+  "Longitude": -158.1842681
+},
+{
+  "_id": {
+    "$oid": "6549a8f0d4eb4971e9475a7f"
+  },
+  "address": "91-2135 Fort Weaver Rd, Ewa Beach, HI 96706",
+  "Latitude": 21.3718069,
+  "Longitude": -158.027199
+},
+{
+  "_id": {
+    "$oid": "6549a8f0d4eb4971e9475a80"
+  },
+  "address": "94-216 Farrington Hwy, Waipahu, HI 96797",
+  "Latitude": 21.3800335,
+  "Longitude": -158.0208651
+},
+{
+  "_id": {
+    "$oid": "6549a8f0d4eb4971e9475a81"
+  },
+  "address": "2229 N School St, Honolulu, HI 96819-2588",
+  "Latitude": 21.3404638,
+  "Longitude": -157.8743426
+},
+{
+  "_id": {
+    "$oid": "6549a8f0d4eb4971e9475a82"
+  },
+  "address": "1319 Punahou St, Honolulu, HI 96826",
+  "Latitude": 21.2997565,
+  "Longitude": -157.8341111
+},
+{
+  "_id": {
+    "$oid": "6549a8f0d4eb4971e9475a83"
+  },
+  "address": "1414 Kalakaua Ave, Honolulu, HI 96826-1910",
+  "Latitude": 21.2977766,
+  "Longitude": -157.8373246
+},
+{
+  "_id": {
+    "$oid": "6549a8f0d4eb4971e9475a84"
+  },
+  "address": "904 Kohou St, Honolulu, HI 96817",
+  "Latitude": 21.3247787,
+  "Longitude": -157.8708575
+},
+{
+  "_id": {
+    "$oid": "6549a8f0d4eb4971e9475a85"
+  },
+  "address": "1846 Gulick Ave, Honolulu, HI 96819-4212",
+  "Latitude": 21.3416606,
+  "Longitude": -157.869195
+},
+{
+  "_id": {
+    "$oid": "6549a8f0d4eb4971e9475a86"
+  },
+  "address": "634 Kalihi St, Honolulu, HI 96819",
+  "Latitude": 21.3278084,
+  "Longitude": -157.878938
+},
+{
+  "_id": {
+    "$oid": "6549a8f0d4eb4971e9475a87"
+  },
+  "address": "1029 Kapahulu Ave, Honolulu, HI 96816",
+  "Latitude": 21.2870363,
+  "Longitude": -157.8128314
+},
+{
+  "_id": {
+    "$oid": "6549a8f0d4eb4971e9475a88"
+  },
+  "address": "1481 S King St, Honolulu, HI 96814",
+  "Latitude": 21.2972335,
+  "Longitude": -157.8384785
+},
+{
+  "_id": {
+    "$oid": "6549a8f0d4eb4971e9475a89"
+  },
+  "address": "86-120 Farrington Hwy STE 309C, Waianae, HI 96792-3073",
+  "Latitude": 21.4362174,
+  "Longitude": -158.1842681
+},
+{
+  "_id": {
+    "$oid": "6549a8f0d4eb4971e9475a8a"
+  },
+  "address": "599 Farrington Hwy STE 100, Kapolei, HI 96707-2028",
+  "Latitude": 21.339421,
+  "Longitude": -158.0763957
+},
+{
+  "_id": {
+    "$oid": "6549a8f0d4eb4971e9475a8b"
+  },
+  "address": "1310 Punahou St, Honolulu, HI 96826",
+  "Latitude": 21.3002109,
+  "Longitude": -157.8357295
+},
+{
+  "_id": {
+    "$oid": "6549a8f0d4eb4971e9475a8c"
+  },
+  "address": "302 California Ave STE 208, Wahiawa, HI 96786-1841",
+  "Latitude": 21.4957372,
+  "Longitude": -158.0314045
+},
+{
+  "_id": {
+    "$oid": "6549a8f0d4eb4971e9475a8d"
+  },
+  "address": "91-2141 Fort Weaver Rd, Ewa Beach, HI 96706",
+  "Latitude": 21.3726307,
+  "Longitude": -158.0266703
+},
+{
+  "_id": {
+    "$oid": "6549a8f0d4eb4971e9475a8e"
+  },
+  "address": "316 Kamehameha Hwy, Hauula, HI 96717",
+  "Latitude": 21.6201382,
+  "Longitude": -157.9164792
+},
+{
+  "_id": {
+    "$oid": "6549a8f0d4eb4971e9475a8f"
+  },
+  "address": "85-180 Ala Akau St, Waianae, HI 96792-2323",
+  "Latitude": 21.4566792,
+  "Longitude": -158.1953556
+},
+{
+  "_id": {
+    "$oid": "6549a8f0d4eb4971e9475a90"
+  },
+  "address": "405 N Kuakini St, Honolulu, HI 96817",
+  "Latitude": 21.3226652,
+  "Longitude": -157.8571182
+},
+{
+  "_id": {
+    "$oid": "6549a8f0d4eb4971e9475a91"
+  },
+  "address": "599 Farrington Hwy BLDG 1, Kapolei, HI 96707-2028",
+  "Latitude": 21.339421,
+  "Longitude": -158.0763957
+},
+{
+  "_id": {
+    "$oid": "6549a8f0d4eb4971e9475a92"
+  },
+  "address": "86-260 Farrington Hwy, Waianae, HI 96792",
+  "Latitude": 21.4307528,
+  "Longitude": -158.1793933
+},
+{
+  "_id": {
+    "$oid": "6549a8f0d4eb4971e9475a93"
+  },
+  "address": "45-710 Kamehameha Hwy, Kaneohe, HI 96744",
+  "Latitude": 21.4067535,
+  "Longitude": -157.7998263
+},
+{
+  "_id": {
+    "$oid": "6549a8f0d4eb4971e9475a94"
+  },
+  "address": "3288 Moanalua Rd, Honolulu, HI 96819",
+  "Latitude": 21.3632544,
+  "Longitude": -157.9000128
+},
+{
+  "_id": {
+    "$oid": "6549a8f0d4eb4971e9475a95"
+  },
+  "address": "89-188 Farrington Hwy, Waianae, HI 96792-4124",
+  "Latitude": 21.3803893,
+  "Longitude": -158.1434442
+},
+{
+  "_id": {
+    "$oid": "6549a8f0d4eb4971e9475a96"
+  },
+  "address": "546 Kaaahi St, Honolulu, HI 96817",
+  "Latitude": 21.3177915,
+  "Longitude": -157.8658741
+},
+{
+  "_id": {
+    "$oid": "6549a8f0d4eb4971e9475a97"
+  },
+  "address": "546 Kaaahi St, Honolulu, HI 96817-4630",
+  "Latitude": 21.3177915,
+  "Longitude": -157.8658741
+},
+{
+  "_id": {
+    "$oid": "6549a8f0d4eb4971e9475a98"
+  },
+  "address": "66-214 Haleiwa Rd, Haleiwa, HI 96712",
+  "Latitude": 21.5910661,
+  "Longitude": -158.1087554
+},
+{
+  "_id": {
+    "$oid": "6549a8f0d4eb4971e9475a99"
+  },
+  "address": "904 Kohou St, Honolulu, HI 96817-4420",
+  "Latitude": 21.3247787,
+  "Longitude": -157.8708575
+},
+{
+  "_id": {
+    "$oid": "6549a8f0d4eb4971e9475a9a"
+  },
+  "address": "56-119 Pualalea St, Kahuku, HI 96731-2052",
+  "Latitude": 21.676077,
+  "Longitude": -157.9534342
+},
+{
+  "_id": {
+    "$oid": "6549a8f0d4eb4971e9475a9b"
+  },
+  "address": "935 Makahiki Way, Honolulu, HI 96826-2896",
+  "Latitude": 21.2933313,
+  "Longitude": -157.8272881
+},
+{
+  "_id": {
+    "$oid": "6549a8f0d4eb4971e9475a9c"
+  },
+  "address": "87-2116 Farrington Hwy, Waianae, HI 96792",
+  "Latitude": 21.3863139,
+  "Longitude": -158.1494565
+},
+{
+  "_id": {
+    "$oid": "6549a8f0d4eb4971e9475a9d"
+  },
+  "address": "938 Austin Ln, Honolulu, HI 96817-5765",
+  "Latitude": 21.3225004,
+  "Longitude": -157.8685521
+},
+{
+  "_id": {
+    "$oid": "6549a8f0d4eb4971e9475a9e"
+  },
+  "address": "1001 Kamokila Blvd, Kapolei, HI 96707",
+  "Latitude": 21.3345109,
+  "Longitude": -158.0808206
+},
+{
+  "_id": {
+    "$oid": "6549a8f0d4eb4971e9475a9f"
+  },
+  "address": "845 22nd Ave BLDG 5, Honolulu, HI 96816-4521",
+  "Latitude": 21.2715134,
+  "Longitude": -157.792028
+},
+{
+  "_id": {
+    "$oid": "6549a8f0d4eb4971e9475aa0"
+  },
+  "address": "302 California Ave Ste 217, Wahiawa, HI 96786-1841",
+  "Latitude": 21.4956804,
+  "Longitude": -158.0312627
+},
+{
+  "_id": {
+    "$oid": "6549a8f0d4eb4971e9475aa1"
+  },
+  "address": "45-600 Kamehameha Hwy, Kaneohe, HI 96744-2065",
+  "Latitude": 21.400695,
+  "Longitude": -157.7999967
+},
+{
+  "_id": {
+    "$oid": "6549a8f0d4eb4971e9475aa2"
+  },
+  "address": "86-260 Farrington Hwy, Waianae, HI 96792-3128",
+  "Latitude": 21.4307528,
+  "Longitude": -158.1793933
+},
+{
+  "_id": {
+    "$oid": "6549a8f0d4eb4971e9475aa3"
+  },
+  "address": "2243 Kalaunu St, Honolulu, HI 96819-2784",
+  "Latitude": 21.3486118,
+  "Longitude": -157.8656877
+},
+{
+  "_id": {
+    "$oid": "6549a8f0d4eb4971e9475aa4"
+  },
+  "address": "89-102 Farrington Hwy UNIT 3000, Waianae, HI 96792-4160",
+  "Latitude": 21.3815879,
+  "Longitude": -158.1440429
+},
+{
+  "_id": {
+    "$oid": "6549a8f0d4eb4971e9475aa5"
+  },
+  "address": "2230 Liliha St, Honolulu, HI 96817",
+  "Latitude": 21.3365858,
+  "Longitude": -157.8597395
+},
+{
+  "_id": {
+    "$oid": "6549a8f0d4eb4971e9475aa6"
+  },
+  "address": "86-120 Farrington Hwy, Waianae, HI 96792-3000",
+  "Latitude": 21.4362174,
+  "Longitude": -158.1842681
+},
+{
+  "_id": {
+    "$oid": "6549a8f0d4eb4971e9475aa7"
+  },
+  "address": "1700 Lanakila Ave, Honolulu, HI 96817",
+  "Latitude": 21.3279282,
+  "Longitude": -157.8614181
+},
+{
+  "_id": {
+    "$oid": "6549a8f0d4eb4971e9475aa8"
+  },
+  "address": "1314 S King St, Honolulu, HI 96814",
+  "Latitude": 21.2993176,
+  "Longitude": -157.8411777
+},
+{
+  "_id": {
+    "$oid": "6549a8f0d4eb4971e9475aa9"
+  },
+  "address": "431 Kuwili St FL 2, Honolulu, HI 96817-5051",
+  "Latitude": 21.3165363,
+  "Longitude": -157.8673179
+},
+{
+  "_id": {
+    "$oid": "6549a8f0d4eb4971e9475aaa"
+  },
+  "address": "888 S King St, Honolulu, HI 96813",
+  "Latitude": 21.3025814,
+  "Longitude": -157.8501322
+},
+{
+  "_id": {
+    "$oid": "6549a8f0d4eb4971e9475aab"
+  },
+  "address": "89 S King St, Honolulu, HI 96813-4315",
+  "Latitude": 21.309293,
+  "Longitude": -157.862379
+},
+{
+  "_id": {
+    "$oid": "6549a8f0d4eb4971e9475aac"
+  },
+  "address": "1574 Meyers St, Honolulu, HI 96819-2513",
+  "Latitude": 21.344344,
+  "Longitude": -157.8774406
+},
+{
+  "_id": {
+    "$oid": "6549a8f0d4eb4971e9475aad"
+  },
+  "address": "1319 Punahou St Suite 630 Honolulu,  HI  96826",
+  "Latitude": 21.2999562,
+  "Longitude": -157.8337386
+},
+{
+  "_id": {
+    "$oid": "6549a8f0d4eb4971e9475aae"
+  },
+  "address": "94-428 Mokuola St STE 108B, Waipahu, HI 96797-3396",
+  "Latitude": 21.3872714,
+  "Longitude": -158.0061115
+},
+{
+  "_id": {
+    "$oid": "6549a8f0d4eb4971e9475aaf"
+  },
+  "address": "1301 Punchbowl St, Honolulu, HI 96813",
+  "Latitude": 21.3079928,
+  "Longitude": -157.8543937
+},
+{
+  "_id": {
+    "$oid": "6549a8f0d4eb4971e9475ab0"
+  },
+  "address": "46-001 Kamehameha Hwy, Kaneohe, HI 96744",
+  "Latitude": 21.4187174,
+  "Longitude": -157.8017897
+},
+{
+  "_id": {
+    "$oid": "6549a8f0d4eb4971e9475ab1"
+  },
+  "address": "87-2070 Farrington Hwy, Waianae, HI 96792-3757",
+  "Latitude": 21.3866514,
+  "Longitude": -158.1504658
+},
+{
+  "_id": {
+    "$oid": "6549a8f0d4eb4971e9475ab2"
+  },
+  "address": "1903 Palolo Ave, Honolulu, HI 96816-2928",
+  "Latitude": 21.2969817,
+  "Longitude": -157.7970859
+},
+{
+  "_id": {
+    "$oid": "6549a8f0d4eb4971e9475ab3"
+  },
+  "address": "321 N Kuakini St, Honolulu, HI 96817",
+  "Latitude": 21.3210653,
+  "Longitude": -157.8566991
+},
+{
+  "_id": {
+    "$oid": "6549a8f0d4eb4971e9475ab4"
+  },
+  "address": "888 N King St, Honolulu, HI 96817-4595",
+  "Latitude": 21.322779,
+  "Longitude": -157.8674807
+},
+{
+  "_id": {
+    "$oid": "6549a8f0d4eb4971e9475ab5"
+  },
+  "address": "415 Keoniana St, Honolulu, HI 96815-2018",
+  "Latitude": 21.2851254,
+  "Longitude": -157.831992
+},
+{
+  "_id": {
+    "$oid": "6549a8f0d4eb4971e9475ab6"
+  },
+  "address": "85-251 Farrington Hwy, Waianae, HI 96792-2113",
+  "Latitude": 21.4553201,
+  "Longitude": -158.1989887
+},
+{
+  "_id": {
+    "$oid": "6549a8f0d4eb4971e9475ab7"
+  },
+  "address": "85-626 Farrington Hwy, Waianae, HI 96792-2419",
+  "Latitude": 21.4529502,
+  "Longitude": -158.1924444
+},
+{
+  "_id": {
+    "$oid": "6549a8f0d4eb4971e9475ab8"
+  },
+  "address": "302 California Ave STE 106, Wahiawa, HI 96786-1841",
+  "Latitude": 21.4956804,
+  "Longitude": -158.0312627
+},
+{
+  "_id": {
+    "$oid": "6549a8f0d4eb4971e9475ab9"
+  },
+  "address": "952 N King St, Honolulu, HI 96817",
+  "Latitude": 21.3236068,
+  "Longitude": -157.8679335
+},
+{
+  "_id": {
+    "$oid": "6549a8f0d4eb4971e9475aba"
+  },
+  "address": "94-748 Hikimoe St, Waipahu, HI 96797",
+  "Latitude": 21.38489,
+  "Longitude": -158.0059484
+},
+{
+  "_id": {
+    "$oid": "6549a8f0d4eb4971e9475abb"
+  },
+  "address": "710 N King St, Honolulu, HI 96817-5769",
+  "Latitude": 21.3206959,
+  "Longitude": -157.8656656
+},
+{
+  "_id": {
+    "$oid": "6549a8f0d4eb4971e9475abc"
+  },
+  "address": "2239 N School St, Honolulu, HI 96819-2539",
+  "Latitude": 21.3406712,
+  "Longitude": -157.8746137
+},
+{
+  "_id": {
+    "$oid": "6549a8f0d4eb4971e9475abd"
+  },
+  "address": "91-2139 Fort Weaver Rd, Ewa Beach, HI 96706",
+  "Latitude": 21.3717368,
+  "Longitude": -158.0272571
+},
+{
+  "_id": {
+    "$oid": "6549a8f0d4eb4971e9475abe"
+  },
+  "address": "952 N King St, Honolulu, HI 96817-4556",
+  "Latitude": 21.3236068,
+  "Longitude": -157.8679335
+},
+{
+  "_id": {
+    "$oid": "6549a8f0d4eb4971e9475abf"
+  },
+  "address": "803 Kamehameha Hwy, Pearl City, HI 96782",
+  "Latitude": 21.3925353,
+  "Longitude": -157.9676901
+},
+{
+  "_id": {
+    "$oid": "6549a8f0d4eb4971e9475ac0"
+  },
+  "address": "500 Ala Moana Blvd, Honolulu, HI 96813",
+  "Latitude": 21.3005046,
+  "Longitude": -157.8620714
+},
+{
+  "_id": {
+    "$oid": "6549a8f0d4eb4971e9475ac1"
+  },
+  "address": "1475 Linapuni St BLDG A, Honolulu, HI 96819-3569",
+  "Latitude": 21.3376705,
+  "Longitude": -157.877888
+},
+{
+  "_id": {
+    "$oid": "6549a8f0d4eb4971e9475ac2"
+  },
+  "address": "1600 Kapiolani Blvd, Honolulu, HI 96814",
+  "Latitude": 21.2920925,
+  "Longitude": -157.8392341
+},
+{
+  "_id": {
+    "$oid": "6549a8f0d4eb4971e9475ac3"
+  },
+  "address": "94-141 Pupupuhi St, Waipahu, HI 96797",
+  "Latitude": 21.3812534,
+  "Longitude": -158.0151189
+},
+{
+  "_id": {
+    "$oid": "6549a8f0d4eb4971e9475ac4"
+  },
+  "address": "1712 Liliha St, Honolulu, HI 96817",
+  "Latitude": 21.3231447,
+  "Longitude": -157.8587168
+},
+{
+  "_id": {
+    "$oid": "6549a8f0d4eb4971e9475ac5"
+  },
+  "address": "94-307 Farrington Hwy, Waipahu, HI 96797",
+  "Latitude": 21.3799227,
+  "Longitude": -158.0178021
+},
+{
+  "_id": {
+    "$oid": "6549a8f0d4eb4971e9475ac6"
+  },
+  "address": "53-594 Kamehameha Hwy, Hauula, HI 96717",
+  "Latitude": 21.5869396,
+  "Longitude": -157.8956814
+},
+{
+  "_id": {
+    "$oid": "6549a8f0d4eb4971e9475ac7"
+  },
+  "address": "54-316 Kamehameha Hwy, Hauula, HI 96717-9539",
+  "Latitude": 21.6201382,
+  "Longitude": -157.9164792
+},
+{
+  "_id": {
+    "$oid": "6549a8f0d4eb4971e9475ac8"
+  },
+  "address": "94-235 Hanawai Cir, Waipahu, HI 96797",
+  "Latitude": 21.3843004,
+  "Longitude": -158.0072759
+},
+{
+  "_id": {
+    "$oid": "6549a8f0d4eb4971e9475ac9"
+  },
+  "address": "41-1295 Kalanianaole Hwy, Waimanalo, HI 96795-1536",
+  "Latitude": 21.3485542,
+  "Longitude": -157.7233637
+},
+{
+  "_id": {
+    "$oid": "6549a8f0d4eb4971e9475aca"
+  },
+  "address": "936 Kalihi St, Honolulu, HI 96819",
+  "Latitude": 21.3307347,
+  "Longitude": -157.8761902
+},
+{
+  "_id": {
+    "$oid": "6549a8f0d4eb4971e9475acb"
+  },
+  "address": "1520 Liliha St, Honolulu, HI 96817",
+  "Latitude": 21.3213469,
+  "Longitude": -157.860835
+},
+{
+  "_id": {
+    "$oid": "6549a8f0d4eb4971e9475acc"
+  },
+  "address": "377 Keahole St, Honolulu, HI 96825",
+  "Latitude": 21.28527016,
+  "Longitude": -157.7080759
+},
+{
+  "_id": {
+    "$oid": "6549a8f0d4eb4971e9475acd"
+  },
+  "address": "94-428 Mokuola St STE 213, Waipahu, HI 96797-3396",
+  "Latitude": 21.3872714,
+  "Longitude": -158.0061115
+},
+{
+  "_id": {
+    "$oid": "6549a8f0d4eb4971e9475ace"
+  },
+  "address": "302 California Ave STE 215, Wahiawa, HI 96786-1841",
+  "Latitude": 21.4956804,
+  "Longitude": -158.0312627
+},
+{
+  "_id": {
+    "$oid": "6549a8f0d4eb4971e9475acf"
+  },
+  "address": "1020 Isenberg St, Honolulu, HI 96826-2936",
+  "Latitude": 21.2939058,
+  "Longitude": -157.8257047
+},
+{
+  "_id": {
+    "$oid": "6549a8f0d4eb4971e9475ad0"
+  },
+  "address": "94-239 Waipahu Depot St, Waipahu, HI 96797",
+  "Latitude": 21.3842797,
+  "Longitude": -158.006321
+},
+{
+  "_id": {
+    "$oid": "6549a8f0d4eb4971e9475ad1"
+  },
+  "address": "94-837 Waipahu St Ext, Waipahu, HI 96797",
+  "Latitude": 21.386014,
+  "Longitude": -158.0067309
+},
+{
+  "_id": {
+    "$oid": "6549a8f0d4eb4971e9475ad2"
+  },
+  "address": "1010 Pensacola St Honolulu,  HI  96814",
+  "Latitude": 21.3008127,
+  "Longitude": -157.8460668
+},
+{
+  "_id": {
+    "$oid": "6549a8f0d4eb4971e9475ad3"
+  },
+  "address": "1380 Lusitana St, Honolulu, HI 96813",
+  "Latitude": 21.3079573,
+  "Longitude": -157.8528568
+},
+{
+  "_id": {
+    "$oid": "6549a8f0d4eb4971e9475ad4"
+  },
+  "address": "91-1841 Fort Weaver Rd, Ewa Beach, HI 96706-1909",
+  "Latitude": 21.35420939,
+  "Longitude": -158.029176
+},
+{
+  "_id": {
+    "$oid": "6549a8f0d4eb4971e9475ad5"
+  },
+  "address": "1329 Lusitana St, Honolulu, HI 96813",
+  "Latitude": 21.3075591,
+  "Longitude": -157.8521238
+},
+{
+  "_id": {
+    "$oid": "6549a8f0d4eb4971e9475ad6"
+  },
+  "address": "302 California Ave, Wahiawa, HI 96786",
+  "Latitude": 21.4956804,
+  "Longitude": -158.0312627
+},
+{
+  "_id": {
+    "$oid": "6549a8f0d4eb4971e9475ad7"
+  },
+  "address": "56-490 Kamehameha Hwy, Kahuku, HI 96731-2200",
+  "Latitude": 21.6750577,
+  "Longitude": -157.9470534
+},
+{
+  "_id": {
+    "$oid": "6549a8f0d4eb4971e9475ad8"
+  },
+  "address": "277 Ohua Ave, Honolulu, HI 96815-6612",
+  "Latitude": 21.2755652,
+  "Longitude": -157.8205094
+},
+{
+  "_id": {
+    "$oid": "6549a8f0d4eb4971e9475ad9"
+  },
+  "address": "86-120 Farrington Hwy STE C304B, Waianae, HI 96792-3000",
+  "Latitude": 21.4362174,
+  "Longitude": -158.1842681
+},
+{
+  "_id": {
+    "$oid": "6549a8f0d4eb4971e9475ada"
+  },
+  "address": "915 N King St, Honolulu, HI 96817",
+  "Latitude": 21.3228144,
+  "Longitude": -157.8682726
+},
+{
+  "_id": {
+    "$oid": "6549a8f0d4eb4971e9475adb"
+  },
+  "address": "41-1347 Kalanianaole Hwy, Waimanalo, HI 96795-1247",
+  "Latitude": 21.3472863,
+  "Longitude": -157.7163087
+},
+{
+  "_id": {
+    "$oid": "6549a8f0d4eb4971e9475adc"
+  },
+  "address": "915 N King St, Honolulu, HI 96817-4544",
+  "Latitude": 21.3228144,
+  "Longitude": -157.8682726
+}]
