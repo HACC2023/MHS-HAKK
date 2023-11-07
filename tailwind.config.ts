@@ -12,7 +12,8 @@ export default {
         'hover-green': '#88AF37',
         'light-green': '#9ac73e',
         'dark-blue': '#2C6191',
-        'med-blue': '#50AEC6'
+        'med-blue': '#50AEC6',
+        'hover-blue': '#4292a6',
       },
       fontFamily: {
         sans: ['"Raleway"', ...fontFamily.sans],

@@ -42,11 +42,11 @@ const ReviewPage: NextPage<{ healthCenterID: string }> = ({
       // TODO: use states or something? Migrate this to a React.Component class so it looks nicer to other people working on the backend.
       const procedureName: string = form.procedureName.value as string;
       const procedureType: string = form.procedureType.value as string;
-      const questcovered          = form.questcoveredy.checked ? true : form.questcoveredn.checked ? false : undefined;
-      const covered               = form.coveredy.checked ? true : form.coveredn.checked ? false : undefined;
+      const questcovered = form.questcoveredy.checked ? true : form.questcoveredn.checked ? false : undefined;
+      const covered = form.coveredy.checked ? true : form.coveredn.checked ? false : undefined;
 
       // make sure they respond to our form...
-      if(questcovered === undefined || covered === undefined || !procedureType.length || !procedureName.length) 
+      if (questcovered === undefined || covered === undefined || !procedureType.length || !procedureName.length)
         throw "SubmitSomethingBro";
 
       // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
@@ -80,104 +80,130 @@ const ReviewPage: NextPage<{ healthCenterID: string }> = ({
       switch (e) {
         case "ProcedureTypeNameInvalid":
           setStatus("Procedure type name not found in center.");
-        break;
+          break;
         case "SubmitSomethingBro":
           setStatus("Please fill out the form fully.");
-        break;
+          break;
         default:
           console.log(e);
           setStatus("Unknown error occurred. Please try again later.");
-        break;
+          break;
       }
     }
   };
 
   return (
-    <div className="h-screen overflow-hidden">
+    <div className="h-screen overflow-hidden " >
       <Navbar />
-      <div className="ml-auto mr-auto w-fit p-3">
-        <h1 className="pb-3 text-center text-6xl font-bold text-white">
-          Submit a review
+      <div className="ml-auto mr-auto w-fit p-3 py-24">
+        <h1 className="pb-3 text-center text-6xl font-bold text-green-gray h-32">
+          Submit a Review
         </h1>
-        <div className="pb-2">
+        <div className="pb-2 text-xl">
           {"Reviewing " + foundHealthCenter.address + ". "}
           <Link href="/Search" className="text-blue-400 underline">
             Wrong address?
           </Link>
         </div>
         <form onSubmit={handleSubmit} className="justify-items-center text-center" ref={formRef}>
-          <table className="text-left mb-5">
+          <table className="text-left mb-5 w-full">
             <tbody>
 
-              <tr>
+              <tr className="h-16">
                 <td>
-                  <label htmlFor="procedureName">Procedure Name: </label>
+                  <label htmlFor="procedureName " className="text-lg">Procedure Name: </label>
                 </td>
                 <td>
-                  <input type="text" id="procedureName" name="procedureName" />
+                  <input type="text" id="procedureName" name="procedureName" className="input input-bordered w-full" />
                 </td>
               </tr>
 
-              <tr>
+              <tr className="h-16">
                 <td>
-                  <label htmlFor="procedureType">Procedure Type: </label>
+                  <label htmlFor="procedureType" className="text-lg">Procedure Type: </label>
                 </td>
                 <td>
-                  <input type="text" id="procedureType" name="procedureType" />
+                  <input type="text" id="procedureType" name="procedureType" className="input input-bordered w-full" />
                 </td>
               </tr>
-              <tr>
+              <tr className="h-16">
                 <td>
-                  <label htmlFor="questcovered">
-                    Was this procedure QUEST covered? (y/n):{" "}
+                  <label htmlFor="questcovered" className="text-lg">
+                    Was this procedure QUEST covered?:{" "}
                   </label>
                 </td>
                 <td>
-                  <label htmlFor="questcoveredy">Yes</label>
-                  <input
-                    type="radio"
-                    name="questcovered"
-                    id="questcoveredy"
-                    value="Yes"
-                  ></input>
-                  <label htmlFor="questcoveredn">No</label>
-                  <input
-                    type="radio"
-                    name="questcovered"
-                    id="questcoveredn"
-                    value="No"
-                  ></input>
+                  <div className="join w-full text-lg">
+                    <div className="join join-item join-horizontal border border-gray-300 w-6/12 justify-evenly">
+
+                      <input
+                        className="input join-item "
+                        type="radio"
+                        name="questcovered"
+                        id="questcoveredy"
+                        value="Yes"
+                      ></input>
+                      <label htmlFor="questcoveredy" className="label join-item">Yes</label>
+
+                    </div>
+
+
+
+                    <div className="join join-item join-horizontal border border-gray-300 w-6/12 justify-evenly">
+                      <input
+                        className="input join-item"
+                        type="radio"
+                        name="questcovered"
+                        id="questcoveredn"
+                        value="No"
+                      ></input>
+                      <label htmlFor="questcoveredn" className="label join-item">No</label>
+                    </div>
+                  </div>
                 </td>
               </tr>
-              <tr>
+
+
+              <tr className="h-16">
                 <td>
-                  <label htmlFor="covered">
-                    Was this procedure covered? (y/n):{" "}
+                  <label htmlFor="covered" className="text-lg">
+                    Was this procedure covered?:{" "}
                   </label>
                 </td>
                 <td>
-                  <label htmlFor="coveredy">Yes</label>
-                  <input
-                    type="radio"
-                    name="covered"
-                    id="coveredy"
-                    value="Yes"
-                  ></input>
-                  <label htmlFor="coveredn">No</label>
-                  <input
-                    type="radio"
-                    name="covered"
-                    id="coveredn"
-                    value="No"
-                  ></input>
+                  <div className="join w-full text-lg">
+                    <div className="join join-item join-horizontal border border-gray-300 w-6/12 justify-evenly">
+                      <input
+                        className="input join-item"
+                        type="radio"
+                        name="covered"
+                        id="coveredy"
+                        value="Yes"
+                      ></input>
+                      <label htmlFor="coveredy" className="label join-item">Yes</label>
+                    </div>
+
+                    <div className="join join-item join-horizontal border border-gray-300 w-6/12 justify-evenly">
+                      <input
+                        className="input join-item"
+                        type="radio"
+                        name="covered"
+                        id="coveredn"
+                        value="No"
+                      ></input>
+                      <label htmlFor="coveredn" className="label join-item">No</label>
+                    </div>
+                  </div>
                 </td>
               </tr>
             </tbody>
           </table>
-          <input className="btn bg-light-green hover:bg-hover-green text-green-gray border-0 " type="submit" value="submit!" />
+          <input className="btn bg-light-green hover:bg-hover-green text-green-gray text-lg border-0 w-2/12" type="submit" value="submit!" />
         </form>
         <p className="text-center mt-5 text-3xl">{status}</p>
-        <p className="mt-5 text-3xl">{foundHealthCenter.procedureTypes.map(pT=>pT.name).join(", ")}</p>
+
+        {/* idk what this was for but i removed it bc it just said "comprehensive care" */}
+        {/* <p className="mt-5 text-3xl">{foundHealthCenter.procedureTypes.map(pT=>pT.name).join(", ")}</p> */}
       </div>
     </div>
   );

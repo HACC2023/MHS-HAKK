@@ -11,13 +11,13 @@ export default function searchPage() {
         <>
             <Navbar />
             <div>
-                <SearchBarAutocomplete />
+                {/* <SearchBarAutocomplete /> */}
             </div>
             <div className="font-tyler">
                 <div className="h-80 w-full bg-dark-blue flex flex-row font-tyler">
                     <div className="ml-60 pt-16 w-2/3">
-                        <h1 className="text-white text-6xl  font-bold">Tyler Healthcare Hawaii</h1>
-                        <p className="text-white text-3xl  mt-6 font-semi-bold">Healthcare clinic finder for the uninsured and underinsured</p>
+                        <h1 className="text-white text-6xl font-bold">Tyler Healthcare Hawaii</h1>
+                        <p className="text-white text-3xl mt-6 font-semi-bold">Healthcare clinic finder for the uninsured and underinsured</p>
                         <a href="Search" className="mt-3 btn w-40 h-14 text-xl bg-light-green hover:bg-hover-green text-green-gray border-0 ">Start now</a>
                     </div>
                 </div>
