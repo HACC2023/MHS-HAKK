@@ -6,6 +6,7 @@ import { Prisma } from "@prisma/client";
 const InsuranceValidator = z.union([z.literal("FQHC"), z.literal("QI")]);
 
 export type InsuranceProviders = z.infer<typeof InsuranceValidator>;
+export type IDToMeta = Record<string, { names: string[], address: string }>;
 
 const HealthcareRouter = createTRPCRouter({
   getById: publicProcedure
@@ -98,8 +99,8 @@ const HealthcareRouter = createTRPCRouter({
     });
     return features;
   }),
-  getDataByName: publicProcedure.input(z.object({ name: z.string().min(1) })).query(async ({ ctx, input }) => {
-    const lol: Prisma.HealthCenterGroupByOutputType[] = await db.healthCenter.findRaw({
+  getDataByName: publicProcedure.input(z.object({ name: z.string() })).query(async ({ ctx, input }) => {
+    const lol: ({_id: {$oid: string }} & Prisma.HealthCenterGroupByOutputType)[] = await db.healthCenter.findRaw({
         filter: {
             names: {
                 // prisma doesnt have an elegant way of filtering if a letter occurs in a string[] so we use regexes.
@@ -108,8 +109,10 @@ const HealthcareRouter = createTRPCRouter({
             }
         }
     }) as unknown as [];
-    console.log(lol);
-    return lol.flatMap(e => e.names);
+    const format:IDToMeta = {};
+    for(const place of lol)
+      format[place._id.$oid] = { names: place.names, address: place.address }; 
+    return format;
   }),
   getAllProcedureTypes: publicProcedure.query(async () => {
     const t = await db.procedureType.findMany();
