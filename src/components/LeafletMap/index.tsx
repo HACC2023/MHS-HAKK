@@ -1,23 +1,26 @@
-import React, { useRef, useEffect, useState } from "react";
-import L, { IconOptions, LeafletMouseEvent, LocationEvent, ErrorEvent } from "leaflet";
+import React, { useRef, useEffect } from "react";
+import L, { type LocationEvent, type ErrorEvent } from "leaflet";
 import "leaflet/dist/leaflet.css";
 import markerIcon2x from 'leaflet/dist/images/marker-icon-2x.png';
 import markerIcon from 'leaflet/dist/images/marker-icon.png';
 import markerShadow from 'leaflet/dist/images/marker-shadow.png';
-import * as geoJsonData from './Coordinates.json';
+import * as jsonData from './Coordinates.json';
 
-const data = geoJsonData.map((c) => {
+const data = jsonData.map((c) => {
     return {
-        "type": "Feature",
-        "geometry": {
-          "type": "Point",
-          "coordinates": [c.Longitude, c.Latitude]
-        },
-        "properties": {
-          "address": c.address
-        }
-      }
-})
+        type: "Feature",
+            geometry: {
+                type: "Point",
+                coordinates: [
+                    c.Longitude,
+                    c.Latitude
+                ],
+            },
+            properties: {
+                address: c.address
+            },
+    };
+});
 
 delete (L.Icon.Default.prototype as any)._getIconUrl;
 L.Icon.Default.mergeOptions({
@@ -57,9 +60,9 @@ const LeafletMap = () => {
                             'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors',
                         maxZoom: 18,
                     }).addTo(map);
-                    
+
                     function onLocationFound(e: LocationEvent) {
-                        var radius = e.accuracy;
+                        const radius = e.accuracy;
 
                         L.marker(e.latlng).addTo(map)
                             .bindPopup("You are within " + radius + " meters from this point").openPopup();
@@ -68,7 +71,7 @@ const LeafletMap = () => {
                     }
 
                     map.on('locationfound', onLocationFound);
-                    
+
                     function onLocationError(e: ErrorEvent) {
                         alert(e.message);
                     }
@@ -83,7 +86,7 @@ const LeafletMap = () => {
 
         initializeMap();
     }, []);
-    
+
     return <div ref={mapRef} className="w-2/5 h-full ml-auto"></div>;
 };
 

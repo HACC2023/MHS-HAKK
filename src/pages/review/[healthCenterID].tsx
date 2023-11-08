@@ -8,7 +8,7 @@ import getServerSideHelper from "~/server/helpers/ServerSideHelper";
 import Navbar from "~/components/Navbar";
 import Link from "next/link";
 
-const ReviewPage: NextPage<{ healthCenterID: string }> = ({
+export const ReviewPage: NextPage<{ healthCenterID: string }> = ({
   healthCenterID,
 }) => {
   const [status, setStatus] = useState("");
@@ -94,11 +94,10 @@ const ReviewPage: NextPage<{ healthCenterID: string }> = ({
 
   return (
     <div className="h-screen overflow-hidden " >
-      <Navbar />
       <div className="ml-auto mr-auto w-fit p-3 py-24">
-        <h1 className="pb-3 text-center text-6xl font-bold text-green-gray h-32">
-          Submit a Review
-        </h1>
+        <h3 className="pb-3 text-center text-6xl font-bold text-green-gray h-32">
+          Was Your Care Covered?
+        </h3>
         <div className="pb-2 text-xl">
           {"Reviewing " + foundHealthCenter.address + ". "}
           <Link href="/Search" className="text-blue-400 underline">
@@ -201,6 +200,7 @@ const ReviewPage: NextPage<{ healthCenterID: string }> = ({
           <input className="btn bg-light-green hover:bg-hover-green text-green-gray text-lg border-0 w-2/12" type="submit" value="submit!" />
         </form>
         <p className="text-center mt-5 text-3xl">{status}</p>
+      
 
         {/* idk what this was for but i removed it bc it just said "comprehensive care" */}
         {/* <p className="mt-5 text-3xl">{foundHealthCenter.procedureTypes.map(pT=>pT.name).join(", ")}</p> */}

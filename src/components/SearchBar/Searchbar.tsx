@@ -26,7 +26,7 @@ const Autocomplete = (props: Props) => {
         >
             <input
                 type="text"
-                className="input input-bordered h-14 w-full text-xl rounded-r-none"
+                className="input input-bordered h-12 w-full text-lg rounded-r-none"
                 value={value}
                 onChange={(e) => onChange(e.target.value)}
                 placeholder="Search Location..."
@@ -48,7 +48,8 @@ const Autocomplete = (props: Props) => {
                                     onChange(name);
                                     setOpen(false);
                                 }}
-                                className="border-b border-b-base-content/10 w-1/2"
+                                className="border-b border-b-base-content/10
+                                "
                             >
                                 <Link href={"/location/" + id}>{name}<div className="text-right text-sm italic text-slate-600">{items[id]!.address}</div></Link>
                             </li>

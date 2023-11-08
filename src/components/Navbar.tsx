@@ -22,31 +22,24 @@ export default function Navbar() {
         </Link>
       </div>
       <div className="join navbar-center w-1/2 justify-center">
-      <div className="w-1/4">
-        </div>
         <div className="w-2/5">
-          {/* <input
-            className="input join-item input-bordered h-14 w-full text-xl"
-            placeholder="Search Locations"
-          /> */}
           <SearchBarAutocomplete />
         </div>
         <div className="w-1/4">
-        <select className="select join-item select-bordered h-14 w-full text-xl" defaultValue={"Procedures"}>
+          <select className="select join-item select-bordered h-10 w-full text-lg" defaultValue={"Procedures"}>
             <option disabled>Procedures</option>
-            { /** create a option for every procedure type our db has, math.random is a placeholder to make eslint stop complaining. */}
             {data?.map(proType => (<option key={Math.random()}>{proType.name}</option>))}
           </select>
         </div>
         <div className="indicator">
-          <button className="btn btn-secondary join-item h-14 w-16 border-0 bg-med-blue text-white hover:bg-dark-blue">
+          <button className="btn btn-secondary join-item h-10 w-16 border-0 bg-med-blue text-white hover:bg-dark-blue">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
               viewBox="0 0 24 24"
-              strokeWidth="2"
+              strokeWidth="2.5"
               stroke="currentColor"
-              className="h-8 w-8"
+              className="h-6 w-6"
             >
               <path
                 strokeLinecap="round"
@@ -58,9 +51,9 @@ export default function Navbar() {
         </div>
       </div>
       <div className="navbar-end">
-        <a target="_blank"href="https://www.tylertech.com/client-support" className="btn btn-ghost h-14 text-lg mr-60">
+        {/* <a target="_blank"href="https://www.tylertech.com/client-support" className="btn btn-ghost h-14 text-lg mr-60">
           Contact us
-        </a>
+        </a> */}
       </div>
     </div>
   );
