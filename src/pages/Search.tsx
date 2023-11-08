@@ -89,12 +89,8 @@ const SearchPage: React.FC = () => {
 
                 <div className="flex">
                   <div className="min-w-full break-words text-justify">
-<<<<<<< Updated upstream
                     {/* {isLoggedIn ? 'currently' : 'not'} */}
                     <a className="italic" href={JSON.stringify(c.website).includes("https://") ? c.website : "https://" + c.website}>{c.website}</a>
-=======
-                    <a>{c.website}</a>
->>>>>>> Stashed changes
                     <div>{c.address}</div>
                     <div>({JSON.stringify(c.healthCenterNumbers)[2]}{JSON.stringify(c.healthCenterNumbers)[3]}{JSON.stringify(c.healthCenterNumbers)[4]}) {JSON.stringify(c.healthCenterNumbers)[5]}{JSON.stringify(c.healthCenterNumbers)[6]}{JSON.stringify(c.healthCenterNumbers)[7]}-{JSON.stringify(c.healthCenterNumbers)[8]}{JSON.stringify(c.healthCenterNumbers)[9]}{JSON.stringify(c.healthCenterNumbers)[10]}{JSON.stringify(c.healthCenterNumbers)[11]}</div>
                     <div>{c.insurancePlans == "QI" && "Quest Insured"}{c.insurancePlans == "FQHC" && "Federally Qualified Health Center"}</div>

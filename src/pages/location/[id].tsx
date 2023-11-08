@@ -1,5 +1,8 @@
 import type { GetStaticProps, NextPage } from "next";
 import Navbar from "~/components/Navbar";
+import { ReviewPage } from "~/pages/review/[healthCenterID]";
+
+import healthCenterID from "~/pages/review/[healthCenterID]"
 import getServerSideHelper from "~/server/helpers/ServerSideHelper";
 import { api } from "~/utils/api";
 
@@ -19,6 +22,7 @@ const LocationDestination: NextPage<{ id: string }> = ({ id }) => {
                             <a className="normal-case mt-3 btn w-40 h-14 text-xl bg-light-green hover:bg-hover-green text-green-gray border-0 "
                                 onClick={_ => window.history.back()}
                             >
+                                
                                 Go back
                             </a>
                         </div>
@@ -33,7 +37,7 @@ const LocationDestination: NextPage<{ id: string }> = ({ id }) => {
                                     <div className="mr-4 pb-6 flex flex-col">
 
                                         <div className="join join-vertical lg:join-horizontal pt-4">
-                                            <h2 className="join-item text-2xl font-semibold">Clinic Name:</h2>
+                                            <h2 className="join-item text-2xl font-semibold">Clinic Name: </h2>
                                             <p className="join-item text-2xl indent-16">{data.names[0]}</p>
                                         </div>
 
@@ -108,7 +112,7 @@ const LocationDestination: NextPage<{ id: string }> = ({ id }) => {
                         </div>
 
 
-
+                        <ReviewPage healthCenterID={id}/>
 
                     </>
 
@@ -119,6 +123,8 @@ const LocationDestination: NextPage<{ id: string }> = ({ id }) => {
                         </div>
                     </>
                 )}
+                
+
             </div>
         </>
     );
