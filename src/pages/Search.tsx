@@ -90,44 +90,11 @@ const SearchPage: React.FC = () => {
                 <div className="flex">
                   <div className="min-w-full break-words text-justify">
                     {/* {isLoggedIn ? 'currently' : 'not'} */}
-                    <a className="italic" href={JSON.stringify(c.website).includes("https://") ? c.website : "https://" + c.website}>{c.website}</a>
+                    <a className="italic underline text-blue-700" href={JSON.stringify(c.website).includes("https://") ? c.website : "https://" + c.website}>{c.website}</a>
                     <div>{c.address}</div>
                     <div>({JSON.stringify(c.healthCenterNumbers)[2]}{JSON.stringify(c.healthCenterNumbers)[3]}{JSON.stringify(c.healthCenterNumbers)[4]}) {JSON.stringify(c.healthCenterNumbers)[5]}{JSON.stringify(c.healthCenterNumbers)[6]}{JSON.stringify(c.healthCenterNumbers)[7]}-{JSON.stringify(c.healthCenterNumbers)[8]}{JSON.stringify(c.healthCenterNumbers)[9]}{JSON.stringify(c.healthCenterNumbers)[10]}{JSON.stringify(c.healthCenterNumbers)[11]}</div>
-                    <div>{c.insurancePlans == "QI" && "Quest Insured"}{c.insurancePlans == "FQHC" && "Federally Qualified Health Center"}</div>
-                    <div className="[shape-outside:inset(calc(100% - 100px) 0 0)] float-right flex items-end">
-                      <button
-                        onClick={async (_) => {
-                          let loc = "";
-                          console.log(navigator.geolocation);
-                          if (navigator.geolocation) {
-                            loc = await new Promise((res) =>
-                              navigator.geolocation.getCurrentPosition(
-                                (p) =>
-                                  res(
-                                    p.coords.latitude +
-                                    "," +
-                                    p.coords.longitude,
-                                  ),
-                                (_err) => res(""),
-                                {
-                                  enableHighAccuracy: true,
-                                },
-                              ),
-                            );
-                          }
-                          window.open(
-                            "https://www.google.com/maps/dir/" +
-                            loc +
-                            "/" +
-                            c.address,
-                          );
-                        }}
-                        rel="noopener noreferrer"
-                        className="text-md btn h-12 w-36 border-0 bg-light-green p-2 font-bold text-green-gray hover:bg-hover-green"
-                      >
-                        Get Directions
-                      </button>
-                    </div>
+                    <div>{c.insurancePlans === "QI" && "Quest Insured"}{c.insurancePlans === "FQHC" && "Federally Qualified Health Center"}</div>
+                    
                   </div>
                 </div>
               </div>
