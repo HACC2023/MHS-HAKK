@@ -90,6 +90,7 @@ const SearchPage: React.FC = () => {
                 <div className="flex">
                   <div className="min-w-full break-words text-justify">
                     {/* {isLoggedIn ? 'currently' : 'not'} */}
+                    <a className="italic" href={JSON.stringify(c.website).includes("https://") ? c.website : "https://" + c.website}>{c.website}</a>
                     <a className="italic underline text-blue-700" href={JSON.stringify(c.website).includes("https://") ? c.website : "https://" + c.website}>{c.website}</a>
                     <div>{c.address}</div>
                     <div>({JSON.stringify(c.healthCenterNumbers)[2]}{JSON.stringify(c.healthCenterNumbers)[3]}{JSON.stringify(c.healthCenterNumbers)[4]}) {JSON.stringify(c.healthCenterNumbers)[5]}{JSON.stringify(c.healthCenterNumbers)[6]}{JSON.stringify(c.healthCenterNumbers)[7]}-{JSON.stringify(c.healthCenterNumbers)[8]}{JSON.stringify(c.healthCenterNumbers)[9]}{JSON.stringify(c.healthCenterNumbers)[10]}{JSON.stringify(c.healthCenterNumbers)[11]}</div>
