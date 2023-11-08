@@ -6,6 +6,8 @@ import type { NextPage, GetStaticProps } from "next";
 import getServerSideHelper from "~/server/helpers/ServerSideHelper";
 import Navbar from "~/components/Navbar";
 import Link from "next/link";
+import classNames from "classnames";
+
 
 const ReviewPage: NextPage<{ healthCenterID: string }> = ({
   healthCenterID,
@@ -33,6 +35,10 @@ const ReviewPage: NextPage<{ healthCenterID: string }> = ({
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+
+
+
+
     try {
       setStatus("Processing...");
       const form = formRef.current;
@@ -94,79 +100,114 @@ const ReviewPage: NextPage<{ healthCenterID: string }> = ({
   return (
     <div className="h-screen overflow-hidden " >
       <Navbar />
-      <div className="ml-auto mr-auto w-fit p-3 py-24">
-        <h1 className="pb-3 text-center text-6xl font-bold text-green-gray h-32">
-          Submit a Review
-        </h1>
+
+      <div className="h-60 w-full bg-dark-blue flex flex-row font-tyler">
+        <div className="pt-16 w-full">
+          <h1 className="text-white text-6xl text-center font-bold">Submit a Review</h1>
+        </div>
+      </div>
+
+
+      <div className="mx-auto w-fit p-3 py-12 ">
+
         <div className="pb-2 text-xl">
-          {"Reviewing " + foundHealthCenter.address + ". "}
+          {"Reviewing " + foundHealthCenter.names + ". "}
           <Link href="/Search" className="text-blue-400 underline">
-            Wrong address?
+            Wrong center?
           </Link>
         </div>
-        <form onSubmit={handleSubmit} className="justify-items-center text-center" ref={formRef}>
+        <form onSubmit={handleSubmit} className="justify-items-center text-center group" ref={formRef} data-te-validation-init noValidate>
           <table className="text-left mb-5 w-full">
             <tbody>
-
-              <tr className="h-16">
+              {/* editing this first */}
+              <tr className="h-24">
                 <td>
-                  <label htmlFor="procedureName " className="text-lg">Procedure Name: </label>
+                  <label htmlFor="procedureName " className="text-lg font-bold">Procedure Name </label>
                 </td>
                 <td>
-                  <input type="text" id="procedureName" name="procedureName" className="input input-bordered w-full" />
-                </td>
-              </tr>
-
-              <tr className="h-16">
-                <td>
-                  <label htmlFor="procedureType" className="text-lg">Procedure Type: </label>
-                </td>
-                <td>
-                  <input type="text" id="procedureType" name="procedureType" className="input input-bordered w-full" />
+                  <input 
+                  type="text" 
+                  id="procedureName" 
+                  name="procedureName" 
+                  className="input input-bordered w-full invalid:[&:not(:placeholder-shown):not(:focus)]:border-red-500 peer align-top" 
+                  required 
+                  />
+                  <span className="mt-2 hidden text-sm text-red-500 peer-[&:not(:placeholder-shown):not(:focus):invalid]:block">Please fill out</span>
                 </td>
               </tr>
-              <tr className="h-16">
+
+              <tr className="h-24">
                 <td>
-                  <label htmlFor="questcovered" className="text-lg">
-                    Was this procedure QUEST covered?:{" "}
+                  <label htmlFor="procedureType" className="text-lg font-bold">Procedure Type </label>
+                </td>
+                <td>
+                  {/* dropdown menu here */}
+
+                  <div className="w-full" data-te-validate="input" data-te-validation-ruleset="isRequired">
+                    <select data-te-select-init data-te-select-clear-button="true" className="select join-item select-bordered h-14 w-full text-xl" >
+                      <option hidden selected>
+                        Procedures
+                      </option>
+                      <option>Ex1</option>
+                      <option>Ex2</option>
+                      <option>Ex3</option>
+                    </select>
+                  </div>
+
+
+
+
+
+
+                  {/* <input type="text" id="procedureType" name="procedureType" className="input input-bordered w-full input input-bordered w-full invalid:[&:not(:placeholder-shown):not(:focus)]:border-red-500 peer" required />
+                  <span className="mt-2 hidden text-sm text-red-500 peer-[&:not(:placeholder-shown):not(:focus):invalid]:block">Please fill out</span> */}
+                </td>
+              </tr>
+              <tr className="h-24">
+                <td>
+                  <label htmlFor="questcovered" className="text-lg font-bold">
+                    Was this procedure QUEST covered?{" "}
                   </label>
                 </td>
                 <td>
                   <div className="join w-full text-lg">
                     <div className="join join-item join-horizontal border border-gray-300 w-6/12 justify-evenly">
 
+
                       <input
-                        className="input join-item "
+                        className="input join-item invalid:[&:not(:placeholder-shown):not(:focus)]:border-red-500"
                         type="radio"
                         name="questcovered"
                         id="questcoveredy"
                         value="Yes"
+                        aria-label="Yes"
                       ></input>
                       <label htmlFor="questcoveredy" className="label join-item">Yes</label>
 
                     </div>
-
-
-
                     <div className="join join-item join-horizontal border border-gray-300 w-6/12 justify-evenly">
                       <input
-                        className="input join-item"
+                        className="input join-item invalid:[&:not(:placeholder-shown):not(:focus)]:border-red-500"
                         type="radio"
                         name="questcovered"
                         id="questcoveredn"
                         value="No"
+                        aria-label="No"
                       ></input>
                       <label htmlFor="questcoveredn" className="label join-item">No</label>
                     </div>
+                    <span className="mt-2 hidden text-sm text-red-500 peer-[&:not(:placeholder-shown):not(:focus):invalid]:block">
+                      Please select one
+                    </span>
                   </div>
                 </td>
               </tr>
 
 
-              <tr className="h-16">
+              <tr className="h-24">
                 <td>
-                  <label htmlFor="covered" className="text-lg">
-                    Was this procedure covered?:{" "}
+                  <label htmlFor="covered" className="text-lg font-bold">
+                    Was this procedure covered?{" "}
                   </label>
                 </td>
                 <td>
@@ -197,13 +238,18 @@ const ReviewPage: NextPage<{ healthCenterID: string }> = ({
               </tr>
             </tbody>
           </table>
-          <input className="btn bg-light-green hover:bg-hover-green text-green-gray text-lg border-0 w-2/12" type="submit" value="submit!" />
+
+
+
+          <input data-te-submit-btn-ref className="btn bg-light-green hover:bg-hover-green text-green-gray text-lg border-0 w-2/12 group-invalid:pointer-events-none group-invalid:opacity-30" type="submit" value="submit!" />
         </form>
         <p className="text-center mt-5 text-3xl">{status}</p>
 
         {/* idk what this was for but i removed it bc it just said "comprehensive care" */}
         {/* <p className="mt-5 text-3xl">{foundHealthCenter.procedureTypes.map(pT=>pT.name).join(", ")}</p> */}
       </div>
+
+
     </div>
   );
 };
