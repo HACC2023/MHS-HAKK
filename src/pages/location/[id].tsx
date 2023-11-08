@@ -1,10 +1,12 @@
 import type { GetStaticProps, NextPage } from "next";
+import { useEffect, useState } from "react";
 import Navbar from "~/components/Navbar";
 import getServerSideHelper from "~/server/helpers/ServerSideHelper";
 import { api } from "~/utils/api";
 
 const LocationDestination: NextPage<{ id: string }> = ({ id }) => {
     const { data } = api.healthcare.getById.useQuery({ id });
+    const [map, setMap] = useState("&q=" + data?.address);
     return (
         <>
             <Navbar />
@@ -25,7 +27,7 @@ const LocationDestination: NextPage<{ id: string }> = ({ id }) => {
 
                         {/* <div className="grid grid-cols-2 h-full py-6 px-60"> */}
                         <div className="flex">
-                            <div className="w-3/5 ml-60 mt-10 relative bg-gray-100 rounded-l-xl">
+                            <div className="w-2/5 ml-60 mt-10 relative bg-gray-100 rounded-l-xl">
 
                                 <div className="h-96 p-4">
 
@@ -37,7 +39,7 @@ const LocationDestination: NextPage<{ id: string }> = ({ id }) => {
                                             <p className="join-item text-2xl indent-16">{data.names[0]}</p>
                                         </div>
 
-                                        
+
 
                                         <div className="join join-vertical lg:join-horizontal pt-4">
                                             <h2 className="join-item text-2xl font-semibold">Procedure Type:</h2>
@@ -51,7 +53,7 @@ const LocationDestination: NextPage<{ id: string }> = ({ id }) => {
                                             <p className="join-item text-2xl indent-16">{data.healthCenterNumbers[0]}</p>
                                         </div>
 
-                                        
+
                                         {/* }
                                         {data.procedureTypes.map((p) => p.insurancePlan) == "FQHC" &&
                                             <div className="pt-4">
@@ -59,10 +61,10 @@ const LocationDestination: NextPage<{ id: string }> = ({ id }) => {
                                                 <p className="text-xl pt-4">A program designed to reduce the cost of primary care for those who meet income requirements.</p>
                                             </div>
                                         } */}
-                                    
-                                        <div className="absolute bottom-0 pb-4">
 
-                                            <a target="_blank" className="normal-case mx-24 btn w-48 h-16 text-xl bg-med-blue hover:bg-hover-blue text-black border-0 " href={data.website} >
+                                        <div className="absolute flex bottom-0 pb-4">
+
+                                            <a target="_blank" className="normal-case mr-0.5 btn w-48 h-16 text-xl bg-med-blue hover:bg-hover-blue text-black border-0 " href={data.website} >
                                                 Clinic Website
                                             </a>
 
@@ -71,44 +73,34 @@ const LocationDestination: NextPage<{ id: string }> = ({ id }) => {
                                                 href={"/review/" + data.id}>
                                                 Review clinic
                                             </a>
-
-                                            <button className="normal-case mx-24 btn w-48 h-16 text-xl bg-med-blue hover:bg-dark-blue text-black border-0 "
-                                                onClick={async (_) => {
-                                                    let loc = "";
-                                                    console.log(navigator.geolocation)
-                                                    if (navigator.geolocation) {
-                                                        loc = await new Promise((res) =>
-                                                            navigator.geolocation.getCurrentPosition(
-                                                                p => res(p.coords.latitude + ',' + p.coords.longitude),
-                                                                _err => res(""),
-                                                                {
-                                                                    enableHighAccuracy: true
-                                                                }
-                                                            )
-                                                        );
-                                                    };
-                                                    window.open("https://www.google.com/maps/dir/" + loc + "/" + data.address);
-                                                }}
-                                                rel="noopener noreferrer" >
-                                                Get Directions
-                                            </button>
                                         </div>
 
                                     </div>
                                 </div>
                             </div>
-                            <div className="w-2/5 pr-60 pt-10">
-                                <iframe className="w-full h-full ml-auto rounded-r-xl"
+                            <div className="w-3/5 pr-60 pt-10">
+                                <iframe 
+                                onLoad={async (e) => {
+                                    if (navigator.geolocation) {
+                                        setMap(await new Promise((res) =>
+                                            navigator.geolocation.getCurrentPosition(
+                                                p => res("&saddr=" + p.coords.latitude + ',' + p.coords.longitude + "&daddr=" + data.address),
+                                                _err => res(''),
+                                                {
+                                                    enableHighAccuracy: true
+                                                }
+                                            )
+                                        ) || map);
+                                    };
+                                    
+                                }}
+                                className="w-full h-full ml-auto rounded-r-xl"
                                     src={
-                                        "https://www.google.com/maps/?output=embed&q=" +
-                                        data.address
+                                        "https://www.google.com/maps/?output=embed" + map
                                     }
                                 />
                             </div>
                         </div>
-
-
-
 
                     </>
 

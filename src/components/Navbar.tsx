@@ -23,11 +23,6 @@ export default function Navbar() {
       </div>
       <div className="join navbar-center w-1/2 justify-center">
       <div className="w-1/4">
-          <select className="select join-item select-bordered h-14 w-full text-xl" defaultValue={"Procedures"}>
-            <option disabled>Procedures</option>
-            { /** create a option for every procedure type our db has, math.random is a placeholder to make eslint stop complaining. */}
-            {data?.map(proType => (<option key={Math.random()}>{proType.name}</option>))}
-          </select>
         </div>
         <div className="w-2/5">
           {/* <input
@@ -37,13 +32,10 @@ export default function Navbar() {
           <SearchBarAutocomplete />
         </div>
         <div className="w-1/4">
-          <select className="select join-item select-bordered h-14 w-full text-xl" defaultValue={"Procedures"}>
-            <option disabled>
-              Procedures
-            </option>
-            <option>Ex1</option>
-            <option>Ex2</option>
-            <option>Ex3</option>
+        <select className="select join-item select-bordered h-14 w-full text-xl" defaultValue={"Procedures"}>
+            <option disabled>Procedures</option>
+            { /** create a option for every procedure type our db has, math.random is a placeholder to make eslint stop complaining. */}
+            {data?.map(proType => (<option key={Math.random()}>{proType.name}</option>))}
           </select>
         </div>
         <div className="indicator">
