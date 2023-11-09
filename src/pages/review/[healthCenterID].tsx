@@ -5,7 +5,6 @@ import React from "react";
 import { api } from "~/utils/api";
 import type { NextPage, GetStaticProps } from "next";
 import getServerSideHelper from "~/server/helpers/ServerSideHelper";
-import Navbar from "~/components/Navbar";
 import Link from "next/link";
 
 export const ReviewPage: NextPage<{ healthCenterID: string }> = ({
