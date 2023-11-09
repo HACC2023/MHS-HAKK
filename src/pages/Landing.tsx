@@ -37,7 +37,7 @@ export default function searchPage() {
                         </div>
                     </div>
                     <div className="w-1/2">
-                        <Image className="h-full w-3/4 object-cover" width={1280} height={720} alt="Image of Hawaii" src={islandImage}/>
+                        <Image className="h-full w-3/4 object-cover" loading="eager" width={1280} height={720} alt="Image of Hawaii" src={islandImage}/>
                     </div>
                 </div>
             </div>
