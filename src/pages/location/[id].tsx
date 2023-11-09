@@ -33,7 +33,7 @@ const LocationDestination: NextPage<{ id: string }> = ({ id }) => {
 
 
 
-                        <div className="flex ">
+                        <div className="flex">
                             <div className="w-1/2 ml-60 mt-10 pl-16 pt-6 relative bg-gray-100 rounded-l-xl">
                                 <h1 className="w-full text-2xl font-semibold">Clinic Description:</h1>
                                 <div className="join join-horizontally grid-cols-2 h-96 p-4">
@@ -44,7 +44,7 @@ const LocationDestination: NextPage<{ id: string }> = ({ id }) => {
                                                     <h2 className="join-item text-xl font-semibold w-48">Clinic Website</h2>
                                                 </td>
                                                 <td>
-                                                    <a className="italic" href={data.website && JSON.stringify(data.website).includes("https://") ? data.website : "https://" + data.website}>{data.website}</a>
+                                                    <a className="italic underline text-blue-700" href={data.website && JSON.stringify(data.website).includes("https://") ? data.website : "https://" + data.website}>{data.website}</a>
                                                 </td>
                                             </tr>
                                             <tr>
@@ -55,15 +55,7 @@ const LocationDestination: NextPage<{ id: string }> = ({ id }) => {
                                                     <p className="">{data.address}</p>
                                                 </td>
                                             </tr>
-                                            <tr>
-                                                <td>
-                                                    <h2 className="join-item text-xl font-semibold">Clinic Name</h2>
-                                                </td>
-                                                <td>
-                                                    <p className="">{data.names[0]}</p>
-                                                </td>
-
-                                            </tr>
+                                            
                                             <tr>
                                                 <td>
                                                     <h2 className="join-item text-xl font-semibold">Clinic Phone</h2>
@@ -80,6 +72,25 @@ const LocationDestination: NextPage<{ id: string }> = ({ id }) => {
                                                     <p className="">{data.insurancePlans.includes("QI") && "Quest Insured"}{data.insurancePlans.includes("FQHC") && "Federally Qualified Health Center"}</p>
                                                 </td>
                                             </tr>
+                                            <tr>
+                                                <td>
+                                                    <h2 className="join-item text-xl font-semibold">{data.names[1] ? "Doctor Name" : "Insurance coverage disclaimer"}</h2>
+                                                </td>
+                                                <td>
+                                                    <p className="">{data.names[1] ? data.names[0] : "We gathered multiple open source information databases on clinics, however this information is currently incomplete. To supplement this, we are crowdsourcing information from the community. This may not accurately reflect your experience. If it does not, please let us know how your visit went."}</p>
+                                                </td>
+
+                                            </tr>
+                                            
+                                            {/* <tr>
+                                                <td>
+                                                    <h2 className="join-item text-xl font-semibold">Doctor Phone</h2>
+                                                </td>
+                                                <td>
+                                                    <p className="">{data.names[0]}</p>
+                                                </td>
+
+                                            </tr> */}
                                         </tbody>
                                     </table>
                                 </div>
