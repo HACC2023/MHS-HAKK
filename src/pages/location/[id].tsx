@@ -1,8 +1,7 @@
 import type { GetStaticProps, NextPage } from "next";
-import { useEffect, useState } from "react";
+import {useState } from "react";
 import Navbar from "~/components/Navbar";
 import { ReviewPage } from "~/pages/review/[healthCenterID]";
-
 import getServerSideHelper from "~/server/helpers/ServerSideHelper";
 import { api } from "~/utils/api";
 
@@ -46,7 +45,7 @@ const LocationDestination: NextPage<{ id: string }> = ({ id }) => {
 
                                     <div className="join join-vertical lg:join-horizontal pt-4">
                                         <h2 className="join-item text-xl font-semibold">Clinic Website</h2>
-                                        <a className="italic join-item text-xl indent-16" href={JSON.stringify(data.website).includes("https://") ? data.website : "https://" + data.website}>{data.website}</a>
+                                        <a className="italic join-item text-xl indent-16" href={data.website && JSON.stringify(data.website).includes("https://") ? data.website : "https://" + data.website}>{data.website}</a>
                                     </div>
 
 
@@ -80,7 +79,7 @@ const LocationDestination: NextPage<{ id: string }> = ({ id }) => {
                         </div>
                             <div className="w-3/5 pr-60 pt-10">
                                 <iframe 
-                                onLoad={async (e) => {
+                                onLoad={async () => {
                                     if (navigator.geolocation) {
                                         setMap(await new Promise((res) =>
                                             navigator.geolocation.getCurrentPosition(
