@@ -1,7 +1,7 @@
 import { useState } from "react";
-import Link from "next/link";
+// import SearchBarAutocomplete from "~/components/SearchBar/AutoComplete";
 import Navbar from "~/components/Navbar";
-import SearchBarAutocomplete from "~/components/SearchBar/AutoComplete";
+import Footer from "~/components/Footer";
 
 export default function searchPage() {
 
@@ -42,6 +42,7 @@ export default function searchPage() {
                     </div>
                 </div>
             </div>
+            <Footer/>
         </>
     );
 }
