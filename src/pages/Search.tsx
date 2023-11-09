@@ -4,7 +4,6 @@ import "leaflet/dist/leaflet.css";
 import type { InsuranceProviders } from "~/server/api/routers/HealthcareRouter";
 import { api } from "~/utils/api";
 import Navbar from "~/components/Navbar";
-import SearchBarAutocomplete from "~/components/SearchBar/AutoComplete";
 import { LoadingSpinner } from "~/components/Loading";
 const LeafletMap = dynamic(() => import("../components/LeafletMap"), {
   ssr: false,
@@ -45,9 +44,9 @@ const SearchPage: React.FC = () => {
               <option disabled>
                 Pick one
               </option>
-              <option onClick={(p) => setInsurance("FQHC")}>Uninsured</option>
-              <option onClick={(p) => setInsurance("QI")}>Med-QUEST</option>
-              <option onClick={(p) => setInsurance(undefined)}>Any</option>
+              <option onClick={(_p) => setInsurance("FQHC")}>Uninsured</option>
+              <option onClick={(_p) => setInsurance("QI")}>Med-QUEST</option>
+              <option onClick={(_p) => setInsurance(undefined)}>Any</option>
             </select>
           </div>
         </div>
@@ -90,12 +89,13 @@ const SearchPage: React.FC = () => {
                 <div className="flex">
                   <div className="min-w-full break-words text-justify">
                     {/* {isLoggedIn ? 'currently' : 'not'} */}
-                    <a className="italic" href={JSON.stringify(c.website).includes("https://") ? c.website : "https://" + c.website}>{c.website}</a>
-                    <a className="italic underline text-blue-700" href={JSON.stringify(c.website).includes("https://") ? c.website : "https://" + c.website}>{c.website}</a>
+                    {c.website && <a className="italic underline text-blue-700" href={"https://" + c.website}>{c.website}</a>}
                     <div>{c.address}</div>
-                    <div>({JSON.stringify(c.healthCenterNumbers)[2]}{JSON.stringify(c.healthCenterNumbers)[3]}{JSON.stringify(c.healthCenterNumbers)[4]}) {JSON.stringify(c.healthCenterNumbers)[5]}{JSON.stringify(c.healthCenterNumbers)[6]}{JSON.stringify(c.healthCenterNumbers)[7]}-{JSON.stringify(c.healthCenterNumbers)[8]}{JSON.stringify(c.healthCenterNumbers)[9]}{JSON.stringify(c.healthCenterNumbers)[10]}{JSON.stringify(c.healthCenterNumbers)[11]}</div>
-                    <div>{c.insurancePlans === "QI" && "Quest Insured"}{c.insurancePlans === "FQHC" && "Federally Qualified Health Center"}</div>
-                    
+                    {c.healthCenterNumbers[0] && <div>{(() => {
+                      const num = c.healthCenterNumbers[0];
+                      return '(' + num.slice(0, 3) + ") " + num.slice(3, 6) + '-' + num.slice(6);
+                    })()}</div>}
+                    <div>{c.insurancePlans.includes("QI") && "Quest Insured"}{c.insurancePlans.includes("FQHC") && "Federally Qualified Health Center"}</div>
                   </div>
                 </div>
               </div>

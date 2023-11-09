@@ -1,7 +1,7 @@
 import { db } from "~/server/db";
 import { createTRPCRouter, publicProcedure } from "../trpc";
 import { z } from "zod";
-import { Prisma } from "@prisma/client";
+import type { Prisma } from "@prisma/client";
 
 const InsuranceValidator = z.union([z.literal("FQHC"), z.literal("QI")]);
 
@@ -99,7 +99,7 @@ const HealthcareRouter = createTRPCRouter({
     });
     return features;
   }),
-  getDataByName: publicProcedure.input(z.object({ name: z.string() })).query(async ({ ctx, input }) => {
+  getDataByName: publicProcedure.input(z.object({ name: z.string() })).query(async ({ input }) => {
     const lol: ({_id: {$oid: string }} & Prisma.HealthCenterGroupByOutputType)[] = await db.healthCenter.findRaw({
         filter: {
             names: {
