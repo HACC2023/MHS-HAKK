@@ -51,72 +51,67 @@ const LeafletMap: React.FC = () => {
 
     useEffect(() => {
         if (bruh.length > 0 && mapRef.current) {
-            initializeMap();
+            try {
+                if (mapRef.current && bruh.length > 0) {
+                    console.warn('mapRef.current && bruh.length > 0 === true')
+                    const geoJSONLayer = L.geoJSON(bruh, {
+                        pointToLayer: function (feature: ModdedGSONObj, latlng) {
+                            const { address, id, names, healthCenterNumbers, insurancePlans, website } = feature.properties;
+                            console.log(address, id, names, healthCenterNumbers, insurancePlans)
+                            const marker = L.marker(latlng, {
+                                title: address,
+                            });
+                            const formattedHealthCenterNumbers = healthCenterNumbers.map((number) => {
+                                return number.replace(/(\d{3})(\d{3})(\d{4})/, '($1) $2-$3');
+                            });
+                            const websiteLink = website ? `<p><strong>Website:</strong> <a href="${website}" target="_blank">${website}</a></p>` : '';
+                            const popupContent = `
+                            <div>
+                                <h2>${names.join(', ')}</h2>
+                                <p><strong>Address:</strong> ${address}</p>
+                                <p><strong>Health Center Numbers:</strong> ${formattedHealthCenterNumbers.join(', ')}</p>
+                                <p><strong>Insurance Plans:</strong> ${insurancePlans.join(', ')}</p>
+                                ${websiteLink}
+                            </div>
+                            `;
+
+                            marker.bindPopup(popupContent);
+                            return marker;
+                        }
+                    });
+                    const map = L.map(mapRef.current).setView([21.306944, -157.858337], 12);
+                    geoJSONLayer.addTo(map);
+                    L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+                        attribution:
+                            'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors',
+                        maxZoom: 18,
+                    }).addTo(map);
+
+                    function onLocationFound(e: LocationEvent) {
+                        const radius = e.accuracy;
+
+                        L.marker(e.latlng).addTo(map)
+                            .bindPopup("You are within " + radius + " meters from this point").openPopup();
+
+                        L.circle(e.latlng, radius).addTo(map);
+                    }
+
+                    map.on('locationfound', onLocationFound);
+
+                    function onLocationError(e: ErrorEvent) {
+                        alert(e.message);
+                    }
+
+                    map.on('locationerror', onLocationError);
+
+                } else {
+                    console.warn('mapRef.current && bruh.length > 0 === false')
+                }
+            } catch (error) {
+                console.error("Error initializing map:", error);
+            }
         }
     }, [bruh]);
-
-    const initializeMap = () => {
-        try {
-            if (mapRef.current && bruh.length > 0) {
-                console.warn('mapRef.current && bruh.length > 0 === true')
-                const geoJSONLayer = L.geoJSON(bruh, {
-                    pointToLayer: function (feature: ModdedGSONObj, latlng) {
-                        const { address, id, names, healthCenterNumbers, insurancePlans, website } = feature.properties;
-                        console.log(address, id, names, healthCenterNumbers, insurancePlans)
-                        const marker = L.marker(latlng, {
-                            title: address,
-                        });
-                        const formattedHealthCenterNumbers = healthCenterNumbers.map((number) => {
-                            return number.replace(/(\d{3})(\d{3})(\d{4})/, '($1) $2-$3');
-                        });
-                        const websiteLink = website ? `<p><strong>Website:</strong> <a href="${website}" target="_blank">${website}</a></p>` : '';
-                        const popupContent = `
-                        <div>
-                            <h2>${names.join(', ')}</h2>
-                            <p><strong>Address:</strong> ${address}</p>
-                            <p><strong>Health Center Numbers:</strong> ${formattedHealthCenterNumbers.join(', ')}</p>
-                            <p><strong>Insurance Plans:</strong> ${insurancePlans.join(', ')}</p>
-                            ${websiteLink}
-                        </div>
-                        `;
-
-                        marker.bindPopup(popupContent);
-                        return marker;
-                    }
-                });
-                const map = L.map(mapRef.current).setView([21.306944, -157.858337], 12);
-                geoJSONLayer.addTo(map);
-                L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-                    attribution:
-                        'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors',
-                    maxZoom: 18,
-                }).addTo(map);
-
-                function onLocationFound(e: LocationEvent) {
-                    const radius = e.accuracy;
-
-                    L.marker(e.latlng).addTo(map)
-                        .bindPopup("You are within " + radius + " meters from this point").openPopup();
-
-                    L.circle(e.latlng, radius).addTo(map);
-                }
-
-                map.on('locationfound', onLocationFound);
-
-                function onLocationError(e: ErrorEvent) {
-                    alert(e.message);
-                }
-
-                map.on('locationerror', onLocationError);
-
-            } else {
-                console.warn('mapRef.current && bruh.length > 0 === false')
-            }
-        } catch (error) {
-            console.error("Error initializing map:", error);
-        }
-    };
-
     return <div ref={mapRef} className="w-2/5 h-full ml-auto"></div>;
 };
 
