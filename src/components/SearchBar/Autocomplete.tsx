@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react"; // import useEffect from react if needed
 import Autocomplete from './Searchbar'
 import { api } from '~/utils/api'
 
