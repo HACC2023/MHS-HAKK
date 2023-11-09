@@ -5,24 +5,23 @@ import markerIcon2x from 'leaflet/dist/images/marker-icon-2x.png';
 import markerIcon from 'leaflet/dist/images/marker-icon.png';
 import markerShadow from 'leaflet/dist/images/marker-shadow.png';
 import * as jsonData from './Coordinates.json';
-
-const data = jsonData.map((c) => {
+type ModdedGSONObj = (GeoJSON.GeoJsonObject & { properties: { address: string } });
+const data: ModdedGSONObj[] = jsonData.map((c) => {
     return {
         type: "Feature",
-            geometry: {
-                type: "Point",
-                coordinates: [
-                    c.Longitude,
-                    c.Latitude
-                ],
-            },
-            properties: {
-                address: c.address
-            },
+        geometry: {
+            type: "Point",
+            coordinates: [
+                c.Longitude,
+                c.Latitude
+            ],
+        },
+        properties: {
+            address: c.address
+        },
     };
 });
 
-delete (L.Icon.Default.prototype as any)._getIconUrl;
 L.Icon.Default.mergeOptions({
     iconUrl: markerIcon.src,
     iconRetinaUrl: markerIcon2x.src,
@@ -37,8 +36,8 @@ const LeafletMap = () => {
             try {
                 if (mapRef.current) {
                     const geoJSONLayer = L.geoJSON(data, {
-                        pointToLayer: function (feature, latlng) {
-                            const address = feature.properties.address
+                        pointToLayer: function (feature: ModdedGSONObj, latlng) {
+                            const address = feature.properties.address;
                             const marker = L.marker(latlng, {
                                 title: address,
                             });
