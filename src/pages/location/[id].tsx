@@ -17,77 +17,98 @@ const LocationDestination: NextPage<{ id: string }> = ({ id }) => {
                 {data ? (
                     <>
                         <div className="flex flex-col w-screen text-white bg-dark-blue gap-4 py-16 px-60 ">
-                            <div className="items-center text-6xl font-bold ">
+
+                            <div className=" items-center text-6xl font-bold ">
                                 {data.names[0]}
                             </div>
-                            <div className="items-center text-xl font-bold ">
-                                {data.procedureTypes.map((p) => p.name)[0]} {data.procedureTypes.map((p) => p.name)[1]} {data.procedureTypes.map((p) => p.name)[2]}
-                            </div>
-                        </div>
-                        <div className="ml-60 mt-6 grid-cols-2">
-                            <a className="normal-case btn w-40 h-14 text-xl bg-light-green hover:bg-hover-green text-green-gray border-0 "
+                            <a className="normal-case mt-3 btn w-40 h-14 text-xl bg-light-green hover:bg-hover-green text-green-gray border-0 "
                                 onClick={_ => window.history.back()}
                             >
+                                
                                 Go back
                             </a>
-                            <button className="normal-case btn w-40 h-14 text-xl bg-light-green hover:bg-hover-green text-green-gray border-0 ">Planning to visit clinic</button>
                         </div>
 
-
-
-                        <div className="flex ">
-                            <div className="w-1/2 ml-60 mt-10 pl-16 pt-6 relative bg-gray-100 rounded-l-xl">
+                        {/* <div className="grid grid-cols-2 h-full py-6 px-60"> */}
+                        <div className="flex">
+                            <div className="w-2/5 ml-60 mt-10 relative bg-gray-100 rounded-l-xl">
 
                                 <div className="h-96 p-4">
-                                    <h1 className="w-full text-2xl font-semibold">Clinic Description:</h1>
-                                    <div className="divider"></div>
+
+                                    <h1 className="w-full text-3xl font-semibold">Clinic Description:</h1>
                                     <div className="mr-4 pb-6 flex flex-col">
 
-
-
                                         <div className="join join-vertical lg:join-horizontal pt-4">
-                                            <h2 className="join-item text-xl font-semibold">Clinic Website</h2>
-                                            <a className="italic join-item text-xl indent-16" href={JSON.stringify(data.website).includes("https://") ? data.website : "https://" + data.website}>{data.website}</a>
+                                            <h2 className="join-item text-2xl font-semibold">Clinic Name: </h2>
+                                            <p className="join-item text-2xl indent-16">{data.names[0]}</p>
                                         </div>
 
 
 
                                         <div className="join join-vertical lg:join-horizontal pt-4">
-                                            <h2 className="join-item text-xl font-semibold">Clinic Address</h2>
-                                            <p className="join-item text-xl indent-16">{data.address}</p>
+                                            <h2 className="join-item text-2xl font-semibold">Procedure Type:</h2>
+                                            <p className="join-item text-2xl indent-6">{data.procedureTypes.map((p) => p.name)}</p>
                                         </div>
 
 
 
                                         <div className="join join-vertical lg:join-horizontal pt-4">
-                                            <h2 className="join-item text-xl font-semibold">Clinic Name</h2>
-                                            <p className="join-item text-xl indent-16">{data.names[0]}</p>
+                                            <h2 className="join-item text-2xl font-semibold">Clinic Phone:</h2>
+                                            <p className="join-item text-2xl indent-16">{data.healthCenterNumbers[0]}</p>
                                         </div>
 
 
+                                        {/* }
+                                        {data.procedureTypes.map((p) => p.insurancePlan) == "FQHC" &&
+                                            <div className="pt-4">
+                                                <h2 className="text-2xl font-semibold">What is a sliding fee program?</h2>
+                                                <p className="text-xl pt-4">A program designed to reduce the cost of primary care for those who meet income requirements.</p>
+                                            </div>
+                                        } */}
 
-                                        <div className="join join-vertical lg:join-horizontal pt-4">
-                                            <h2 className="join-item text-xl font-semibold">Clinic Phone</h2>
-                                            <p className="join-item text-xl indent-16">({JSON.stringify(data.healthCenterNumbers[0]).split("")[1]}{JSON.stringify(data.healthCenterNumbers[0]).split("")[2]}{JSON.stringify(data.healthCenterNumbers[0]).split("")[3]}) {JSON.stringify(data.healthCenterNumbers[0]).split("")[4]}{JSON.stringify(data.healthCenterNumbers[0]).split("")[5]}{JSON.stringify(data.healthCenterNumbers[0]).split("")[6]}-{JSON.stringify(data.healthCenterNumbers[0]).split("")[7]}{JSON.stringify(data.healthCenterNumbers[0]).split("")[8]}{JSON.stringify(data.healthCenterNumbers[0]).split("")[9]}{JSON.stringify(data.healthCenterNumbers[0]).split("")[10]}</p>
+                                        <div className="absolute flex bottom-0 pb-4">
+
+                                            <a target="_blank" className="normal-case mr-0.5 btn w-48 h-16 text-xl bg-med-blue hover:bg-hover-blue text-black border-0 " href={data.website} >
+                                                Clinic Website
+                                            </a>
+
+                                            {/* send user to the corresponding review page when clicked */}
+                                            <a target="_Blank" className="normal-case btn w-48 h-16 text-xl bg-med-blue hover:bg-dark-blue text-black border-0 "
+                                                href={"/review/" + data.id}>
+                                                Review clinic
+                                            </a>
                                         </div>
 
-
-
-                                        <div className="join join-vertical lg:join-horizontal pt-4">
-                                            <h2 className="join-item text-xl font-semibold">Insurance Type</h2>
-                                            <p className="join-item text-xl indent-16">{data.insurancePlans == "QI" && "Quest Insured"}{data.insurancePlans == "FQHC" && "Federally Qualified Health Center"}</p>
-                                        </div>
                                     </div>
                                 </div>
                             </div>
-                            <div className="w-1/2 pr-60 pt-10">
-                                <iframe className="w-full h-full ml-auto rounded-r-xl"
+                            <div className="w-3/5 pr-60 pt-10">
+                                <iframe 
+                                onLoad={async (e) => {
+                                    if (navigator.geolocation) {
+                                        setMap(await new Promise((res) =>
+                                            navigator.geolocation.getCurrentPosition(
+                                                p => res("&saddr=" + p.coords.latitude + ',' + p.coords.longitude + "&daddr=" + data.address),
+                                                _err => res(''),
+                                                {
+                                                    enableHighAccuracy: true
+                                                }
+                                            )
+                                        ) || map);
+                                    };
+                                    
+                                }}
+                                className="w-full h-full ml-auto rounded-r-xl"
                                     src={
                                         "https://www.google.com/maps/?output=embed" + map
                                     }
                                 />
                             </div>
                         </div>
+
+
+                        <ReviewPage healthCenterID={id}/>
+
                     </>
 
                 ) : (
@@ -97,7 +118,7 @@ const LocationDestination: NextPage<{ id: string }> = ({ id }) => {
                         </div>
                     </>
                 )}
-
+                
 
             </div>
         </>
