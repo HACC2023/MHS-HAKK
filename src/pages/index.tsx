@@ -1,4 +1,3 @@
-import Head from "next/head";
 import Landing from "./Landing";
 import "leaflet/dist/leaflet.css";
 
