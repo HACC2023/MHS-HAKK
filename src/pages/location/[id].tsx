@@ -43,8 +43,16 @@ const LocationDestination: NextPage<{ id: string }> = ({ id }) => {
 
 
                         <div className="flex">
+                            <div className="toast toast-end">
+                                <div className="flex alert alert-info tooltip tooltip-top " data-tip="Let us know if your care was covered">
+                                    <div>Was Your Care Covered?</div>
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" className="stroke-current shrink-0 w-6 h-6"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+
+                                </div>
+                            </div>
+
                             <div className="static ml-60 mt-4 w-1/2 px-12 pb-10 pt-6 bg-gray-100 rounded-l-xl">
-                                <div className="join join-horizontally min-h-min">
+                                <div className="join join-horizontally min-h-96">
 
                                     <table className="table-fixed">
                                         <tbody>
@@ -100,13 +108,13 @@ const LocationDestination: NextPage<{ id: string }> = ({ id }) => {
                                             </tr>
                                             {data.supportedInsurances.includes("FQHC") &&
                                                 <tr>
-                                                <td>
-                                                    <h2 className="text-xl font-semibold">Payment Details</h2>
-                                                </td>   
-                                                <td>
-                                                    <p className="text-lg">Without insurance, clinics will charge based on your income and the number of people in your household. For more information, please contact the clinic.</p>
-                                                </td>
-                                            </tr>
+                                                    <td>
+                                                        <h2 className="text-xl font-semibold">Payment Details</h2>
+                                                    </td>
+                                                    <td>
+                                                        <p className="text-lg">Without insurance, clinics will charge based on your income and the number of people in your household. For more information, please contact the clinic.</p>
+                                                    </td>
+                                                </tr>
                                             }
                                             {data.doctors.map((doctor) => {
                                                 const number = doctor.availabilities.find((availability) => availability.healthCenterID == id)!.phoneNumber;
@@ -117,9 +125,9 @@ const LocationDestination: NextPage<{ id: string }> = ({ id }) => {
                                                                 <h2 className="text-xl font-semibold">Doctor Name:</h2>
                                                             </td>
                                                             <td>
-                                                                {doctor.name} ({doctor.procedureTypes.map((procedureType) => procedureType.name)}) 
+                                                                {doctor.name} ({doctor.procedureTypes.map((procedureType) => procedureType.name)})
                                                             </td>
-                                                            
+
                                                         </tr>
                                                         <tr>
                                                             <td>
