@@ -34,8 +34,8 @@ export default function searchPage() {
                             target="_blank" href="https://medquest.hawaii.gov/en/contact-us.html">Med-QUEST Eligibilty</a>
                         </div>
                     </div>
-                    <div className="w-1/2 hidden md:block">
-                        <Image className="md:h-full w-3/4 object-cover h-1 w-1" loading="eager" width={1280} height={720} alt="Image of Hawaii" src={islandImage}/>
+                    <div className="xl:w-1/2 hidden md:block w-0">
+                        <Image className="md:h-full w-3/4 object-cover h-1" loading="eager" width={1280} height={720} alt="Image of Hawaii" src={islandImage}/>
                     </div>
                 </div>
             </div>
