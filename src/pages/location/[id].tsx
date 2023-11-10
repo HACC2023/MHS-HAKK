@@ -1,5 +1,4 @@
 import type { GetStaticProps, NextPage } from "next";
-import { availableParallelism } from "os";
 import { useState } from "react";
 import Navbar from "~/components/Navbar";
 import { ReviewPage } from "~/pages/review/[healthCenterID]";
@@ -10,10 +9,8 @@ const LocationDestination: NextPage<{ id: string }> = ({ id }) => {
     const { data } = api.healthcare.getById.useQuery({ id });
     const [map, setMap] = useState("&q=" + data?.address);
 
+    const doctorCount = data?.doctors.length
 
-
-    // const doctorNumbers = [] as string[];
-    // api.healthcare.
     return (
         <>
             <Navbar />
@@ -37,21 +34,24 @@ const LocationDestination: NextPage<{ id: string }> = ({ id }) => {
                             </div>
                         </div>
 
-
+                        <div className="flex static w-60 ml-72 mt-6 text-lg tooltip tooltip-right font-semibold" data-tip="We compiled information on multiple clinics and will be crowdsourcing from the community. If this page does not accurately reflect your experience, please let us know how your experience went.">
+                            <h3 className="mr-2">Coverage disclaimer</h3>
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
+                                <path strokeLinecap="round" strokeLinejoin="round" d="M11.25 11.25l.041-.02a.75.75 0 011.063.852l-.708 2.836a.75.75 0 001.063.853l.041-.021M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9-3.75h.008v.008H12V8.25z" />
+                            </svg>
+                        </div>
 
 
                         <div className="flex">
-                            <div className="w-1/2 ml-60 mt-10 px-12 pb-8 pt-4 static bg-gray-100 rounded-l-xl">
-                                <div className="join join-horizontally h-96">
+                            <div className="static ml-60 mt-4 w-1/2 px-12 pb-10 pt-6 bg-gray-100 rounded-l-xl">
+                                <div className="join join-horizontally min-h-min">
+
                                     <table className="table-fixed">
                                         <tbody>
                                             <tr className="border-gray-100">
                                                 <td className="text-2xl font-semibold w-56 ">Clinic Description</td>
-                                                <td className="flex pt-8 text-lg tooltip tooltip-top font-semibold" data-tip="We compiled information on multiple clinics and will be crowdsourcing from the community. If this page does not accurately reflect your experience, please let us know how your experience went.">
-                                                    <h2 className="mr-4 static ">Coverage disclaimer</h2>
-                                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none"  strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
-                                                        <path strokeLinecap="round" strokeLinejoin="round" d="M11.25 11.25l.041-.02a.75.75 0 011.063.852l-.708 2.836a.75.75 0 001.063.853l.041-.021M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9-3.75h.008v.008H12V8.25z" />
-                                                    </svg>
+                                                <td>
+
                                                 </td>
                                             </tr>
 
@@ -98,7 +98,16 @@ const LocationDestination: NextPage<{ id: string }> = ({ id }) => {
                                                     <p className="text-lg">{data.supportedInsurances.includes("QI") && "Quest Insured"}{data.supportedInsurances.includes("FQHC") && "Federally Qualified Health Center"}</p>
                                                 </td>
                                             </tr>
-                                            {/* Must change conditon to doctors information when updating database */}
+                                            {data.supportedInsurances.includes("FQHC") &&
+                                                <tr>
+                                                <td>
+                                                    <h2 className="text-xl font-semibold">Payment Details</h2>
+                                                </td>   
+                                                <td>
+                                                    <p className="text-lg">Without insurance, clinics will charge based on your income and the number of people in your household. For more information, please contact the clinic.</p>
+                                                </td>
+                                            </tr>
+                                            }
                                             {data.doctors.map((doctor) => {
                                                 const number = doctor.availabilities.find((availability) => availability.healthCenterID == id)!.phoneNumber;
                                                 return (
@@ -108,23 +117,16 @@ const LocationDestination: NextPage<{ id: string }> = ({ id }) => {
                                                                 <h2 className="text-xl font-semibold">Doctor Name:</h2>
                                                             </td>
                                                             <td>
-                                                                {doctor.name}
+                                                                {doctor.name} ({doctor.procedureTypes.map((procedureType) => procedureType.name)}) 
                                                             </td>
-                                                        </tr>
-                                                        <tr>
-                                                        <td>
-                                                                <h2 className="text-xl font-semibold">Doctor procedures:</h2>
-                                                            </td>
-                                                            <td>
-                                                                {doctor.procedureTypes.map((procedureType) => procedureType.name).join(", ")}
-                                                            </td>
+                                                            
                                                         </tr>
                                                         <tr>
                                                             <td>
                                                                 <h2 className="text-xl font-semibold">Doctor Number:</h2>
                                                             </td>
                                                             <td>
-                                                            <h2 className="text-xl font-semibold">{number ? '(' + number.slice(0, 3) + ") " + number.slice(3, 6) + '-' + number.slice(6) : ""}</h2>
+                                                                <h2 className="text-xl">{number ? '(' + number.slice(0, 3) + ") " + number.slice(3, 6) + '-' + number.slice(6) : ""}</h2>
                                                             </td>
                                                         </tr>
                                                     </>
@@ -134,7 +136,7 @@ const LocationDestination: NextPage<{ id: string }> = ({ id }) => {
                                     </table>
                                 </div>
                             </div>
-                            <div className="w-1/2 mr-60 pt-10">
+                            <div className="w-1/2 mr-60 pt-4">
                                 <iframe
                                     onLoad={async () => {
                                         if (navigator.geolocation) {
