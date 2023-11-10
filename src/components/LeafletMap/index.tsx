@@ -67,7 +67,8 @@ const LeafletMap: React.FC = () => {
                             const websiteLink = website ? `<p><strong>Website:</strong> <a href="${website}" target="_blank">${website}</a></p>` : '';
                             const popupContent = `
                             <div>
-                                <h2>${names.join(', ')}</h2>
+                                <h2><strong>${names.join(', ')}</strong></h2>
+                                <a href=/location/${id}> (Click for more details)</a>
                                 <p><strong>Address:</strong> ${address}</p>
                                 <p><strong>Health Center Numbers:</strong> ${formattedHealthCenterNumbers.join(', ')}</p>
                                 <p><strong>Insurance Plans:</strong> ${supportedInsurances.join(', ')}</p>
