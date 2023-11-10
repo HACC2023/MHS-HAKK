@@ -103,11 +103,14 @@ const LocationDestination: NextPage<{ id: string }> = ({ id }) => {
                                                     </td>
                                                 </tr>
                                                 :
-                                                <tr className="text-lg flex tooltip tooltip-right font-semibold" data-tip="We compiled information on multiple clinics and will be crowdsourcing from the community. If this page does not accurately reflect your experience, please let us know how your experience went.">
-                                                    <h2 className="join-item">Coverage disclaimer</h2>
-                                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="join-item w-6 h-6">
-                                                        <path strokeLinecap="round" strokeLinejoin="round" d="M11.25 11.25l.041-.02a.75.75 0 011.063.852l-.708 2.836a.75.75 0 001.063.853l.041-.021M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9-3.75h.008v.008H12V8.25z" />
-                                                    </svg>
+                                                <tr className="">
+                                                    <td>
+                                                    <h2 className="text-xl font-semibold">Coverage Warning</h2>
+                                                    </td>
+                                                    <td>
+                                                        <p className="text-lg">Without insurance, clinics will provide heathcare on a sliding scale of payments based on your income and the number of people in your household. For more information, please contact the clinic.</p>
+                                                    </td>
+                                                  
                                                 </tr>}
 
                                             {/* Must change conditon to doctors information when updating database */}
