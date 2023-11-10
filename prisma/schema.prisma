@@ -1,85 +1,91 @@
 generator client {
-  provider        = "prisma-client-js"
+    provider = "prisma-client-js"
 }
 
 datasource db {
-  provider = "mongodb"
-  url      = env("DATABASE_URL")
+    provider = "mongodb"
+    url      = env("DATABASE_URL")
 }
 
-model Post {
-  id        String   @id @default(auto()) @map("_id") @db.ObjectId
-  createdAt DateTime @db.Date
-  name      String
-  updatedAt DateTime @db.Date
+model HealthCenter {
+    id                   String               @id @default(auto()) @map("_id") @db.ObjectId
+    address              String               @unique
+    names                String[]
+    website              String?
+    healthCenterNumbers  String[]
+    supportedInsurances  String[]
+    procedureTypeNames   String[]
+    procedureTypes       ProcedureType[]      @relation(fields: [procedureTypeIDs], references: [id])
+    procedureTypeIDs     String[]             @db.ObjectId
+    doctors              Doctor[]             @relation(fields: [doctorIDs], references: [id])
+    doctorIDs            String[]             @db.ObjectId
+    doctorAvailabilities DoctorAvailability[]
+
+    reviews          Review[]
+    procedureReviews ProcedureReview[]
 }
 
-model centers {
-  id                                                               String  @id @default(auto()) @map("_id") @db.ObjectId
-  /// Multiple data types found: Float: 5%, Int: 95% out of 119 sampled entries
-  BHCMIS_Organization_Identification_Number                        Json    @map("BHCMIS Organization Identification Number")
-  BPHC_Assigned_Number                                             String  @map("BPHC Assigned Number")
-  Community_Health_HRSA_Grant_Subprogram_Indicator                 String  @map("Community Health HRSA Grant Subprogram Indicator")
-  Complete_County_Name                                             String  @map("Complete County Name")
-  Congressional_District_Code                                      String  @map("Congressional District Code")
-  Congressional_District_Name                                      String  @map("Congressional District Name")
-  Congressional_District_Number                                    Int     @map("Congressional District Number")
-  County_Description                                               String  @map("County Description")
-  County_Equivalent_Name                                           String  @map("County Equivalent Name")
-  Data_Warehouse_Record_Create_Date                                String  @map("Data Warehouse Record Create Date")
-  /// Multiple data types found: String: 7.4%, Int: 92.6% out of 54 sampled entries
-  FQHC_Site_Medicare_Billing_Number                                Json?   @map("FQHC Site Medicare Billing Number")
-  FQHC_Site_NPI_Number                                             Int?    @map("FQHC Site NPI Number")
-  Geocoding_Artifact_Address_Primary_X_Coordinate                  Float   @map("Geocoding Artifact Address Primary X Coordinate")
-  Geocoding_Artifact_Address_Primary_Y_Coordinate                  Float   @map("Geocoding Artifact Address Primary Y Coordinate")
-  Geocoding_Artifact_Rural_Status_Indicator                        String  @map("Geocoding Artifact Rural Status Indicator")
-  Grantee_Organization_Type_Description                            String  @map("Grantee Organization Type Description")
-  HHS_Region_Code                                                  Int     @map("HHS Region Code")
-  HHS_Region_Name                                                  String  @map("HHS Region Name")
-  Health_Care_for_the_Homeless_HRSA_Grant_Subprogram_Indicator     String  @map("Health Care for the Homeless HRSA Grant Subprogram Indicator")
-  Health_Center_Location_Identification_Number                     Int     @map("Health Center Location Identification Number")
-  Health_Center_Location_Setting_Identification_Number             Int     @map("Health Center Location Setting Identification Number")
-  Health_Center_Location_Type_Description                          String  @map("Health Center Location Type Description")
-  Health_Center_Name                                               String  @map("Health Center Name")
-  Health_Center_Number                                             String  @map("Health Center Number")
-  Health_Center_Operating_Calendar                                 String  @map("Health Center Operating Calendar")
-  Health_Center_Operating_Calendar_Surrogate_Key                   Int     @map("Health Center Operating Calendar Surrogate Key")
-  Health_Center_Operating_Schedule_Identification_Number           Int     @map("Health Center Operating Schedule Identification Number")
-  Health_Center_Operational_Schedule_Description                   String  @map("Health Center Operational Schedule Description")
-  Health_Center_Operator_Description                               String  @map("Health Center Operator Description")
-  Health_Center_Operator_Identification_Number                     Int     @map("Health Center Operator Identification Number")
-  Health_Center_Organization_City                                  String  @map("Health Center Organization City")
-  Health_Center_Organization_State                                 String  @map("Health Center Organization State")
-  Health_Center_Organization_Street_Address                        String  @map("Health Center Organization Street Address")
-  /// Multiple data types found: String: 84.9%, Int: 15.1% out of 119 sampled entries
-  Health_Center_Organization_ZIP_Code                              Json    @map("Health Center Organization ZIP Code")
-  Health_Center_Service_Delivery_Site_Location_Setting_Description String  @map("Health Center Service Delivery Site Location Setting Description")
-  Health_Center_Status_Identification_Number                       Int     @map("Health Center Status Identification Number")
-  Health_Center_Type                                               String  @map("Health Center Type")
-  Health_Center_Type_Description                                   String  @map("Health Center Type Description")
-  Health_Center_Type_Identification_Number                         Int     @map("Health Center Type Identification Number")
-  Migrant_Health_Centers_HRSA_Grant_Subprogram_Indicator           String  @map("Migrant Health Centers HRSA Grant Subprogram Indicator")
-  Name_of_US_Senator_Number_One                                    String  @map("Name of US Senator Number One")
-  Name_of_US_Senator_Number_Two                                    String  @map("Name of US Senator Number Two")
-  /// Multiple data types found: Float: 5.7%, Int: 94.3% out of 106 sampled entries
-  Operating_Hours_per_Week                                         Json?   @map("Operating Hours per Week")
-  Public_Housing_HRSA_Grant_Subprogram_Indicator                   String  @map("Public Housing HRSA Grant Subprogram Indicator")
-  School_Based_Health_Center_HRSA_Grant_Subprogram_Indicator       String  @map("School Based Health Center HRSA Grant Subprogram Indicator")
-  Site_Added_to_Scope_this_Date                                    String  @map("Site Added to Scope this Date")
-  Site_Address                                                     String  @map("Site Address")
-  Site_City                                                        String  @map("Site City")
-  Site_Name                                                        String  @map("Site Name")
-  /// Multiple data types found: String: 86.6%, Int: 13.4% out of 119 sampled entries
-  Site_Postal_Code                                                 Json    @map("Site Postal Code")
-  Site_State_Abbreviation                                          String  @map("Site State Abbreviation")
-  Site_Status_Description                                          String  @map("Site Status Description")
-  Site_Telephone_Number                                            String  @map("Site Telephone Number")
-  Site_Web_Address                                                 String? @map("Site Web Address")
-  State_FIPS_Code                                                  Int     @map("State FIPS Code")
-  State_FIPS_and_Congressional_District_Number_Code                Int     @map("State FIPS and Congressional District Number Code")
-  State_Name                                                       String  @map("State Name")
-  State_and_County_Federal_Information_Processing_Standard_Code    Int     @map("State and County Federal Information Processing Standard Code")
-  US_Congressional_Representative_Name                             String  @map("US Congressional Representative Name")
-  US_Mexico_Border_100_Kilometer_Indicator                         String  @map("US-Mexico Border 100 Kilometer Indicator")
-  US_Mexico_Border_County_Indicator                                String  @map("US-Mexico Border County Indicator")
+model ProcedureType {
+    id                    String               @id @default(auto()) @map("_id") @db.ObjectId
+    name                  String               @unique // categorization of procedures; family medicine, radiology, etc.
+    insurance             String
+    doctors               Doctor[]             @relation(fields: [doctorIDs], references: [id])
+    doctorIDs             String[]             @db.ObjectId
+    healthCenters         HealthCenter[]       @relation(fields: [healthCenterIDs], references: [id])
+    healthCenterIDs       String[]             @db.ObjectId
+    reviews               Review[]             @relation(fields: [reviewIDs], references: [id])
+    reviewIDs             String[]             @db.ObjectId
+    doctorAvailabilities  DoctorAvailability[] @relation(fields: [doctorAvailabilityIDs], references: [id])
+    doctorAvailabilityIDs String[]             @db.ObjectId
+
+    procedureReviews ProcedureReview[]
+}
+
+model Doctor {
+    id                  String   @id @default(auto()) @map("_id") @db.ObjectId
+    name                String   @unique
+    nonEnglishLanguages String[]
+
+    availabilities   DoctorAvailability[]
+    procedureTypes   ProcedureType[]      @relation(fields: [procedureTypeIDs], references: [id])
+    procedureTypeIDs String[]             @db.ObjectId
+    healthCenters    HealthCenter[]       @relation(fields: [healthCenterIDs], references: [id])
+    healthCenterIDs  String[]             @db.ObjectId
+}
+
+model DoctorAvailability {
+    id                   String          @id @default(auto()) @map("_id") @db.ObjectId
+    phoneNumber          String?
+    acceptingNewPatients Boolean
+    doctor               Doctor          @relation(fields: [doctorID], references: [id])
+    doctorID             String          @db.ObjectId
+    healthCenter         HealthCenter    @relation(fields: [healthCenterID], references: [id])
+    healthCenterID       String          @db.ObjectId
+    procedureTypes       ProcedureType[] @relation(fields: [procedureTypeIDs], references: [id])
+    procedureTypeIDs     String[]        @db.ObjectId
+}
+
+model Review {
+    id                String            @id @default(auto()) @map("_id") @db.ObjectId
+    hadQuest          Boolean // quest or no insurance
+    healthCenter      HealthCenter      @relation(fields: [healthCenterID], references: [id])
+    healthCenterID    String            @db.ObjectId
+    createdAt         DateTime          @default(now())
+    procedureReviews  ProcedureReview[]
+    procedureTypes    ProcedureType[]   @relation(fields: [procedureTypesIDs], references: [id])
+    procedureTypesIDs String[]          @db.ObjectId
+}
+
+model ProcedureReview {
+    id              String        @id @default(auto()) @map("_id") @db.ObjectId
+    type            String // Selected from list of possible categories
+    name            String // Free user input
+    covered         Boolean
+    hadQuest        Boolean
+    review          Review        @relation(fields: [reviewID], references: [id])
+    reviewID        String        @db.ObjectId
+    healthCenter    HealthCenter  @relation(fields: [healthCenterID], references: [id])
+    healthCenterID  String        @db.ObjectId
+    procedureType   ProcedureType @relation(fields: [procedureTypeID], references: [id])
+    procedureTypeID String        @db.ObjectId
 }

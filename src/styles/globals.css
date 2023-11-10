@@ -1,3 +1,16 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@import 'leaflet/dist/leaflet.css';
+
+@font-face {
+    font-family: "Raleway";
+    src: url("../../public/Raleway-VariableFont_wght.ttf") format("truetype");
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "Raleway";
+    src: url("../../public/Raleway-Italic-VariableFont_wght.ttf") format("truetype");
+    font-style: italic;
+}
