@@ -14,88 +14,119 @@ const LocationDestination: NextPage<{ id: string }> = ({ id }) => {
             <div className="w-full font-tyler ">
                 {data ? (
                     <>
-                        <div className="flex flex-col w-screen text-white bg-dark-blue gap-4 py-16 px-60 ">
+                        <div className="flex flex-col w-screen text-white bg-dark-blue gap-4 pt-16 pb-10 px-60 ">
                             <div className="items-center text-6xl font-bold ">
                                 {data.names[0]}
                             </div>
                             <div className="items-center text-xl font-bold ">
                                 {data.procedureTypes.map((p) => p.name)[0]} {data.procedureTypes.map((p) => p.name)[1]} {data.procedureTypes.map((p) => p.name)[2]}
                             </div>
+                            <div className="join join-horizontal static mt-6 grid-cols-2">
+                                <a className="join-item normal-case btn w-40 h-14 text-xl bg-light-green hover:bg-hover-green text-green-gray border-dark-blue"
+                                    onClick={_ => window.history.back()}
+                                >
+                                    Go back
+                                </a>
+                                <button className="join-item normal-case btn w-40 h-14 text-xl bg-light-green hover:bg-hover-green text-green-gray border-dark-blue">Planning to visit clinic</button>
+                            </div>
                         </div>
-                        <div className="join join-horizontal ml-60 mt-6 grid-cols-2">
-                            <a className="join-item normal-case btn w-40 h-14 text-xl bg-light-green hover:bg-hover-green text-green-gray border-white "
-                                onClick={_ => window.history.back()}
-                            >
-                                Go back
-                            </a>
-                            <button className="join-item normal-case btn w-40 h-14 text-xl bg-light-green hover:bg-hover-green text-green-gray border-white ">Planning to visit clinic</button>
-                        </div>
+
 
 
 
                         <div className="flex">
-                            <div className="w-1/2 ml-60 mt-10 pl-16 pt-6 relative bg-gray-100 rounded-l-xl">
-                                <h1 className="w-full text-2xl font-semibold">Clinic Description:</h1>
-                                <div className="join join-horizontally grid-cols-2 h-96 p-4">
+                            <div className="w-1/2 ml-60 mt-10 px-12 py-8 static bg-gray-100 rounded-l-xl">
+                                <div className="join join-horizontally h-96">
                                     <table className="table-fixed">
                                         <tbody>
-                                            <tr className="">
-                                                <td>
-                                                    <h2 className="join-item text-xl font-semibold w-48">Clinic Website</h2>
-                                                </td>
-                                                <td>
-                                                    <a className="italic underline text-blue-700" href={data.website && JSON.stringify(data.website).includes("https://") ? data.website : "https://" + data.website}>{data.website}</a>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <h2 className="join-item text-xl font-semibold">Clinic Address</h2>
-                                                </td>
-                                                <td>
-                                                    <p className="">{data.address}</p>
+                                            <tr className="border-gray-100">
+                                                <td className="text-2xl font-semibold w-56 ">Clinic Description</td>
+                                                <td className="flex pt-4 text-lg tooltip tooltip-top font-semibold" data-tip="We compiled information on multiple clinics and will be crowdsourcing from the community. If this page does not accurately reflect your experience, please let us know how your experience went.">
+                                                    <h2 className="mr-4">Coverage disclaimer</h2>
+                                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none"  strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
+                                                        <path strokeLinecap="round" strokeLinejoin="round" d="M11.25 11.25l.041-.02a.75.75 0 011.063.852l-.708 2.836a.75.75 0 001.063.853l.041-.021M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9-3.75h.008v.008H12V8.25z" />
+                                                    </svg>
                                                 </td>
                                             </tr>
-                                            
-                                            <tr>
-                                                <td>
-                                                    <h2 className="join-item text-xl font-semibold">Clinic Phone</h2>
-                                                </td>
-                                                <td>
-                                                    <p className="">({JSON.stringify(data.healthCenterNumbers[0]).split("")[1]}{JSON.stringify(data.healthCenterNumbers[0]).split("")[2]}{JSON.stringify(data.healthCenterNumbers[0]).split("")[3]}) {JSON.stringify(data.healthCenterNumbers[0]).split("")[4]}{JSON.stringify(data.healthCenterNumbers[0]).split("")[5]}{JSON.stringify(data.healthCenterNumbers[0]).split("")[6]}-{JSON.stringify(data.healthCenterNumbers[0]).split("")[7]}{JSON.stringify(data.healthCenterNumbers[0]).split("")[8]}{JSON.stringify(data.healthCenterNumbers[0]).split("")[9]}{JSON.stringify(data.healthCenterNumbers[0]).split("")[10]}</p>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <h2 className="join-item text-xl font-semibold">Insurance Type</h2>
-                                                </td>
-                                                <td>
-                                                    <p className="">{data.insurancePlans.includes("QI") && "Quest Insured"}{data.insurancePlans.includes("FQHC") && "Federally Qualified Health Center"}</p>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <h2 className="join-item text-xl font-semibold">{data.names[1] ? "Doctor Name" : "Insurance coverage disclaimer"}</h2>
-                                                </td>
-                                                <td>
-                                                    <p className="">{data.names[1] ? data.names[0] : "We gathered multiple open source information databases on clinics, however this information is currently incomplete. To supplement this, we are crowdsourcing information from the community. This may not accurately reflect your experience. If it does not, please let us know how your visit went."}</p>
-                                                </td>
 
+                                            <tr>
+                                                <td>
+                                                    <div className="divide-solid"></div>
+                                                </td>
                                             </tr>
-                                            
-                                            {/* <tr>
-                                                <td>
-                                                    <h2 className="join-item text-xl font-semibold">Doctor Phone</h2>
-                                                </td>
-                                                <td>
-                                                    <p className="">{data.names[0]}</p>
-                                                </td>
 
-                                            </tr> */}
+                                            {data.website ?
+                                                <tr>
+                                                    <td>
+
+                                                        <h2 className="text-xl font-semibold">Clinic Website</h2>
+                                                    </td>
+                                                    <td>
+                                                        <a className="text-lg italic underline text-blue-700" href={data.website && JSON.stringify(data.website).includes("https://") ? data.website : "https://" + data.website}>{data.website}</a>
+                                                    </td>
+                                                </tr>
+                                                :
+                                                null}
+                                            <tr>
+                                                <td>
+                                                    <h2 className="text-xl font-semibold">Clinic Address</h2>
+                                                </td>
+                                                <td>
+                                                    <p className="text-lg">{data.address}</p>
+                                                </td>
+                                            </tr>
+
+                                            <tr>
+                                                <td>
+                                                    <h2 className="text-xl font-semibold">Clinic Phone</h2>
+                                                </td>
+                                                <td>
+                                                    <p className="text-lg">({JSON.stringify(data.healthCenterNumbers[0]).split("")[1]}{JSON.stringify(data.healthCenterNumbers[0]).split("")[2]}{JSON.stringify(data.healthCenterNumbers[0]).split("")[3]}) {JSON.stringify(data.healthCenterNumbers[0]).split("")[4]}{JSON.stringify(data.healthCenterNumbers[0]).split("")[5]}{JSON.stringify(data.healthCenterNumbers[0]).split("")[6]}-{JSON.stringify(data.healthCenterNumbers[0]).split("")[7]}{JSON.stringify(data.healthCenterNumbers[0]).split("")[8]}{JSON.stringify(data.healthCenterNumbers[0]).split("")[9]}{JSON.stringify(data.healthCenterNumbers[0]).split("")[10]}</p>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <h2 className="text-xl font-semibold">Insurance Type</h2>
+                                                </td>
+                                                <td>
+                                                    <p className="text-lg">{data.insurancePlans.includes("QI") && "Quest Insured"}{data.insurancePlans.includes("FQHC") && "Federally Qualified Health Center"}</p>
+                                                </td>
+                                            </tr>
+                                            {/* Must change conditon to doctors information when updating database */}
+                                            {data.address ?
+                                                <tr>
+                                                    <td>
+                                                        <h2 className="text-xl font-semibold">Doctor Name</h2>
+                                                    </td>
+                                                    <td>
+                                                        <p className="text-lg">{data.address}</p>
+                                                    </td>
+                                                </tr>
+                                                :
+                                                <tr className="text-lg flex tooltip tooltip-right font-semibold" data-tip="We compiled information on multiple clinics and will be crowdsourcing from the community. If this page does not accurately reflect your experience, please let us know how your experience went.">
+                                                    <h2 className="join-item">Coverage disclaimer</h2>
+                                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="join-item w-6 h-6">
+                                                        <path strokeLinecap="round" strokeLinejoin="round" d="M11.25 11.25l.041-.02a.75.75 0 011.063.852l-.708 2.836a.75.75 0 001.063.853l.041-.021M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9-3.75h.008v.008H12V8.25z" />
+                                                    </svg>
+                                                </tr>}
+
+                                            {/* Must change conditon to doctors information when updating database */}
+                                            {data.address ?
+                                                <tr>
+                                                    <td>
+                                                        <h2 className="text-xl font-semibold">Doctor Phone</h2>
+                                                    </td>
+                                                    <td>
+                                                        <p className="text-lg">{data.address}</p>
+                                                    </td>
+                                                </tr>
+                                                :
+                                                null}
                                         </tbody>
                                     </table>
                                 </div>
                             </div>
-                            <div className="w-3/5 pr-60 pt-10">
+                            <div className="w-1/2 mr-60 pt-10">
                                 <iframe
                                     onLoad={async () => {
                                         if (navigator.geolocation) {
