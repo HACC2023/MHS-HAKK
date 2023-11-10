@@ -5,7 +5,6 @@ import React from "react";
 import { api } from "~/utils/api";
 import type { NextPage, GetStaticProps } from "next";
 import getServerSideHelper from "~/server/helpers/ServerSideHelper";
-import Navbar from "~/components/Navbar";
 import Link from "next/link";
 
 export const ReviewPage: NextPage<{ healthCenterID: string }> = ({
@@ -40,10 +39,10 @@ export const ReviewPage: NextPage<{ healthCenterID: string }> = ({
 
       // TS has no idea what our page looks like, so expect some red squiggly errors.
       // TODO: use states or something? Migrate this to a React.Component class so it looks nicer to other people working on the backend.
-      const procedureName: string = form.procedureName.value as string;
-      const procedureType: string = form.procedureType.value as string;
-      const questcovered = form.questcoveredy.checked ? true : form.questcoveredn.checked ? false : undefined;
-      const covered = form.coveredy.checked ? true : form.coveredn.checked ? false : undefined;
+      const procedureName: string = (form.procedureName as HTMLInputElement).value;
+      const procedureType: string = (form.procedureType as HTMLInputElement).value;
+      const questcovered = (form.questcoveredy as HTMLInputElement).checked ? true : (form.questcoveredn as HTMLInputElement) ? false : undefined;
+      const covered = (form.coveredy as HTMLInputElement) ? true : (form.coveredn as HTMLInputElement).checked ? false : undefined;
 
       // make sure they respond to our form...
       if (questcovered === undefined || covered === undefined || !procedureType.length || !procedureName.length)
