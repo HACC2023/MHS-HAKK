@@ -28,7 +28,7 @@ const HealthcareRouter = createTRPCRouter({
     .query(async ({ input }) => {
       const a = await db.healthCenter.findMany({
         where: {
-          insurancePlans: {
+          supportedInsurances: {
             has: input.insurance,
           },
         },

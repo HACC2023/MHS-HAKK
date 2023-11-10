@@ -1,7 +1,9 @@
 // import { useState } from "react";
 // import SearchBarAutocomplete from "~/components/SearchBar/AutoComplete";
+import Image  from "next/image";
 import Navbar from "~/components/Navbar";
 import Footer from "~/components/Footer";
+import islandImage from "~/assets/img/index-image-island.jpg"
 
 export default function searchPage() {
     return (
@@ -34,9 +36,8 @@ export default function searchPage() {
                             target="_blank" href="https://medquest.hawaii.gov/en/contact-us.html">Med-QUEST Eligibilty</a>
                         </div>
                     </div>
-
-                    <div className="xl:w-1/2 w-0">
-                        <img className="h-full w-3/4 object-cover" alt="Image of Hawaii" src="https://images.unsplash.com/photo-1591068929753-4d1cf8fc6ff7?auto=format&fit=crop&q=80&w=1932&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"></img>
+                    <div className="w-1/2">
+                        <Image className="h-full w-3/4 object-cover" loading="eager" width={1280} height={720} alt="Image of Hawaii" src={islandImage}/>
                     </div>
                 </div>
             </div>
