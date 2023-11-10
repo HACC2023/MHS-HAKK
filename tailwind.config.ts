@@ -3,6 +3,10 @@ import { fontFamily } from "tailwindcss/defaultTheme";
 
 export default {
   content: ["./src/**/*.tsx"],
+  /**
+   * @todo tell tailwind to purge unused css when publishing 
+   * @example purge: ['./public/index.html']
+   * */
   theme: {
     extend: {
       colors: {
@@ -21,7 +25,5 @@ export default {
       },
     },
   },
-  plugins: [
-    require("daisyui"),
-  ]
+  plugins: [require("@tailwindcss/typography"),require("daisyui")],
 } satisfies Config;

@@ -77,7 +77,7 @@ const SearchPage: React.FC = () => {
                   <a
                     href={"/location/" + c.id}
                     className={
-                      c.insurancePlans.includes("QI")
+                      c.supportedInsurances.includes("QI")
                         ? "text-dark-blue"
                         : "text-dark-blue"
                     }
@@ -95,7 +95,7 @@ const SearchPage: React.FC = () => {
                       const num = c.healthCenterNumbers[0];
                       return '(' + num.slice(0, 3) + ") " + num.slice(3, 6) + '-' + num.slice(6);
                     })()}</div>}
-                    <div>{c.insurancePlans.includes("QI") && "Quest Insured"}{c.insurancePlans.includes("FQHC") && "Federally Qualified Health Center"}</div>
+                    <div>{c.supportedInsurances.includes("QI") && "Quest Insured"}{c.supportedInsurances.includes("FQHC") && "Federally Qualified Health Center"}</div>
                   </div>
                 </div>
               </div>
