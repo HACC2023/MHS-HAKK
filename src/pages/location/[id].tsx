@@ -8,6 +8,11 @@ import { api } from "~/utils/api";
 const LocationDestination: NextPage<{ id: string }> = ({ id }) => {
     const { data } = api.healthcare.getById.useQuery({ id });
     const [map, setMap] = useState("&q=" + data?.address);
+
+
+
+    // const doctorNumbers = [] as string[];
+    // api.healthcare.
     return (
         <>
             <Navbar />
@@ -35,14 +40,14 @@ const LocationDestination: NextPage<{ id: string }> = ({ id }) => {
 
 
                         <div className="flex">
-                            <div className="w-1/2 ml-60 mt-10 px-12 py-8 static bg-gray-100 rounded-l-xl">
+                            <div className="w-1/2 ml-60 mt-10 px-12 pb-8 pt-4 static bg-gray-100 rounded-l-xl">
                                 <div className="join join-horizontally h-96">
                                     <table className="table-fixed">
                                         <tbody>
                                             <tr className="border-gray-100">
                                                 <td className="text-2xl font-semibold w-56 ">Clinic Description</td>
-                                                <td className="flex pt-4 text-lg tooltip tooltip-top font-semibold" data-tip="We compiled information on multiple clinics and will be crowdsourcing from the community. If this page does not accurately reflect your experience, please let us know how your experience went.">
-                                                    <h2 className="mr-4">Coverage disclaimer</h2>
+                                                <td className="flex pt-8 text-lg tooltip tooltip-top font-semibold" data-tip="We compiled information on multiple clinics and will be crowdsourcing from the community. If this page does not accurately reflect your experience, please let us know how your experience went.">
+                                                    <h2 className="mr-4 ">Coverage disclaimer</h2>
                                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none"  strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
                                                         <path strokeLinecap="round" strokeLinejoin="round" d="M11.25 11.25l.041-.02a.75.75 0 011.063.852l-.708 2.836a.75.75 0 001.063.853l.041-.021M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9-3.75h.008v.008H12V8.25z" />
                                                     </svg>
@@ -89,16 +94,17 @@ const LocationDestination: NextPage<{ id: string }> = ({ id }) => {
                                                     <h2 className="text-xl font-semibold">Insurance Type</h2>
                                                 </td>
                                                 <td>
-                                                    <p className="text-lg">{data.insurancePlans.includes("QI") && "Quest Insured"}{data.insurancePlans.includes("FQHC") && "Federally Qualified Health Center"}</p>
+                                                    <p className="text-lg">{data.supportedInsurances.includes("QI") && "Quest Insured"}{data.supportedInsurances.includes("FQHC") && "Federally Qualified Health Center"}</p>
                                                 </td>
                                             </tr>
                                             {/* Must change conditon to doctors information when updating database */}
-                                            {data.address ?
+                                            {data.doctorIDs ?
                                                 <tr>
                                                     <td>
                                                         <h2 className="text-xl font-semibold">Doctor Name</h2>
                                                     </td>
                                                     <td>
+                                                        {/* insert doctor name */}
                                                         <p className="text-lg">{data.address}</p>
                                                     </td>
                                                 </tr>
@@ -120,6 +126,7 @@ const LocationDestination: NextPage<{ id: string }> = ({ id }) => {
                                                         <h2 className="text-xl font-semibold">Doctor Phone</h2>
                                                     </td>
                                                     <td>
+                                                        {/* insert doctor phone number */}
                                                         <p className="text-lg">{data.address}</p>
                                                     </td>
                                                 </tr>
