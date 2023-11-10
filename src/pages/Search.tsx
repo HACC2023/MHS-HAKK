@@ -145,7 +145,7 @@ function ClinicResults(props: {
     names: string[];
     website: string | null;
     healthCenterNumbers: string[];
-    insurancePlans: string[];
+    supportedInsurances: string[];
   }[];
 }) {
   return props.centers.map((c) => (
@@ -159,7 +159,7 @@ function ClinicResults(props: {
         <a
           href={"/location/" + c.id}
           className={
-            c.insurancePlans.includes("QI")
+            c.supportedInsurances.includes("QI")
               ? "text-dark-blue"
               : "text-dark-blue"
           }
@@ -196,8 +196,8 @@ function ClinicResults(props: {
             </div>
           )}
           <div>
-            {c.insurancePlans.includes("QI") && "Quest Insured"}
-            {c.insurancePlans.includes("FQHC") &&
+            {c.supportedInsurances.includes("QI") && "Quest Insured"}
+            {c.supportedInsurances.includes("FQHC") &&
               "Federally Qualified Health Center"}
           </div>
         </div>
