@@ -7,12 +7,18 @@ import type { NextPage, GetStaticProps } from "next";
 import getServerSideHelper from "~/server/helpers/ServerSideHelper";
 import Link from "next/link";
 
+const activeYesBtnCSS = "bg-light-green hover:bg-hover-green";
+const activeNoBtnCSS  = "bg-red-400 hover:bg-red-500";
+
 export const ReviewPage: NextPage<{ healthCenterID: string }> = ({
   healthCenterID,
 }) => {
   const [status, setStatus] = useState("");
   const formRef =
     useRef() as unknown as React.MutableRefObject<HTMLFormElement>;
+
+  const [questCovered, setQuestCovered] = useState<undefined|boolean>(undefined);
+  const [covered, setCovered] = useState<undefined|boolean>(undefined);
 
   const createReviewMutation = api.healthcare.createReview.useMutation({
     onSuccess() {
@@ -41,14 +47,13 @@ export const ReviewPage: NextPage<{ healthCenterID: string }> = ({
       // TODO: use states or something? Migrate this to a React.Component class so it looks nicer to other people working on the backend.
       const procedureName: string = (form.procedureName as HTMLInputElement).value;
       const procedureType: string = (form.procedureType as HTMLInputElement).value;
-      const questcovered = (form.questcoveredy as HTMLInputElement).checked ? true : (form.questcoveredn as HTMLInputElement) ? false : undefined;
-      const covered = (form.coveredy as HTMLInputElement) ? true : (form.coveredn as HTMLInputElement).checked ? false : undefined;
+      //const questcovered = (form.questcoveredy as HTMLInputElement).checked ? true : (form.questcoveredn as HTMLInputElement) ? false : undefined;
+      //const covered = (form.coveredy as HTMLInputElement) ? true : (form.coveredn as HTMLInputElement).checked ? false : undefined;
 
       // make sure they respond to our form...
-      if (questcovered === undefined || covered === undefined || !procedureType.length || !procedureName.length)
+      if (questCovered === undefined || covered === undefined || !procedureType.length || !procedureName.length)
         throw "SubmitSomethingBro";
 
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
       const foundProcedureType = foundHealthCenter.procedureTypes.find(
         (thisProcedureType) => thisProcedureType.name.toLowerCase() === procedureType.toLowerCase(),
       );
@@ -63,7 +68,7 @@ export const ReviewPage: NextPage<{ healthCenterID: string }> = ({
         type: procedureType,
         name: procedureName,
         covered: covered,
-        hadQuest: questcovered,
+        hadQuest: questCovered,
         healthCenterID,
         procedureTypeID: foundProcedureType.id,
       };
@@ -71,7 +76,7 @@ export const ReviewPage: NextPage<{ healthCenterID: string }> = ({
 
       // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
       createReviewMutation.mutate({
-        hadQuest: questcovered,
+        hadQuest: questCovered,
         healthCenterID,
         reviewedProcedures: reviewedProceduresArray
       });
@@ -93,15 +98,17 @@ export const ReviewPage: NextPage<{ healthCenterID: string }> = ({
 
   return (
     <div className="h-screen overflow-hidden " >
-      <div className="ml-auto mr-auto w-fit p-3 py-24">
-        <h3 className="pb-3 text-center text-6xl font-bold text-green-gray h-32">
+      <div className="ml-auto mr-auto w-fit p-7 sm:p-3 sm:py-24">
+        <h3 className="pb-3 text-center text-5xl sm:text-6xl font-bold text-green-gray">
           Was Your Care Covered?
         </h3>
-        <div className="pb-2 text-xl">
-          {"Reviewing " + foundHealthCenter.address + ". "}
-          <Link href="/Search" className="text-blue-400 underline">
-            Wrong address?
-          </Link>
+        <div className="pb-2 text-xl text-center">
+          {"Reviewing " + foundHealthCenter.address + ". "}<br/>
+        </div>
+        <div className="w-full flex justify-center">
+        <Link href="/Search" className="text-blue-400 underline">
+          Wrong address?
+        </Link>
         </div>
         <form onSubmit={handleSubmit} className="justify-items-center text-center" ref={formRef}>
           <table className="text-left mb-5 w-full">
@@ -135,27 +142,26 @@ export const ReviewPage: NextPage<{ healthCenterID: string }> = ({
                     <div className="join join-item join-horizontal border border-gray-300 w-6/12 justify-evenly">
 
                       <input
-                        className="input join-item "
-                        type="radio"
+                        className={"input join-item w-full " + (questCovered === true ? activeYesBtnCSS : 'hover:bg-slate-300')}
+                        type="button"
                         name="questcovered"
                         id="questcoveredy"
                         value="Yes"
+                        onClick={() => setQuestCovered(true)}
                       ></input>
-                      <label htmlFor="questcoveredy" className="label join-item">Yes</label>
-
                     </div>
 
 
 
                     <div className="join join-item join-horizontal border border-gray-300 w-6/12 justify-evenly">
                       <input
-                        className="input join-item"
-                        type="radio"
+                        className={"input join-item w-full " + (questCovered === false ? activeNoBtnCSS : 'hover:bg-slate-300')}
+                        type="button"
                         name="questcovered"
                         id="questcoveredn"
                         value="No"
+                        onClick={() => setQuestCovered(false)}
                       ></input>
-                      <label htmlFor="questcoveredn" className="label join-item">No</label>
                     </div>
                   </div>
                 </td>
@@ -172,31 +178,31 @@ export const ReviewPage: NextPage<{ healthCenterID: string }> = ({
                   <div className="join w-full text-lg">
                     <div className="join join-item join-horizontal border border-gray-300 w-6/12 justify-evenly">
                       <input
-                        className="input join-item"
-                        type="radio"
+                        className={"input join-item w-full " + (covered === true ? activeYesBtnCSS : 'hover:bg-slate-300')}
+                        type="button"
                         name="covered"
                         id="coveredy"
                         value="Yes"
+                        onClick={() => setCovered(true)}
                       ></input>
-                      <label htmlFor="coveredy" className="label join-item">Yes</label>
                     </div>
 
                     <div className="join join-item join-horizontal border border-gray-300 w-6/12 justify-evenly">
                       <input
-                        className="input join-item"
-                        type="radio"
+                        className={"input join-item w-full " + (covered === false ? activeNoBtnCSS : 'hover:bg-slate-300')}
+                        type="button"
                         name="covered"
                         id="coveredn"
                         value="No"
+                        onClick={() => setCovered(false)}
                       ></input>
-                      <label htmlFor="coveredn" className="label join-item">No</label>
                     </div>
                   </div>
                 </td>
               </tr>
             </tbody>
           </table>
-          <input className="btn bg-light-green hover:bg-hover-green text-green-gray text-lg border-0 w-2/12" type="submit" value="submit!" />
+          <input className="btn bg-light-green hover:bg-hover-green text-green-gray text-lg border-0" type="submit" value="submit!" />
         </form>
         <p className="text-center mt-5 text-3xl">{status}</p>
       
