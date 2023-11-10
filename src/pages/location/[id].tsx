@@ -1,4 +1,5 @@
 import type { GetStaticProps, NextPage } from "next";
+import { availableParallelism } from "os";
 import { useState } from "react";
 import Navbar from "~/components/Navbar";
 import { ReviewPage } from "~/pages/review/[healthCenterID]";
@@ -47,7 +48,7 @@ const LocationDestination: NextPage<{ id: string }> = ({ id }) => {
                                             <tr className="border-gray-100">
                                                 <td className="text-2xl font-semibold w-56 ">Clinic Description</td>
                                                 <td className="flex pt-8 text-lg tooltip tooltip-top font-semibold" data-tip="We compiled information on multiple clinics and will be crowdsourcing from the community. If this page does not accurately reflect your experience, please let us know how your experience went.">
-                                                    <h2 className="mr-4 ">Coverage disclaimer</h2>
+                                                    <h2 className="mr-4 static ">Coverage disclaimer</h2>
                                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none"  strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
                                                         <path strokeLinecap="round" strokeLinejoin="round" d="M11.25 11.25l.041-.02a.75.75 0 011.063.852l-.708 2.836a.75.75 0 001.063.853l.041-.021M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9-3.75h.008v.008H12V8.25z" />
                                                     </svg>
@@ -98,40 +99,37 @@ const LocationDestination: NextPage<{ id: string }> = ({ id }) => {
                                                 </td>
                                             </tr>
                                             {/* Must change conditon to doctors information when updating database */}
-                                            {data.doctorIDs ?
-                                                <tr>
-                                                    <td>
-                                                        <h2 className="text-xl font-semibold">Doctor Name</h2>
-                                                    </td>
-                                                    <td>
-                                                        {/* insert doctor name */}
-                                                        <p className="text-lg">{data.address}</p>
-                                                    </td>
-                                                </tr>
-                                                :
-                                                <tr className="">
-                                                    <td>
-                                                    <h2 className="text-xl font-semibold">Coverage Warning</h2>
-                                                    </td>
-                                                    <td>
-                                                        <p className="text-lg">Without insurance, clinics will provide heathcare on a sliding scale of payments based on your income and the number of people in your household. For more information, please contact the clinic.</p>
-                                                    </td>
-                                                  
-                                                </tr>}
-
-                                            {/* Must change conditon to doctors information when updating database */}
-                                            {data.address ?
-                                                <tr>
-                                                    <td>
-                                                        <h2 className="text-xl font-semibold">Doctor Phone</h2>
-                                                    </td>
-                                                    <td>
-                                                        {/* insert doctor phone number */}
-                                                        <p className="text-lg">{data.address}</p>
-                                                    </td>
-                                                </tr>
-                                                :
-                                                null}
+                                            {data.doctors.map((doctor) => {
+                                                const number = doctor.availabilities.find((availability) => availability.healthCenterID == id)!.phoneNumber;
+                                                return (
+                                                    <>
+                                                        <tr>
+                                                            <td>
+                                                                <h2 className="text-xl font-semibold">Doctor Name:</h2>
+                                                            </td>
+                                                            <td>
+                                                                {doctor.name}
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                        <td>
+                                                                <h2 className="text-xl font-semibold">Doctor procedures:</h2>
+                                                            </td>
+                                                            <td>
+                                                                {doctor.procedureTypes.map((procedureType) => procedureType.name).join(", ")}
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>
+                                                                <h2 className="text-xl font-semibold">Doctor Number:</h2>
+                                                            </td>
+                                                            <td>
+                                                            <h2 className="text-xl font-semibold">{number ? '(' + number.slice(0, 3) + ") " + number.slice(3, 6) + '-' + number.slice(6) : ""}</h2>
+                                                            </td>
+                                                        </tr>
+                                                    </>
+                                                )
+                                            })}
                                         </tbody>
                                     </table>
                                 </div>
