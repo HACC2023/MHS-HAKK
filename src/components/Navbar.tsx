@@ -7,21 +7,24 @@ export default function Navbar() {
 
   const { data } = api.healthcare.getAllProcedureTypes.useQuery();
 
-  if(data) console.log(data)
-
   return (
     <div className="navbar sticky top-0 flex h-20 flex-row border-b-2 bg-white">
       <div className="navbar-start">
-        <Link href="/Landing" className="btn btn-ghost my-auto h-16 ml-60">
+        <Link href="/Landing" className="btn btn-ghost my-auto h-16 ml-30">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             alt="tyler Hawaii logo"
-            className="h-12"
+            className="h-12 hidden md:block"
             src="https://upload.wikimedia.org/wikipedia/en/thumb/b/bf/Tyler_Technologies_logo.svg/640px-Tyler_Technologies_logo.svg.png"
+          />
+          <img
+            alt="tyler Hawaii logo compact"
+            className="h-12 block md:hidden"
+            src="/Shrink_Tyler_Technologies_logo.svg.png"
           />
         </Link>
       </div>
-      <div className="join navbar-center w-1/2 justify-center">
+      <div className="join w-21 sm:w-1/2 justify-center hidden md:flex navbar-center">
         <div className="w-2/5">
           <SearchBarAutocomplete />
         </div>
@@ -32,7 +35,7 @@ export default function Navbar() {
           </select>
         </div>
         <div className="indicator">
-          <button className="btn btn-secondary join-item h-10 w-16 border-0 bg-med-blue text-white hover:bg-dark-blue">
+          <button className="btn btn-secondary join-item h-10 w-12 border-0 bg-med-blue text-white hover:bg-dark-blue">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
