@@ -13,7 +13,7 @@ type ModdedGSONObj = (GeoJSON.GeoJsonObject & {
         names: string[];
         website: string | null;
         healthCenterNumbers: string[];
-        insurancePlans: string[];
+        supportedInsurances: string[];
     }
 });
 
@@ -35,14 +35,14 @@ const LeafletMap: React.FC = () => {
             const c = jsonData[index];
             if (!c) return null;
 
-            const { address, id, names, healthCenterNumbers, insurancePlans } = x;
+            const { address, id, names, healthCenterNumbers, supportedInsurances } = x;
             return {
                 type: "Feature",
                 geometry: {
                     type: "Point",
                     coordinates: [c.Longitude, c.Latitude],
                 },
-                properties: { id, address, names, website: x.website, healthCenterNumbers, insurancePlans },
+                properties: { id, address, names, website: x.website, healthCenterNumbers, supportedInsurances },
             };
         }).filter(Boolean) as ModdedGSONObj[];
 
@@ -56,8 +56,8 @@ const LeafletMap: React.FC = () => {
                     console.warn('mapRef.current && bruh.length > 0 === true')
                     const geoJSONLayer = L.geoJSON(bruh, {
                         pointToLayer: function (feature: ModdedGSONObj, latlng) {
-                            const { address, id, names, healthCenterNumbers, insurancePlans, website } = feature.properties;
-                            console.log(address, id, names, healthCenterNumbers, insurancePlans)
+                            const { address, id, names, healthCenterNumbers, supportedInsurances, website } = feature.properties;
+                            console.log(address, id, names, healthCenterNumbers, supportedInsurances)
                             const marker = L.marker(latlng, {
                                 title: address,
                             });
@@ -70,7 +70,7 @@ const LeafletMap: React.FC = () => {
                                 <h2>${names.join(', ')}</h2>
                                 <p><strong>Address:</strong> ${address}</p>
                                 <p><strong>Health Center Numbers:</strong> ${formattedHealthCenterNumbers.join(', ')}</p>
-                                <p><strong>Insurance Plans:</strong> ${insurancePlans.join(', ')}</p>
+                                <p><strong>Insurance Plans:</strong> ${supportedInsurances.join(', ')}</p>
                                 ${websiteLink}
                             </div>
                             `;

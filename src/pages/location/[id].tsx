@@ -72,7 +72,7 @@ const LocationDestination: NextPage<{ id: string }> = ({ id }) => {
 
                                     <div className="join join-vertical lg:join-horizontal pt-4">
                                         <h2 className="join-item text-xl font-semibold">Insurance Type</h2>
-                                        <p className="join-item text-xl indent-16">{data.insurancePlans.includes("QI") && "Quest Insured"}{data.insurancePlans.includes("FQHC") && "Federally Qualified Health Center"}</p>
+                                        <p className="join-item text-xl indent-16">{data.supportedInsurances.includes("QI") && "Quest Insured"}{data.supportedInsurances.includes("FQHC") && "Federally Qualified Health Center"}</p>
                                     </div>
                                 </div>
                             </div>
