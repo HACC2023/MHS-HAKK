@@ -34,7 +34,6 @@ const SearchPage: React.FC = () => {
   const InsuranceOptions = <SelectInsurance setInsurance={setInsurance} />;
   const ProcedureOptions = <SelectProcedure setProcedure={setProcedure} />;
 
-  console.log(centers);
   const Results =
     isLoading || !centers?.length || isError ? (
       <div className="mt-12 grid justify-items-center justify-self-center text-center text-3xl">

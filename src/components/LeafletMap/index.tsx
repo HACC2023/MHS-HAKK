@@ -53,11 +53,9 @@ const LeafletMap: React.FC = () => {
         if (bruh.length > 0 && mapRef.current) {
             try {
                 if (mapRef.current && bruh.length > 0) {
-                    console.warn('mapRef.current && bruh.length > 0 === true')
                     const geoJSONLayer = L.geoJSON(bruh, {
                         pointToLayer: function (feature: ModdedGSONObj, latlng) {
                             const { address, id, names, healthCenterNumbers, supportedInsurances, website } = feature.properties;
-                            console.log(address, id, names, healthCenterNumbers, supportedInsurances)
                             const marker = L.marker(latlng, {
                                 title: address,
                             });
@@ -113,7 +111,7 @@ const LeafletMap: React.FC = () => {
             }
         }
     }, [bruh]);
-    return <div ref={mapRef} className="h-full w-full md:w-2/5 ml-0 md:ml-auto border-t-2 border-t-slate-600 md:border-t-transparent"></div>;
+    return <div ref={mapRef} className="h-full w-full md:w-2/5 ml-0 md:ml-auto md:border-t-transparent"></div>;
 };
 
 export default LeafletMap;
