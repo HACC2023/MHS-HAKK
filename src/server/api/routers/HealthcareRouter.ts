@@ -19,6 +19,12 @@ const HealthcareRouter = createTRPCRouter({
         include: {
           procedureTypes: true,
           reviews: true,
+          doctors: {
+            include: {
+              availabilities: true,
+              procedureTypes: true
+            }
+          },
         },
       });
     }),

@@ -3,89 +3,89 @@ generator client {
 }
 
 datasource db {
-    provider = "mongodb"
-    url      = env("DATABASE_URL")
+	provider = "mongodb"
+	url  	= env("DATABASE_URL")
 }
 
 model HealthCenter {
-    id                   String               @id @default(auto()) @map("_id") @db.ObjectId
-    address              String               @unique
-    names                String[]
-    website              String?
-    healthCenterNumbers  String[]
-    supportedInsurances  String[]
-    procedureTypeNames   String[]
-    procedureTypes       ProcedureType[]      @relation(fields: [procedureTypeIDs], references: [id])
-    procedureTypeIDs     String[]             @db.ObjectId
-    doctors              Doctor[]             @relation(fields: [doctorIDs], references: [id])
-    doctorIDs            String[]             @db.ObjectId
-    doctorAvailabilities DoctorAvailability[]
+	id               	String           	@id @default(auto()) @map("_id") @db.ObjectId
+	address          	String           	@unique
+	names            	String[]
+	website          	String?
+	healthCenterNumbers  String[]
+	supportedInsurances  String[]
+	procedureTypeNames   String[]
+	procedureTypes   	ProcedureType[]  	@relation(fields: [procedureTypeIDs], references: [id])
+	procedureTypeIDs 	String[]         	@db.ObjectId
+	doctors          	Doctor[]         	@relation(fields: [doctorIDs], references: [id])
+	doctorIDs        	String[]         	@db.ObjectId
+	doctorAvailabilities DoctorAvailability[]
 
-    reviews          Review[]
-    procedureReviews ProcedureReview[]
+	reviews      	Review[]
+	procedureReviews ProcedureReview[]
 }
 
 model ProcedureType {
-    id                    String               @id @default(auto()) @map("_id") @db.ObjectId
-    name                  String               @unique // categorization of procedures; family medicine, radiology, etc.
-    insurance             String
-    doctors               Doctor[]             @relation(fields: [doctorIDs], references: [id])
-    doctorIDs             String[]             @db.ObjectId
-    healthCenters         HealthCenter[]       @relation(fields: [healthCenterIDs], references: [id])
-    healthCenterIDs       String[]             @db.ObjectId
-    reviews               Review[]             @relation(fields: [reviewIDs], references: [id])
-    reviewIDs             String[]             @db.ObjectId
-    doctorAvailabilities  DoctorAvailability[] @relation(fields: [doctorAvailabilityIDs], references: [id])
-    doctorAvailabilityIDs String[]             @db.ObjectId
+	id                	String           	@id @default(auto()) @map("_id") @db.ObjectId
+	name              	String           	@unique // categorization of procedures; family medicine, radiology, etc.
+	insurance         	String
+	doctors           	Doctor[]         	@relation(fields: [doctorIDs], references: [id])
+	doctorIDs         	String[]         	@db.ObjectId
+	healthCenters     	HealthCenter[]   	@relation(fields: [healthCenterIDs], references: [id])
+	healthCenterIDs   	String[]         	@db.ObjectId
+	reviews           	Review[]         	@relation(fields: [reviewIDs], references: [id])
+	reviewIDs         	String[]         	@db.ObjectId
+	doctorAvailabilities  DoctorAvailability[] @relation(fields: [doctorAvailabilityIDs], references: [id])
+	doctorAvailabilityIDs String[]         	@db.ObjectId
 
-    procedureReviews ProcedureReview[]
+	procedureReviews ProcedureReview[]
 }
 
 model Doctor {
-    id                  String   @id @default(auto()) @map("_id") @db.ObjectId
-    name                String   @unique
-    nonEnglishLanguages String[]
+	id              	String   @id @default(auto()) @map("_id") @db.ObjectId
+	name            	String   @unique
+	nonEnglishLanguages String[]
 
-    availabilities   DoctorAvailability[]
-    procedureTypes   ProcedureType[]      @relation(fields: [procedureTypeIDs], references: [id])
-    procedureTypeIDs String[]             @db.ObjectId
-    healthCenters    HealthCenter[]       @relation(fields: [healthCenterIDs], references: [id])
-    healthCenterIDs  String[]             @db.ObjectId
+	availabilities   DoctorAvailability[]
+	procedureTypes   ProcedureType[]  	@relation(fields: [procedureTypeIDs], references: [id])
+	procedureTypeIDs String[]         	@db.ObjectId
+	healthCenters	HealthCenter[]   	@relation(fields: [healthCenterIDs], references: [id])
+	healthCenterIDs  String[]         	@db.ObjectId
 }
 
 model DoctorAvailability {
-    id                   String          @id @default(auto()) @map("_id") @db.ObjectId
-    phoneNumber          String?
-    acceptingNewPatients Boolean
-    doctor               Doctor          @relation(fields: [doctorID], references: [id])
-    doctorID             String          @db.ObjectId
-    healthCenter         HealthCenter    @relation(fields: [healthCenterID], references: [id])
-    healthCenterID       String          @db.ObjectId
-    procedureTypes       ProcedureType[] @relation(fields: [procedureTypeIDs], references: [id])
-    procedureTypeIDs     String[]        @db.ObjectId
+	id               	String      	@id @default(auto()) @map("_id") @db.ObjectId
+	phoneNumber      	String?
+	acceptingNewPatients Boolean
+	doctor           	Doctor      	@relation(fields: [doctorID], references: [id])
+	doctorID         	String      	@db.ObjectId
+	healthCenter     	HealthCenter	@relation(fields: [healthCenterID], references: [id])
+	healthCenterID   	String      	@db.ObjectId
+	procedureTypes   	ProcedureType[] @relation(fields: [procedureTypeIDs], references: [id])
+	procedureTypeIDs 	String[]    	@db.ObjectId
 }
 
 model Review {
-    id                String            @id @default(auto()) @map("_id") @db.ObjectId
-    hadQuest          Boolean // quest or no insurance
-    healthCenter      HealthCenter      @relation(fields: [healthCenterID], references: [id])
-    healthCenterID    String            @db.ObjectId
-    createdAt         DateTime          @default(now())
-    procedureReviews  ProcedureReview[]
-    procedureTypes    ProcedureType[]   @relation(fields: [procedureTypesIDs], references: [id])
-    procedureTypesIDs String[]          @db.ObjectId
+	id            	String        	@id @default(auto()) @map("_id") @db.ObjectId
+	hadQuest      	Boolean // quest or no insurance
+	healthCenter  	HealthCenter  	@relation(fields: [healthCenterID], references: [id])
+	healthCenterID	String        	@db.ObjectId
+	createdAt     	DateTime      	@default(now())
+	procedureReviews  ProcedureReview[]
+	procedureTypes	ProcedureType[]   @relation(fields: [procedureTypesIDs], references: [id])
+	procedureTypesIDs String[]      	@db.ObjectId
 }
 
 model ProcedureReview {
-    id              String        @id @default(auto()) @map("_id") @db.ObjectId
-    type            String // Selected from list of possible categories
-    name            String // Free user input
-    covered         Boolean
-    hadQuest        Boolean
-    review          Review        @relation(fields: [reviewID], references: [id])
-    reviewID        String        @db.ObjectId
-    healthCenter    HealthCenter  @relation(fields: [healthCenterID], references: [id])
-    healthCenterID  String        @db.ObjectId
-    procedureType   ProcedureType @relation(fields: [procedureTypeID], references: [id])
-    procedureTypeID String        @db.ObjectId
+	id          	String    	@id @default(auto()) @map("_id") @db.ObjectId
+	type        	String // Selected from list of possible categories
+	name        	String // Free user input
+	covered     	Boolean
+	hadQuest    	Boolean
+	review      	Review    	@relation(fields: [reviewID], references: [id])
+	reviewID    	String    	@db.ObjectId
+	healthCenter	HealthCenter  @relation(fields: [healthCenterID], references: [id])
+	healthCenterID  String    	@db.ObjectId
+	procedureType   ProcedureType @relation(fields: [procedureTypeID], references: [id])
+	procedureTypeID String    	@db.ObjectId
 }
