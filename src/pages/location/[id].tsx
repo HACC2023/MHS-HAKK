@@ -11,6 +11,25 @@ const LocationDestination: NextPage<{ id: string }> = ({ id }) => {
 
     const doctorCount = data?.doctors.length
 
+
+
+
+
+    // imported variables for reviewTagDisplay
+
+    const foundHealthCenter = api.healthcare.getById.useQuery({
+        id: id,
+    }).data;
+    const reviewTags = foundHealthCenter.procedureReviews.map((procedureReviews) => procedureReviews.name);
+    const reviewTagSeparate = reviewTags.map((x) => { return x });
+  
+    let [reviewType, setReviewType] = useState("⬇️ Select a fruit ⬇️")
+    let handleReviewChange = (e) => {
+      setReviewType(e.target.value)
+    }
+
+
+
     return (
         <>
             <Navbar />
@@ -32,6 +51,10 @@ const LocationDestination: NextPage<{ id: string }> = ({ id }) => {
                                 </a>
                                 <button className="join-item normal-case btn w-40 h-14 text-xl bg-light-green hover:bg-hover-green text-green-gray border-dark-blue">Planning to visit clinic</button>
                             </div>
+                        </div>
+
+                        <div>
+                            {reviewTagSeparate.map((reviewType) => <div className="bg-gray-300 rounded-md mx-2 text-green-gray"><p className="flex align-middle items-center p-1">{reviewType}</p></div>)}
                         </div>
 
                         <div className="flex static w-60 ml-72 mt-6 text-lg tooltip tooltip-right font-semibold" data-tip="We compiled information on multiple clinics and will be crowdsourcing from the community. If this page does not accurately reflect your experience, please let us know how your experience went.">

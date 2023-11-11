@@ -31,6 +31,29 @@ export const ReviewPage: NextPage<{ healthCenterID: string }> = ({
     );
   }
 
+  const centerTypes = foundHealthCenter.procedureTypes.map((procedureType) => procedureType.name);
+  const centerTypeOption = centerTypes.map((x) => { return { label: x, value: x } });
+
+  let [centerType, setCenterType] = useState("⬇️ Select a fruit ⬇️")
+  let handleCenterChange = (e) => {
+    setCenterType(e.target.value)
+  }
+
+
+
+  const reviewTags = foundHealthCenter.procedureReviews.map((procedureReviews) => procedureReviews.name);
+  const reviewTagSeparate = reviewTags.map((x) => { return x });
+
+  let [reviewType, setReviewType] = useState("⬇️ Select a fruit ⬇️")
+  let handleReviewChange = (e) => {
+    setReviewType(e.target.value)
+  }
+  
+
+
+
+
+
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     try {
@@ -103,9 +126,32 @@ export const ReviewPage: NextPage<{ healthCenterID: string }> = ({
             Wrong address?
           </Link>
         </div>
+        {/* <p>{reviewTagSeparate}</p> */}
+        {/* {reviewTagSeparate.map((reviewType) => <p>{reviewType}</p>)} */}
+
         <form onSubmit={handleSubmit} className="justify-items-center text-center" ref={formRef}>
           <table className="text-left mb-5 w-full">
             <tbody>
+
+              
+
+              <tr className="h-16">
+                <td>
+                  <label htmlFor="procedureType" className="text-lg">Procedure Type: </label>
+                </td>
+                <td>
+                  {/* <input type="text" id="procedureType" name="procedureType" className="input input-bordered w-full" /> */}
+                  <select onChange={handleCenterChange} name="procedureType" className="border border-gray-300 w-full h-12 bg-white text-center rounded-lg">
+                    <option value="" className="text-center" hidden> -- Select a Clinic -- </option>
+                    {/* Mapping through each fruit object in our fruits array
+                      and returning an option element with the appropriate attributes / values.
+                    */}
+                    {centerTypeOption.map((centerType) => <option value={centerType.value}>{centerType.label}</option>)}
+
+                  </select>
+                
+                </td>
+              </tr>
 
               <tr className="h-16">
                 <td>
@@ -116,14 +162,6 @@ export const ReviewPage: NextPage<{ healthCenterID: string }> = ({
                 </td>
               </tr>
 
-              <tr className="h-16">
-                <td>
-                  <label htmlFor="procedureType" className="text-lg">Procedure Type: </label>
-                </td>
-                <td>
-                  <input type="text" id="procedureType" name="procedureType" className="input input-bordered w-full" />
-                </td>
-              </tr>
               <tr className="h-16">
                 <td>
                   <label htmlFor="questcovered" className="text-lg">
