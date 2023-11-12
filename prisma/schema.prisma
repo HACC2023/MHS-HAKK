@@ -88,8 +88,4 @@ model ProcedureReview {
 	healthCenterID  String    	@db.ObjectId
 	procedureType   ProcedureType @relation(fields: [procedureTypeID], references: [id])
 	procedureTypeID String    	@db.ObjectId
-<<<<<<< Updated upstream
 }
-=======
-}
->>>>>>> Stashed changes
