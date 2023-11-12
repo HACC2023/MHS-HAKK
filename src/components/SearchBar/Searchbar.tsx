@@ -1,12 +1,11 @@
 import classNames from "classnames";
-import Link from "next/link";
 import React, { memo, useRef, useState } from "react";
 import type { IDToMeta } from "~/server/api/routers/HealthcareRouter";
 
 type Props = {
     items: (IDToMeta | undefined);
-    value: (string | undefined);
-    onChange: (val: string | undefined) => void;
+    value: (string);
+    onChange: (val: string) => void;
 };
 
 //we are using dropdown, input and menu component from daisyui
@@ -33,11 +32,10 @@ const Autocomplete = (props: Props) => {
                 tabIndex={0}
             />
             {/* add this part */}
-            <div className="dropdown-content bg-gray-100 top-14 max-h-96 overflow-auto flex-col rounded-md border">
+            <div className="w-full dropdown-content bg-gray-100 top-14 max-h-96 overflow-auto flex-col rounded-md border">
                 <ul
-                    className="menu menu-compact "
-                    // use ref to calculate the width of parent
-                    style={{ width: ref.current?.clientWidth }}
+                    className="menu menu-compact"
+
                 >
                     {items && Object.keys(items).length ? Object.keys(items).map((id, index) => {
                         return items[id]!.names.map((name, nIndex) => (
@@ -48,10 +46,12 @@ const Autocomplete = (props: Props) => {
                                     onChange(name);
                                     setOpen(false);
                                 }}
-                                className="border-b border-b-base-content/10
-                                "
+                                className="border-b border-b-base-content/10 last:border-b-0 py-1 break-words"
                             >
-                                <Link href={"/location/" + id}>{name}<div className="text-right text-sm italic text-slate-600">{items[id]!.address}</div></Link>
+                                <a className="flex flex-wrap">
+                                    {name}<div className="w-full"/>
+                                    <div className="text-sm italic">{items[id]!.address}</div>
+                                </a>
                             </li>
                         ))
                     }) : "No clinics found."}

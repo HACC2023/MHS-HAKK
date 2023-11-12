@@ -9,6 +9,7 @@ import { api } from "~/utils/api";
 import Navbar from "~/components/Navbar";
 import { LoadingSpinner } from "~/components/Loading";
 import Link from "next/link";
+import { useRouter } from "next/router";
 const LeafletMap = dynamic(() => import("../components/LeafletMap"), {
   ssr: false,
 });
@@ -18,18 +19,21 @@ const SearchPage: React.FC = () => {
   // allow user to set insurance status (QUEST, none, or both)
   const [insurance, setInsurance] = useState<InsuranceProviders>();
   const [procedure, setProcedure] = useState<ProcedureProviders>();
-
+  // used to grab url parameters from the URL: e.g. ?q=1 would be q: 1
+  const router = useRouter();
+  const query = typeof router.query.q === "string" && router.query.q.length ? router.query.q : undefined;
   const [mobileOnResultsView, setMORV] = useState(true);
 
   // if no insurance selected, select first 100 clinics.
   // if there is, plug it into our api.
   // this really needs to be one procedure with the insurance being optional.
   // this is unsorted. it is sorted however mongodb wants to sort it :)
+
   const {
     data: centers,
     isLoading,
     isError,
-  } = api.healthcare.getByPlan.useQuery({ insurance, procedure });
+  } = api.healthcare.getByPlan.useQuery({ insurance, procedure, query });
 
   const InsuranceOptions = <SelectInsurance setInsurance={setInsurance} />;
   const ProcedureOptions = <SelectProcedure setProcedure={setProcedure} />;
@@ -38,14 +42,16 @@ const SearchPage: React.FC = () => {
     isLoading || !centers?.length || isError ? (
       <div className="mt-12 grid justify-items-center justify-self-center text-center text-3xl">
         {isError ? (
-          <p className="mx-4">
+          <p className="mx-3">
             An internal error occurred. Please try again later.
           </p>
         ) : isLoading ? (
           <LoadingSpinner />
         ) : (
-          <p className="mx-4">
-            No centers were found. Try adjusting your filters.
+          <p className="mx-3">
+            {/* query?.at - An unorthodox way of essentially saying 'typeof query === string'
+             even though at is also a method on arrays. We've already checked if this was a string, so I don't care too much. */}
+            No centers were found{query?.at ? " matching \"" + query + '"' : ''}. Try adjusting your filters.
           </p>
         )}
       </div>
