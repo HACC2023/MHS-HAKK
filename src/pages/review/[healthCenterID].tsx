@@ -8,7 +8,7 @@ import getServerSideHelper from "~/server/helpers/ServerSideHelper";
 import Link from "next/link";
 
 const activeYesBtnCSS = "bg-light-green hover:bg-hover-green";
-const activeNoBtnCSS  = "bg-red-400 hover:bg-red-500";
+const activeNoBtnCSS = "bg-red-400 hover:bg-red-500";
 
 export const ReviewPage: NextPage<{ healthCenterID: string }> = ({
   healthCenterID,
@@ -17,8 +17,8 @@ export const ReviewPage: NextPage<{ healthCenterID: string }> = ({
   const formRef =
     useRef() as unknown as React.MutableRefObject<HTMLFormElement>;
 
-  const [questCovered, setQuestCovered] = useState<undefined|boolean>(undefined);
-  const [covered, setCovered] = useState<undefined|boolean>(undefined);
+  const [questCovered, setQuestCovered] = useState<undefined | boolean>(undefined);
+  const [covered, setCovered] = useState<undefined | boolean>(undefined);
 
   const createReviewMutation = api.healthcare.createReview.useMutation({
     onSuccess() {
@@ -37,24 +37,26 @@ export const ReviewPage: NextPage<{ healthCenterID: string }> = ({
     );
   }
 
-  const centerTypes = foundHealthCenter.procedureTypes.map((procedureType: { name: any; }) => procedureType.name);
-  const centerTypeOption = centerTypes.map((x: any) => { return { label: x, value: x } });
-
-  let [centerType, setCenterType] = useState("⬇️ Select a fruit ⬇️")
-  let handleCenterChange = (e: { target: { value: React.SetStateAction<string>; }; }) => {
-    setCenterType(e.target.value)
-  }
-
-
-
-  const reviewTags = foundHealthCenter.procedureReviews.map((procedureReviews: { name: any; }) => procedureReviews.name);
-  const reviewTagSeparate = reviewTags.map((x: any) => { return x });
-
-  let [reviewType, setReviewType] = useState("⬇️ Select a fruit ⬇️")
-  let handleReviewChange = (e: { target: { value: React.SetStateAction<string>; }; }) => {
-    setReviewType(e.target.value)
-  }
   
+
+  // let [centerType, setCenterType] = useState("⬇️ Select a fruit ⬇️")
+  // const handleCenterChange = (e: { target: { value: React.SetStateAction<string>; }; }) => {
+  //   setCenterType(e.target.value)
+  // }
+  function setValue(value: React.SetStateAction<string>) {
+    throw new Error("Function not implemented.");
+  }
+
+
+
+  // const reviewTags = foundHealthCenter.procedureReviews.map((procedureReviews: { name: any; }) => procedureReviews.name);
+  // const reviewTagSeparate = reviewTags.map((x: any) => { return x });
+
+  // let [reviewType, setReviewType] = useState("⬇️ Select a fruit ⬇️")
+  // let handleReviewChange = (e: { target: { value: React.SetStateAction<string>; }; }) => {
+  //   setReviewType(e.target.value)
+  // }
+
 
 
 
@@ -126,19 +128,19 @@ export const ReviewPage: NextPage<{ healthCenterID: string }> = ({
           Were you able to get care?
         </h3>
         <div className="pb-2 text-xl text-center">
-          {"Reviewing " + foundHealthCenter.address + ". "}<br/>
+          {"Reviewing " + foundHealthCenter.address + ". "}<br />
         </div>
         <div className="w-full flex justify-center">
-        <Link href="/Search" className="text-blue-400 underline">
-          Wrong address?
-        </Link>
+          <Link href="/Search" className="text-blue-400 underline">
+            Wrong address?
+          </Link>
         </div>
         <p className="text-center mt-5 text-3xl">{status}</p>
         <form onSubmit={handleSubmit} className="justify-items-center text-center" ref={formRef}>
           <table className="text-left mb-5 w-full">
             <tbody>
 
-              
+
 
               <tr className="h-16">
                 <td>
@@ -146,15 +148,21 @@ export const ReviewPage: NextPage<{ healthCenterID: string }> = ({
                 </td>
                 <td>
                   {/* <input type="text" id="procedureType" name="procedureType" className="input input-bordered w-full" /> */}
-                  <select onChange={handleCenterChange} name="procedureType" className="border border-gray-300 w-full h-12 bg-white text-center rounded-lg">
-                    <option value="" className="text-center" hidden> -- Select a Clinic -- </option>
+                  <select onChange={(e: { target: { value: React.SetStateAction<string>; }; }) => {
+                    setValue(e.target.value)
+                  }} name="procedureType" className="border border-gray-300 w-full h-12 bg-white text-center rounded-lg">
+                    <option value="" className="text-center" hidden > -- Select a Clinic -- </option>
                     {/* Mapping through each fruit object in our fruits array
                       and returning an option element with the appropriate attributes / values.
                     */}
-                    {centerTypeOption.map((centerType: { value: string | number | readonly string[] | undefined; label: string | number | boolean | React.ReactElement<any, string | React.JSXElementConstructor<any>> | Iterable<React.ReactNode> | React.ReactPortal | null | undefined; }) => <option value={centerType.value}>{centerType.label}</option>)}
+                    {/* const centerTypes = foundHealthCenter.procedureTypes.map((procedureType: { name: string; }) => procedureType.name);
+                        const centerTypeOption = centerTypes.map((x: string) => { return { label: x, value: x } }); */}
+                        {/* {foundHealthCenter!.procedureReviews.map((procedureReviews) => procedureReviews.name).join(", ")} */}
+                    {foundHealthCenter.procedureTypes.map((procedureTypes) => <option key={procedureTypes.id} value={procedureTypes.name}>{procedureTypes.name}</option>)}
+                    {/* {centerTypeOption.map((centerType) => <option value={centerType.value}>{centerType.label}</option>)} */}
 
                   </select>
-                
+
                 </td>
               </tr>
 
@@ -240,7 +248,7 @@ export const ReviewPage: NextPage<{ healthCenterID: string }> = ({
           </table>
           <input className="btn bg-light-green hover:bg-hover-green text-green-gray text-lg border-0" type="submit" value="submit!" />
         </form>
-      
+
 
         {/* idk what this was for but i removed it bc it just said "comprehensive care" */}
         {/* <p className="mt-5 text-3xl">{foundHealthCenter.procedureTypes.map(pT=>pT.name).join(", ")}</p> */}

@@ -1,5 +1,5 @@
 import type { GetStaticProps, NextPage } from "next";
-import { JSXElementConstructor, ReactElement, ReactNode, ReactPortal, SetStateAction, useState } from "react";
+import { useState } from "react";
 import Navbar from "~/components/Navbar";
 import { ReviewPage } from "~/pages/review/[healthCenterID]";
 import getServerSideHelper from "~/server/helpers/ServerSideHelper";
@@ -14,13 +14,7 @@ const LocationDestination: NextPage<{ id: string }> = ({ id }) => {
   const foundHealthCenter = api.healthcare.getById.useQuery({
     id: id,
   }).data;
-  const reviewTags = foundHealthCenter!.procedureReviews.map((procedureReviews: { name: any; }) => procedureReviews.name);
-  const reviewTagSeparate = reviewTags.map((x: any) => { return x });
 
-  let [reviewType, setReviewType] = useState("⬇️ Select a fruit ⬇️")
-  let handleReviewChange = (e: { target: { value: SetStateAction<string>; }; }) => {
-    setReviewType(e.target.value)
-  }
   const MapFrame = (
     <iframe
       onLoad={async () => {
@@ -245,8 +239,8 @@ const LocationDestination: NextPage<{ id: string }> = ({ id }) => {
                         </td>
                       </tr>
                     }
-                    {data.doctors.map((doctor: { availabilities: any[]; name: string | number | boolean | ReactElement<any, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | null | undefined; procedureTypes: { name: any; }[]; }) => {
-                      const number = doctor.availabilities.find((availability: { healthCenterID: any; }) => availability.healthCenterID == id)!.phoneNumber;
+                    {data.doctors.map((doctor) => {
+                      const number = doctor.availabilities.find((availability) => availability.healthCenterID == id)!.phoneNumber;
                       return (
                         <>
                           <tr>
@@ -254,7 +248,7 @@ const LocationDestination: NextPage<{ id: string }> = ({ id }) => {
                               <h2 className="text-xl font-semibold">Doctor Name:</h2>
                             </td>
                             <td>
-                              {doctor.name} ({doctor.procedureTypes.map((procedureType: { name: any; }) => procedureType.name)})
+                              {doctor.name} ({doctor.procedureTypes.map((procedureType) => procedureType.name)})
                             </td>
 
                           </tr>
@@ -282,11 +276,7 @@ const LocationDestination: NextPage<{ id: string }> = ({ id }) => {
                           </div>
                         </td>
                         <td className="text-lg">
-                          {reviewTagSeparate.map((reviewType: string | number | boolean | ReactElement<any, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | null | undefined) =>
-
-                            <p>{reviewType}</p>
-                          )
-                          }
+                          {foundHealthCenter!.procedureReviews.map((procedureReviews) => procedureReviews.name).join(", ")}
                         </td>
                       </tr>
                     }
