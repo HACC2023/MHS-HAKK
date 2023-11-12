@@ -119,11 +119,7 @@ const HealthcareRouter = createTRPCRouter({
     for(const place of lol)
       format[place._id.$oid] = { names: place.names, address: place.address }; 
     return format;
-  }),
-  getAllProcedureTypes: publicProcedure.query(async () => {
-    const t = await db.procedureType.findMany();
-    return t.filter((item,index,self) => self.findIndex(e=>item.name === e.name) === index);
-  }),
+  })
 });
 
 export default HealthcareRouter;

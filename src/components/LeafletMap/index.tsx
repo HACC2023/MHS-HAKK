@@ -113,7 +113,7 @@ const LeafletMap: React.FC = () => {
             }
         }
     }, [bruh]);
-    return <div ref={mapRef} className="w-2/5 h-full ml-auto"></div>;
+    return <div ref={mapRef} className="h-full w-full md:w-2/5 ml-0 md:ml-auto md:border-t-transparent"></div>;
 };
 
 export default LeafletMap;
