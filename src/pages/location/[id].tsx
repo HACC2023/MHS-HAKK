@@ -22,10 +22,10 @@ const LocationDestination: NextPage<{ id: string }> = ({ id }) => {
     }).data;
     const reviewTags = foundHealthCenter.procedureReviews.map((procedureReviews) => procedureReviews.name);
     const reviewTagSeparate = reviewTags.map((x) => { return x });
-  
+
     let [reviewType, setReviewType] = useState("⬇️ Select a fruit ⬇️")
     let handleReviewChange = (e) => {
-      setReviewType(e.target.value)
+        setReviewType(e.target.value)
     }
 
 
@@ -53,21 +53,11 @@ const LocationDestination: NextPage<{ id: string }> = ({ id }) => {
                             </div>
                         </div>
 
-                        <div>
-                            {reviewTagSeparate.map((reviewType) => <div className="bg-gray-300 rounded-md mx-2 text-green-gray"><p className="flex align-middle items-center p-1">{reviewType}</p></div>)}
-                        </div>
-
-                        <div className="flex static w-60 ml-72 mt-6 text-lg tooltip tooltip-right font-semibold" data-tip="We compiled information on multiple clinics and will be crowdsourcing from the community. If this page does not accurately reflect your experience, please let us know how your experience went.">
-                            <h3 className="mr-2">Coverage disclaimer</h3>
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
-                                <path strokeLinecap="round" strokeLinejoin="round" d="M11.25 11.25l.041-.02a.75.75 0 011.063.852l-.708 2.836a.75.75 0 001.063.853l.041-.021M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9-3.75h.008v.008H12V8.25z" />
-                            </svg>
-                        </div>
 
 
                         <div className="flex">
                             <div className="toast toast-end">
-                                <div className="flex alert alert-info tooltip tooltip-top " data-tip="Let us know if your care was covered">
+                                <div className="bg-dark-blue text-white flex alert alert-info tooltip tooltip-top " data-tip="Let us know if your care was covered">
                                     <div>Was Your Care Covered?</div>
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" className="stroke-current shrink-0 w-6 h-6"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
 
@@ -163,6 +153,33 @@ const LocationDestination: NextPage<{ id: string }> = ({ id }) => {
                                                     </>
                                                 )
                                             })}
+
+                                            {
+                                                <tr>
+                                                    <td>
+                                                        {/* Making a tooltip static caused the tooltip to disappear */}
+                                                        <div className="flex tooltip tooltip-bottom" data-tip="We compiled information on multiple clinics and will be crowdsourcing from the community. If this page does not accurately reflect your experience, please let us know how your experience went.">
+                                                <h3 className="text-lx font-semibold">Coverage disclaimer</h3>
+                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
+                                                    <path strokeLinecap="round" strokeLinejoin="round" d="M11.25 11.25l.041-.02a.75.75 0 011.063.852l-.708 2.836a.75.75 0 001.063.853l.041-.021M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9-3.75h.008v.008H12V8.25z" />
+                                                </svg>
+                                            </div>
+                                                    </td>
+                                                    <td className="text-lg">
+                                                        {reviewTagSeparate.map((reviewType) =>
+
+                                                            <p>{reviewType}</p>
+                                                        )
+                                                        }
+                                                    </td>
+                                                </tr>
+                                            }
+                                            {/* <div className="flex static w-60 ml-72 mt-6 text-lg tooltip tooltip-right font-semibold" data-tip="We compiled information on multiple clinics and will be crowdsourcing from the community. If this page does not accurately reflect your experience, please let us know how your experience went.">
+                                                <h3 className="mr-2">Coverage disclaimer</h3>
+                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
+                                                    <path strokeLinecap="round" strokeLinejoin="round" d="M11.25 11.25l.041-.02a.75.75 0 011.063.852l-.708 2.836a.75.75 0 001.063.853l.041-.021M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9-3.75h.008v.008H12V8.25z" />
+                                                </svg>
+                                            </div> */}
                                         </tbody>
                                     </table>
                                 </div>
