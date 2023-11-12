@@ -37,21 +37,21 @@ export const ReviewPage: NextPage<{ healthCenterID: string }> = ({
     );
   }
 
-  const centerTypes = foundHealthCenter.procedureTypes.map((procedureType) => procedureType.name);
-  const centerTypeOption = centerTypes.map((x) => { return { label: x, value: x } });
+  const centerTypes = foundHealthCenter.procedureTypes.map((procedureType: { name: any; }) => procedureType.name);
+  const centerTypeOption = centerTypes.map((x: any) => { return { label: x, value: x } });
 
   let [centerType, setCenterType] = useState("⬇️ Select a fruit ⬇️")
-  let handleCenterChange = (e) => {
+  let handleCenterChange = (e: { target: { value: React.SetStateAction<string>; }; }) => {
     setCenterType(e.target.value)
   }
 
 
 
-  const reviewTags = foundHealthCenter.procedureReviews.map((procedureReviews) => procedureReviews.name);
-  const reviewTagSeparate = reviewTags.map((x) => { return x });
+  const reviewTags = foundHealthCenter.procedureReviews.map((procedureReviews: { name: any; }) => procedureReviews.name);
+  const reviewTagSeparate = reviewTags.map((x: any) => { return x });
 
   let [reviewType, setReviewType] = useState("⬇️ Select a fruit ⬇️")
-  let handleReviewChange = (e) => {
+  let handleReviewChange = (e: { target: { value: React.SetStateAction<string>; }; }) => {
     setReviewType(e.target.value)
   }
   
@@ -78,7 +78,7 @@ export const ReviewPage: NextPage<{ healthCenterID: string }> = ({
         throw "SubmitSomethingBro";
 
       const foundProcedureType = foundHealthCenter.procedureTypes.find(
-        (thisProcedureType) => thisProcedureType.name.toLowerCase() === procedureType.toLowerCase(),
+        (thisProcedureType: { name: string; }) => thisProcedureType.name.toLowerCase() === procedureType.toLowerCase(),
       );
       if (!foundProcedureType) {
         throw "ProcedureTypeNameInvalid";
@@ -151,7 +151,7 @@ export const ReviewPage: NextPage<{ healthCenterID: string }> = ({
                     {/* Mapping through each fruit object in our fruits array
                       and returning an option element with the appropriate attributes / values.
                     */}
-                    {centerTypeOption.map((centerType) => <option value={centerType.value}>{centerType.label}</option>)}
+                    {centerTypeOption.map((centerType: { value: string | number | readonly string[] | undefined; label: string | number | boolean | React.ReactElement<any, string | React.JSXElementConstructor<any>> | Iterable<React.ReactNode> | React.ReactPortal | null | undefined; }) => <option value={centerType.value}>{centerType.label}</option>)}
 
                   </select>
                 
