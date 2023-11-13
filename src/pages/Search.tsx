@@ -256,10 +256,10 @@ function ClinicResults(props: {
         <Link
           href={"/location/" + c.id}
           shallow={true}
-          className="text-dark-blue"
+          className={"text-dark-blue"
+}
         >
-          {c.names[0]}
-
+          {c.names} ({c.procedureTypeNames.join(", ")})
         </Link>
       </div>
 
