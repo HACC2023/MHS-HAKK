@@ -1,5 +1,4 @@
 import type { GetStaticProps, NextPage } from "next";
-import Link from "next/link";
 import { useState } from "react";
 import Navbar from "~/components/Navbar";
 import { ReviewPage } from "~/pages/review/[healthCenterID]";
@@ -32,7 +31,7 @@ const LocationDestination: NextPage<{ id: string }> = ({ id }) => {
                       "&daddr=" +
                       data.address,
                   ),
-                (_err) => res(""),
+                (_err) => res(map),
                 {
                   enableHighAccuracy: true,
                 },
@@ -62,7 +61,7 @@ const LocationDestination: NextPage<{ id: string }> = ({ id }) => {
           <>
             <div
               className={
-                "flex w-full flex-col gap-4 bg-dark-blue px-[calc(5%)] py-16 text-white sm:px-[calc(15%)] " +
+                "flex w-full flex-col gap-4 bg-dark-blue px-[calc(5%)] py-16 pb-10 text-white lg:px-[calc(15%)] " +
                 (mobileView === "map" ? "hidden" : "")
               }
             >
@@ -72,12 +71,37 @@ const LocationDestination: NextPage<{ id: string }> = ({ id }) => {
                     ? "Also known as " + data.names.slice(1).join(", ")
                     : undefined
                 }
-                className="flex-col break-words pt-4 text-center text-4xl font-bold  md:text-left"
+                className="flex-col break-words pt-4 text-center text-4xl font-bold lg:text-left"
               >
                 {data.names[0]}
               </div>
-              <div className="items-center text-center text-xl font-bold md:text-left">
-                {data.procedureTypeNames.join(" ")}
+              <div className="items-center text-center text-xl font-bold lg:text-left">
+                {data.procedureTypeNames.join(", ")}
+              </div>
+              <div className="mr-1 flex w-full space-x-4 pt-0">
+                <div className="join mx-auto lg:mx-0">
+                  <a
+                    onClick={() => window.history.back()}
+                    className={
+                      "btn join-item mt-5 h-20 w-40 border-white bg-light-green text-2xl normal-case text-green-gray hover:bg-hover-green "
+                    }
+                  >
+                    Go Back
+                  </a>
+                  {/*
+                  this can be added later.
+                  <a
+                    onClick={() => {
+                      /* We need to do something here!!! * /
+                    }}
+                    className={
+                      "btn join-item mt-5 h-20 w-40 border-white bg-light-green text-2xl normal-case text-green-gray hover:bg-hover-green "
+                    }
+                  >
+                    Planning to visit clinic
+                  </a>
+                  */}
+                </div>
               </div>
             </div>
 
@@ -86,28 +110,6 @@ const LocationDestination: NextPage<{ id: string }> = ({ id }) => {
                 "w-full lg:block " + (mobileView === "map" ? "hidden" : "")
               }
             >
-              <div className="mr-1 flex w-full space-x-4 p-5 pt-0">
-                <div className="join mx-auto">
-                  <a
-                    onClick={() => window.history.back()}
-                    className={
-                      "btn join-item mt-5 h-20 w-40 border-white bg-light-green text-xl normal-case text-green-gray hover:bg-hover-green "
-                    }
-                  >
-                    Go Back
-                  </a>
-                  <a
-                    onClick={() => {
-                      /* We need to do something here!!! */
-                    }}
-                    className={
-                      "btn join-item mt-5 h-20 w-40 border-white bg-light-green text-xl normal-case text-green-gray hover:bg-hover-green "
-                    }
-                  >
-                    Planning to visit clinic
-                  </a>
-                </div>
-              </div>
               <div className="flex">
                 <div className="toast toast-end">
                   <div
@@ -183,7 +185,7 @@ const LocationDestination: NextPage<{ id: string }> = ({ id }) => {
              */}
             <div
               className={
-                "w-full lg:join lg:flex " +
+                "w-full lg:join lg:flex lg:mt-4 " +
                 (mobileView === "desc" ? "mb-3 flex" : "hidden")
               }
             >
@@ -240,7 +242,7 @@ const LocationDestination: NextPage<{ id: string }> = ({ id }) => {
                         <h2 className="text-xl font-semibold">Insurance Type</h2>
                       </td>
                       <td>
-                        <p className="text-lg">{data.supportedInsurances.includes("QI") && "Quest Insured"}{data.supportedInsurances.includes("FQHC") && "Federally Qualified Health Center"}</p>
+                        <p className="text-lg">{data.supportedInsurances.join(", ").replace("QI", "Quest Insured").replace("FQHC", "Federally Qualified Health Center")}</p>
                       </td>
                     </tr>
                     {data.supportedInsurances.includes("FQHC") &&
