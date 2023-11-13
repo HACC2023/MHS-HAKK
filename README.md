@@ -8,23 +8,18 @@ Welcome to HelpCare by MHS-HAKK, compiling Hawaii’s affordable healthcare opti
 
 
 
+### Search filters
+- Insurance type
+    - Med-QUEST Insured (covered healthcare for Med-QUEST eligible): Has doctor information
+    - FQHC (has “sliding fee scale”): Has sliding scale description
+- Hospital name/address
+- Procedure type
 
+###
 
-- [Next.js](https://nextjs.org)
-- [NextAuth.js](https://next-auth.js.org)
-- [Prisma](https://prisma.io)
-- [Tailwind CSS](https://tailwindcss.com)
-- [tRPC](https://trpc.io)
-
-## Learn More
-
-To learn more about the [T3 Stack](https://create.t3.gg/), take a look at the following resources:
-
-- [Documentation](https://create.t3.gg/)
-- [Learn the T3 Stack](https://create.t3.gg/en/faq#what-learning-resources-are-currently-available) — Check out these awesome tutorials
-
-You can check out the [create-t3-app GitHub repository](https://github.com/t3-oss/create-t3-app) — your feedback and contributions are welcome!
-
-## How do I deploy this?
-
-Follow our deployment guides for [Vercel](https://create.t3.gg/en/deployment/vercel), [Netlify](https://create.t3.gg/en/deployment/netlify) and [Docker](https://create.t3.gg/en/deployment/docker) for more information.
+Centers appear on Search Page map and have link for specific center information
+Information compiled on over 100 clinic on Oahu
+Review page creates tags of specific procedures
+Tagging system would eventually grow to search
+Clicking on clinic brings up more information and a directions
+Med-QUEST eligibility button takes you to MedQuest Eligibility page
