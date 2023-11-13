@@ -1,9 +1,11 @@
 import type { GetStaticProps, NextPage } from "next";
+import Link from "next/link";
 import { useState } from "react";
 import Navbar from "~/components/Navbar";
 import { ReviewPage } from "~/pages/review/[healthCenterID]";
 import getServerSideHelper from "~/server/helpers/ServerSideHelper";
 import { api } from "~/utils/api";
+import { FormatURL } from "../Search";
 
 const LocationDestination: NextPage<{ id: string }> = ({ id }) => {
   const { data } = api.healthcare.getById.useQuery({ id });
@@ -31,7 +33,7 @@ const LocationDestination: NextPage<{ id: string }> = ({ id }) => {
                       "&daddr=" +
                       data.address,
                   ),
-                (_err) => res(map),
+                (_err) => res(''),
                 {
                   enableHighAccuracy: true,
                 },
@@ -203,7 +205,7 @@ const LocationDestination: NextPage<{ id: string }> = ({ id }) => {
                           <h2 className="text-xl font-semibold">Clinic Website</h2>
                         </td>
                         <td>
-                          <a className="text-lg italic underline text-blue-700" href={data.website && JSON.stringify(data.website).includes("https://") ? data.website : "https://" + data.website}>{data.website}</a>
+                          <Link className="text-lg italic underline text-blue-700" href={"https://" + FormatURL(data.website)} target="_blank">{FormatURL(data.website)}</Link>
                         </td>
                       </tr>
                       :

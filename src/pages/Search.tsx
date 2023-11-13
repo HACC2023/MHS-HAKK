@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import dynamic from "next/dynamic";
 import "leaflet/dist/leaflet.css";
 import type {
@@ -11,6 +11,7 @@ import Navbar from "~/components/Navbar";
 import { LoadingSpinner } from "~/components/Loading";
 import Link from "next/link";
 import { useRouter } from "next/router";
+export const FormatURL = (url: string) => url.replace(/^https?:\/\//, '');
 const LeafletMap = dynamic(() => import("../components/LeafletMap"), {
   ssr: false,
 });
@@ -255,25 +256,22 @@ function ClinicResults(props: {
         <Link
           href={"/location/" + c.id}
           shallow={true}
-          className={
-            c.supportedInsurances.includes("QI")
-              ? "text-dark-blue"
-              : "text-dark-blue"
-          }
+          className="text-dark-blue"
         >
-          {c.names[0] + " (" + (false || "Comprehensive Care") + ")"}
+          {c.names[0] + " (" + (c.procedureTypeNames[0] ?? "Comprehensive Care") + ")"}
         </Link>
       </div>
 
       <div className="flex">
         <div className="min-w-full break-words text-justify">
           {c.website && (
-            <a
+            <Link
               className="italic text-blue-700 underline"
-              href={"https://" + c.website}
+              href={"https://" + FormatURL(c.website)}
+              target="_blank"
             >
-              {c.website}
-            </a>
+              {FormatURL(c.website)}
+            </Link>
           )}
           <div>{c.address}</div>
           {c.healthCenterNumbers[0] && (
