@@ -2,6 +2,7 @@ import classNames from "classnames";
 import React, { memo, useRef, useState } from "react";
 import type { IDToMeta } from "~/server/api/routers/HealthcareRouter";
 import { LoadingSpinner } from "../Loading";
+import { useRouter } from "next/router";
 
 type Props = {
     items: (IDToMeta | undefined);
@@ -12,6 +13,8 @@ type Props = {
 
 //we are using dropdown, input and menu component from daisyui
 const Autocomplete = (props: Props) => {
+
+    const router = useRouter();
     const { items, value, isLoading, onChange } = props;
     const ref = useRef<HTMLDivElement>(null);
     const [open, setOpen] = useState(false);
@@ -29,6 +32,7 @@ const Autocomplete = (props: Props) => {
                 type="text"
                 className="input input-bordered h-12 w-full text-lg rounded-r-none"
                 value={value}
+                onKeyUp={(e) => e.key === "Enter" && router.push("/Search?q=" + value, undefined, { shallow: true })}
                 onChange={(e) => onChange(e.target.value)}
                 placeholder="Search Location..."
                 tabIndex={0}

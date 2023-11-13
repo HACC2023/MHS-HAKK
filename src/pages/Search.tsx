@@ -254,6 +254,7 @@ function ClinicResults(props: {
       <div className="l-20 text-2xl font-semibold">
         <Link
           href={"/location/" + c.id}
+          shallow={true}
           className={
             c.supportedInsurances.includes("QI")
               ? "text-dark-blue"
