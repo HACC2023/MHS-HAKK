@@ -7,6 +7,7 @@ import markerShadow from 'leaflet/dist/images/marker-shadow.png';
 import * as jsonData from './Coordinates.json';
 import { api } from "~/utils/api";
 import type { CenterResult } from "~/server/api/routers/HealthcareRouter";
+import { FormatURL } from "~/pages/Search";
 type ModdedGSONObj = (GeoJSON.GeoJsonObject & {
     properties: {
         id: string;
@@ -64,7 +65,7 @@ const LeafletMap: React.FC = () => {
                                 return number.replace(/(\d{3})(\d{3})(\d{4})/, '($1) $2-$3');
                             }); 
                             const insuranceStuff = supportedInsurances.length > 0 ? `<p><strong>Insurance Plan(s): </strong>${supportedInsurances.join(', ')}</p>` : ''
-                            const websiteLink = website ? `<p><strong>Website:</strong> <a href="${website}" target="_blank">${website}</a></p>` : '';
+                            const websiteLink = website ? `<p><strong>Website:</strong> <a href="https://${FormatURL(website)}" target="_blank">${FormatURL(website)}</a></p>` : '';
                             const popupContent = `
                             <div>
                                 <h2><strong>${names.join(', ')}</strong></h2>
