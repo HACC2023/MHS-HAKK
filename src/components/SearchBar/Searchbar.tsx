@@ -1,16 +1,18 @@
 import classNames from "classnames";
 import React, { memo, useRef, useState } from "react";
 import type { IDToMeta } from "~/server/api/routers/HealthcareRouter";
+import { LoadingSpinner } from "../Loading";
 
 type Props = {
     items: (IDToMeta | undefined);
     value: (string);
+    isLoading: (boolean);
     onChange: (val: string) => void;
 };
 
 //we are using dropdown, input and menu component from daisyui
 const Autocomplete = (props: Props) => {
-    const { items, value, onChange } = props;
+    const { items, value, isLoading, onChange } = props;
     const ref = useRef<HTMLDivElement>(null);
     const [open, setOpen] = useState(false);
 
@@ -19,7 +21,7 @@ const Autocomplete = (props: Props) => {
             // use classnames here to easily toggle dropdown open 
             className={classNames({
                 "dropdown w-full": true,
-                "dropdown-open": open,
+                "dropdown-open": open
             })}
             ref={ref}
         >
@@ -37,24 +39,24 @@ const Autocomplete = (props: Props) => {
                     className="menu menu-compact"
 
                 >
-                    {items && Object.keys(items).length ? Object.keys(items).map((id, index) => {
-                        return items[id]!.names.map((name, nIndex) => (
+                    {items?.length ? items.flatMap((center, index) => {
+                        return center.names.map((name, nIndex) => (
                             <li 
-                                key={id+nIndex}
+                                key={index + 'b' + nIndex}
                                 tabIndex={index + 1}
                                 onClick={() => {
                                     onChange(name);
                                     setOpen(false);
                                 }}
-                                className="border-b border-b-base-content/10 last:border-b-0 py-1 break-words"
+                                className="border-b border-b-base-content/10 last:border-b-0 py-2 first:pt-0 last:pb-0 break-words"
                             >
                                 <a className="flex flex-wrap">
                                     {name}<div className="w-full"/>
-                                    <div className="text-sm italic">{items[id]!.address}</div>
+                                    <div className="text-sm italic">{center.address}</div>
                                 </a>
                             </li>
                         ))
-                    }) : "No clinics found."}
+                    }) : isLoading ? <div className="ml-auto mr-auto overflow-hidden my-2"><LoadingSpinner/></div> : "No clinics found."}
                 </ul>
                 {/* add this part */}
             </div>

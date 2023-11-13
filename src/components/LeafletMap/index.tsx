@@ -6,6 +6,7 @@ import markerIcon from 'leaflet/dist/images/marker-icon.png';
 import markerShadow from 'leaflet/dist/images/marker-shadow.png';
 import * as jsonData from './Coordinates.json';
 import { api } from "~/utils/api";
+import type { CenterResult } from "~/server/api/routers/HealthcareRouter";
 type ModdedGSONObj = (GeoJSON.GeoJsonObject & {
     properties: {
         id: string;
@@ -25,7 +26,7 @@ L.Icon.Default.mergeOptions({
 
 const LeafletMap: React.FC = () => {
     const mapRef = useRef<HTMLDivElement>(null);
-    const queryData = api.healthcare.getSome.useQuery().data;
+    const queryData = api.healthcare.getByPlan.useQuery({ forAutocomplete: false }).data as CenterResult | undefined;
     const [bruh, setBruh] = useState<ModdedGSONObj[]>([]);
 
     useEffect(() => {

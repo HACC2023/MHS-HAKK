@@ -20,11 +20,13 @@ const ProcedureValidator = z.union([
   z.undefined(),
 ]);
 
+// from Stack Overflow lol - If someone enters a hospital with a period, regex thinks that it'll accept any char. When searching the db raw, regexes are ez to do but you have to escape some special characters soooo here we are.
 const REGEXFix = (str: string) => str.replace(/[/\-\\^$*+?.()|[\]{}]/g, "\\$&");
 
 export type InsuranceProviders = z.infer<typeof InsuranceValidator>;
 export type ProcedureProviders = z.infer<typeof ProcedureValidator>;
-export type IDToMeta = Record<string, { names: string[]; address: string }>;
+export type IDToMeta = Array<{ names: string[]; address: string }>;
+export type CenterResult = Array<{ _id: { $oid: string }; } & Prisma.HealthCenterGroupByOutputType>;
 
 const HealthcareRouter = createTRPCRouter({
   getById: publicProcedure
@@ -46,19 +48,19 @@ const HealthcareRouter = createTRPCRouter({
       z.object({
         insurance: InsuranceValidator,
         procedure: ProcedureValidator,
-        query: z.string().or(z.undefined()),
-      }),
+        forAutocomplete: z.boolean().or(z.undefined()),
+        query: z.string().or(z.undefined())
+      }).or(z.undefined()),
     )
-    .query(async ({ input }) => {
-      const lol: ({
-        _id: { $oid: string };
-      } & Prisma.HealthCenterGroupByOutputType)[] =
+    .query(async ({ input }): Promise<CenterResult | IDToMeta> => {
+      const lol: CenterResult =
         (await db.healthCenter.findRaw({
           filter: {
+            // hey prisma, id really appreciate it if u could search mongodb, and if the user types in something that matches either the name or address of a hospital, plz add it to a list you will give me later thx
             $or: [
               {
                 // prisma doesnt have an elegant way of filtering if a letter occurs in a string[] so we use regexes.
-                address: input.query?.length
+                address: input?.query?.length
                   ? {
                       $regex: REGEXFix(input.query),
                       $options: "i",
@@ -67,7 +69,7 @@ const HealthcareRouter = createTRPCRouter({
               },
               {
                 // if the string exists and isnt empty, make a regex that is case insensitive.
-                names: input.query?.length
+                names: input?.query?.length
                   ? {
                       $regex: REGEXFix(input.query),
                       $options: "i",
@@ -75,32 +77,31 @@ const HealthcareRouter = createTRPCRouter({
                   : undefined,
               },
             ],
+            // oh also, if they requested a specific insurance or provider, make sure that the hospitals also satisfy these conditions as well.
             $and: [
               {
-                supportedInsurances: input.insurance
+                supportedInsurances: input?.insurance
                   ? { $eq: input.insurance }
                   : undefined,
               },
               {
-                procedureTypeNames: input.procedure
+                procedureTypeNames: input?.procedure
                   ? { $eq: input.procedure }
                   : undefined,
               },
-            ],
+            ]
           },
+          options: {
+            limit: 50
+          }
         })) as unknown as [];
       // the type of lol is off, .id does not exist until we copy _id to id
-      lol.forEach((place, index) => (lol[index]!.id = place.id));
-      return lol;
+      if(input?.forAutocomplete) return lol.map((center) => ({ names: center.names, address: center.address }))
+      else {
+        lol.forEach((place, index) => (lol[index]!.id = place._id.$oid));
+        return lol;
+      }
     }),
-  getSome: publicProcedure.query(async () => {
-    const a = await db.healthCenter.findMany({
-      take: 100,
-    });
-
-    return a;
-  }),
-
   createReview: publicProcedure
     .input(
       z.object({
@@ -147,53 +148,7 @@ const HealthcareRouter = createTRPCRouter({
           },
         },
       });
-    }),
-  getData: publicProcedure.query(async () => {
-    const allData = await db.healthCenter.findMany();
-    const features = allData.map((entry: { names: string[] }) => {
-      return [entry.names];
-    });
-    return features;
-  }),
-  // i feel like we can get rid of this procedure given that we now have getByPlan, which accepts a name, insurance, and procedure (all of which are optional iirc)
-  getDataByName: publicProcedure
-    .input(z.object({ name: z.string() }))
-    .query(async ({ input }) => {
-      const lol: ({
-        _id: { $oid: string };
-      } & Prisma.HealthCenterGroupByOutputType)[] =
-        (await db.healthCenter.findRaw({
-          filter: {
-            $or: [
-              {
-                // prisma doesnt have an elegant way of filtering if a letter occurs in a string[] so we use regexes.
-                address: {
-                  $regex: REGEXFix(input.name),
-                  $options: "i",
-                },
-              },
-              {
-                names: {
-                  $regex: REGEXFix(input.name),
-                  $options: "i",
-                },
-              },
-            ],
-          },
-        })) as unknown as [];
-      const format: IDToMeta = {};
-      for (const place of lol)
-        format[place._id.$oid] = { names: place.names, address: place.address };
-      return format;
-    }),
-  getAllProcedureTypes: publicProcedure.query(() => {
-    return [];
-    //const t = await db.procedureType.findMany();
-    //return t.filter(
-    //  (item, index, self) =>
-    //    self.findIndex((e) => item.name === e.name) === index,
-    //);
-  }),
+    })
 });
 
 export default HealthcareRouter;

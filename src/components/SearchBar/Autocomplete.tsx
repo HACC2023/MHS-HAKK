@@ -3,8 +3,8 @@ import Autocomplete from './Searchbar'
 import { api } from '~/utils/api'
 
 const SearchBarAutocomplete = (props: { input: string, setInput: React.Dispatch<React.SetStateAction<string>> }) => {
-    const { data } = api.healthcare.getDataByName.useQuery({ name: props.input ?? '' });
-    return <Autocomplete items={data} value={props.input} onChange={props.setInput} />;
+    const { data, isLoading } = api.healthcare.getByPlan.useQuery({ query: props.input, forAutocomplete: true });
+    return <Autocomplete items={data} value={props.input} onChange={props.setInput} isLoading={isLoading} />;
 }
 
 export default SearchBarAutocomplete;
