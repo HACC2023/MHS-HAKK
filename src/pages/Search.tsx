@@ -261,7 +261,7 @@ function ClinicResults(props: {
               : "text-dark-blue"
           }
         >
-          {c.names[0] + " (" + (false || "Comprehensive Care") + ")"}
+          {c.names[0]}
         </Link>
       </div>
 
