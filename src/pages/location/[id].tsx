@@ -113,7 +113,7 @@ const LocationDestination: NextPage<{ id: string }> = ({ id }) => {
               <div className="flex">
                 <div className="toast toast-end">
                   <div
-                    className="alert alert-info tooltip tooltip-top flex bg-dark-blue text-white "
+                    className="hidden md:flex alert alert-info tooltip tooltip-top bg-dark-blue text-white "
                     data-tip="Let us know if your care was covered"
                   >
                     <div>Was Your Care Covered?</div>
