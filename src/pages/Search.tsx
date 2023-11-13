@@ -258,7 +258,8 @@ function ClinicResults(props: {
           shallow={true}
           className="text-dark-blue"
         >
-          {c.names[0] + " (" + (c.procedureTypeNames[0] ?? "Comprehensive Care") + ")"}
+          {c.names[0]}
+
         </Link>
       </div>
 
