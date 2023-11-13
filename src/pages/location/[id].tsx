@@ -1,4 +1,5 @@
 import type { GetStaticProps, NextPage } from "next";
+import Link from "next/link";
 import { useState } from "react";
 import Navbar from "~/components/Navbar";
 import { ReviewPage } from "~/pages/review/[healthCenterID]";
@@ -25,11 +26,11 @@ const LocationDestination: NextPage<{ id: string }> = ({ id }) => {
                 (p) =>
                   res(
                     "&saddr=" +
-                    p.coords.latitude +
-                    "," +
-                    p.coords.longitude +
-                    "&daddr=" +
-                    data.address,
+                      p.coords.latitude +
+                      "," +
+                      p.coords.longitude +
+                      "&daddr=" +
+                      data.address,
                   ),
                 (_err) => res(""),
                 {
@@ -48,7 +49,12 @@ const LocationDestination: NextPage<{ id: string }> = ({ id }) => {
   );
 
   return (
-    <div className={"w-full font-tyler lg:block lg:overflow-y-auto " + (mobileView === "map" ? "fixed overflow-y-hidden" : "")}>
+    <div
+      className={
+        "w-full font-tyler lg:block lg:overflow-y-auto " +
+        (mobileView === "map" ? "fixed overflow-y-hidden" : "")
+      }
+    >
       <Navbar />
       <div>
         {data ? (
@@ -102,13 +108,27 @@ const LocationDestination: NextPage<{ id: string }> = ({ id }) => {
                 </div>
               </div>
               <div className="flex">
-                            <div className="toast toast-end">
-                                <div className="bg-dark-blue text-white flex alert alert-info tooltip tooltip-top " data-tip="Let us know if your care was covered">
-                                    <div>Was Your Care Covered?</div>
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" className="stroke-current shrink-0 w-6 h-6"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-
-                                </div>
-                            </div>
+                <div className="toast toast-end">
+                  <div
+                    className="alert alert-info tooltip tooltip-top flex bg-dark-blue text-white "
+                    data-tip="Let us know if your care was covered"
+                  >
+                    <div>Was Your Care Covered?</div>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      className="h-6 w-6 shrink-0 stroke-current"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                      ></path>
+                    </svg>
+                  </div>
+                </div>
               </div>
             </div>
             <div className="mb-5 flex h-full w-screen flex-col lg:hidden ">
@@ -160,25 +180,18 @@ const LocationDestination: NextPage<{ id: string }> = ({ id }) => {
              * DESKTOP VIEW: SHOW DESC|MAP
              * MOBILE VIEW : SHOW DESC
              */}
-
-            <div className={"bg-gray-100 rounded-l-xl lg:static mx-[calc(15%)] p-[calc(2%)] lg:ml-60 lg:mt-4 lg:w-3/4 lg:px-12 lg:pb-10 lg:pt-6 " +
-              (mobileView === "desc" ? "mb-3 flex" : "hidden")
-            }>
-
-                <table className="table-fixed">
-                  <tbody>
-                    <tr className="border-gray-100">
-                      <td className="text-2xl font-semibold w-56 ">Clinic Description</td>
-                      <td>
-
-                      </td>
-                    </tr>
-
-                    <tr>
-                      <td>
-                        <div className="divide-solid"></div>
-                      </td>
-                    </tr>
+            <div
+              className={
+                "w-full lg:join lg:flex " +
+                (mobileView === "desc" ? "mb-3 flex" : "hidden")
+              }
+            >
+              <div className="static mx-3 w-full rounded-xl bg-gray-100 lg:mr-0 lg:w-4/5 lg:rounded-r-none lg:border-r-4">
+                <div className="min-h-96 w-full py-7 px-3 sm:p-7">
+                <div className="text-3xl font-semibold w-full text-center lg:text-start">Clinic Description</div>
+                <div className="divider mt-0 mb-0"/>
+                <table className="table-fixed mx-auto lg:mx-0">
+                  <tbody className="border-spacing-2">
 
                     {data.website ?
                       <tr>
@@ -268,24 +281,26 @@ const LocationDestination: NextPage<{ id: string }> = ({ id }) => {
                       <tr>
                         <td>
                           {/* Making a tooltip static caused the tooltip to disappear */}
-                          <div className="flex tooltip tooltip-bottom" data-tip="We compiled information on multiple clinics and will be crowdsourcing from the community. If this page does not accurately reflect your experience, please let us know how your experience went.">
-                            <h3 className="text-lx font-semibold">Coverage disclaimer</h3>
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
+                          <div className="flex tooltip tooltip-bottom w-full" data-tip="We compiled information on multiple clinics and will be crowdsourcing from the community. If this page does not accurately reflect your experience, please let us know how your experience went.">
+                            <h3 className="text-lx font-semibold flex md:gap-x-1">Coverage disclaimer<svg xmlns="http://www.w3.org/2000/svg" fill="none" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
                               <path strokeLinecap="round" strokeLinejoin="round" d="M11.25 11.25l.041-.02a.75.75 0 011.063.852l-.708 2.836a.75.75 0 001.063.853l.041-.021M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9-3.75h.008v.008H12V8.25z" />
-                            </svg>
+                            </svg></h3>
                           </div>
                         </td>
                         <td className="text-lg">
-                          {foundHealthCenter!.procedureReviews.map((procedureReviews) => procedureReviews.name).join(", ")}
+                          {foundHealthCenter?.procedureReviews.map((procedureReviews) => procedureReviews.name).join(", ")}
                         </td>
                       </tr>
                     }
                   </tbody>
                 </table>
-              <div className="w-1/2 rounded-r-xl hidden lg:flex p-4">
+                </div>
+              </div>
+              <div className="mr-3 hidden w-3/5 rounded-r-xl lg:flex">
                 {MapFrame}
               </div>
             </div>
+
             {/**
              * DESKTOP VIEW: N/A
              * MOBILE VIEW: SHOW MAP
