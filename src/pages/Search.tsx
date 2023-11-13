@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import dynamic from "next/dynamic";
 import "leaflet/dist/leaflet.css";
 import type {
@@ -91,6 +91,7 @@ const SearchPage: React.FC = () => {
             </label>
             {ProcedureOptions}
           </div>
+
         </div>
         <div
           className="h-full w-1/2 flex-col overflow-y-scroll

@@ -62,7 +62,8 @@ const LeafletMap: React.FC = () => {
                             });
                             const formattedHealthCenterNumbers = healthCenterNumbers.map((number) => {
                                 return number.replace(/(\d{3})(\d{3})(\d{4})/, '($1) $2-$3');
-                            });
+                            }); 
+                            const insuranceStuff = supportedInsurances.length > 0 ? `<p><strong>Insurance Plan(s): </strong>${supportedInsurances.join(', ')}</p>` : ''
                             const websiteLink = website ? `<p><strong>Website:</strong> <a href="${website}" target="_blank">${website}</a></p>` : '';
                             const popupContent = `
                             <div>
@@ -70,7 +71,7 @@ const LeafletMap: React.FC = () => {
                                 <a href=/location/${id}> (Click for more details)</a>
                                 <p><strong>Address:</strong> ${address}</p>
                                 <p><strong>Health Center Numbers:</strong> ${formattedHealthCenterNumbers.join(', ')}</p>
-                                <p><strong>Insurance Plans:</strong> ${supportedInsurances.join(', ')}</p>
+                                ${insuranceStuff}
                                 ${websiteLink}
                             </div>
                             `;

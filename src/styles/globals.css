@@ -14,3 +14,13 @@
     src: url("../../public/Raleway-Italic-VariableFont_wght.ttf") format("truetype");
     font-style: italic;
 }
+
+/* This is here because transitioning between pages on 'mobile' (ios sim, chromium mobile, my iphone) makes weird white bar on right side of page.*/
+/* https://stackoverflow.com/questions/4612307/website-has-strange-whitespace-on-right-side-of-the-page-when-the-browser-is-res */
+html, body {
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden; 
+}

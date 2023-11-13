@@ -13,12 +13,16 @@ const activeNoBtnCSS  = "bg-red-400 hover:bg-red-500";
 export const ReviewPage: NextPage<{ healthCenterID: string }> = ({
   healthCenterID,
 }) => {
+  const [, setCenterType] = useState("⬇️ Select a fruit ⬇️")
+  const handleCenterChange = (e: { target: { value: React.SetStateAction<string>; }; }) => {
+    setCenterType(e.target.value)
+  }
   const [status, setStatus] = useState("");
   const formRef =
     useRef() as unknown as React.MutableRefObject<HTMLFormElement>;
 
-  const [questCovered, setQuestCovered] = useState<undefined|boolean>(undefined);
-  const [covered, setCovered] = useState<undefined|boolean>(undefined);
+  const [questCovered, setQuestCovered] = useState<undefined | boolean>(undefined);
+  const [covered, setCovered] = useState<undefined | boolean>(undefined);
 
   const createReviewMutation = api.healthcare.createReview.useMutation({
     onSuccess() {
@@ -37,11 +41,34 @@ export const ReviewPage: NextPage<{ healthCenterID: string }> = ({
     );
   }
 
+  
+  // const centerTypes = foundHealthCenter.procedureTypes.map((procedureType) => procedureType.name);
+  // const centerTypeOption = centerTypes.map((x) => { return { label: x, value: x } });
+  
+ 
+  // const handleCenterChange = (e: { target: { value: React.SetStateAction<string>; }; }) => {}
+
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     try {
       setStatus("Processing...");
       const form = formRef.current;
+
+
+  // const reviewTags = foundHealthCenter.procedureReviews.map((procedureReviews: { name: any; }) => procedureReviews.name);
+  // const reviewTagSeparate = reviewTags.map((x: any) => { return x });
+
+  // let [reviewType, setReviewType] = useState("⬇️ Select a fruit ⬇️")
+  // let handleReviewChange = (e: { target: { value: React.SetStateAction<string>; }; }) => {
+  //   setReviewType(e.target.value)
+  // }
+
+
+
+
+
+
+  
 
       // TS has no idea what our page looks like, so expect some red squiggly errors.
       // TODO: use states or something? Migrate this to a React.Component class so it looks nicer to other people working on the backend.
@@ -55,7 +82,7 @@ export const ReviewPage: NextPage<{ healthCenterID: string }> = ({
         throw "SubmitSomethingBro";
 
       const foundProcedureType = foundHealthCenter.procedureTypes.find(
-        (thisProcedureType) => thisProcedureType.name.toLowerCase() === procedureType.toLowerCase(),
+        (thisProcedureType: { name: string; }) => thisProcedureType.name.toLowerCase() === procedureType.toLowerCase(),
       );
       if (!foundProcedureType) {
         throw "ProcedureTypeNameInvalid";
@@ -97,22 +124,48 @@ export const ReviewPage: NextPage<{ healthCenterID: string }> = ({
   };
 
   return (
-    <div className="h-screen overflow-hidden " >
+    <div className="h-fit overflow-hidden " >
       <div className="ml-auto mr-auto w-fit p-7 sm:p-3 sm:py-24">
         <h3 className="pb-3 text-center text-5xl sm:text-6xl font-bold text-green-gray">
-          Was Your Care Covered?
+          Were you able to get care?
         </h3>
         <div className="pb-2 text-xl text-center">
-          {"Reviewing " + foundHealthCenter.address + ". "}<br/>
+          {"Reviewing " + foundHealthCenter.names[0] + ". "}<br />
         </div>
         <div className="w-full flex justify-center">
-        <Link href="/Search" className="text-blue-400 underline">
-          Wrong address?
-        </Link>
+          <Link href="/Search" className="text-blue-400 underline">
+            Wrong address?
+          </Link>
         </div>
+        <p className="text-center mt-5 text-3xl">{status}</p>
         <form onSubmit={handleSubmit} className="justify-items-center text-center" ref={formRef}>
           <table className="text-left mb-5 w-full">
             <tbody>
+
+
+
+              <tr className="h-16">
+                <td>
+                  <label htmlFor="procedureType" className="text-lg">Procedure Type: </label>
+                </td>
+                <td>
+                  {/* <input type="text" id="procedureType" name="procedureType" className="input input-bordered w-full" /> */}
+                  <select onChange={handleCenterChange} name="procedureType" className="border border-gray-300 w-full h-12 bg-white text-center rounded-lg">
+                  {/* <select onChange={(e: { target: { value}; }) => {handleCenterChange(e.target.value)}} name="procedureType" className="border border-gray-300 w-full h-12 bg-white text-center rounded-lg"> */}
+                    <option value="" className="text-center" hidden > -- Select a Procedure -- </option>
+                    {/* Mapping through each fruit object in our fruits array
+                      and returning an option element with the appropriate attributes / values.
+                    */}
+                    {/* const centerTypes = foundHealthCenter.procedureTypes.map((procedureType: { name: string; }) => procedureType.name);
+                        const centerTypeOption = centerTypes.map((x: string) => { return { label: x, value: x } }); */}
+                        {/* {foundHealthCenter!.procedureReviews.map((procedureReviews) => procedureReviews.name).join(", ")} */}
+                        {/* {centerTypeOption.map((centerType) => <option value={centerType.value}>{centerType.label}</option>)} */}
+                    {foundHealthCenter.procedureTypes.map((procedureTypes) => <option key={procedureTypes.id} value={procedureTypes.name}>{procedureTypes.name}</option>)}
+
+                  </select>
+
+                </td>
+              </tr>
 
               <tr className="h-16">
                 <td>
@@ -123,14 +176,6 @@ export const ReviewPage: NextPage<{ healthCenterID: string }> = ({
                 </td>
               </tr>
 
-              <tr className="h-16">
-                <td>
-                  <label htmlFor="procedureType" className="text-lg">Procedure Type: </label>
-                </td>
-                <td>
-                  <input type="text" id="procedureType" name="procedureType" className="input input-bordered w-full" />
-                </td>
-              </tr>
               <tr className="h-16">
                 <td>
                   <label htmlFor="questcovered" className="text-lg">
@@ -204,8 +249,7 @@ export const ReviewPage: NextPage<{ healthCenterID: string }> = ({
           </table>
           <input className="btn bg-light-green hover:bg-hover-green text-green-gray text-lg border-0" type="submit" value="submit!" />
         </form>
-        <p className="text-center mt-5 text-3xl">{status}</p>
-      
+
 
         {/* idk what this was for but i removed it bc it just said "comprehensive care" */}
         {/* <p className="mt-5 text-3xl">{foundHealthCenter.procedureTypes.map(pT=>pT.name).join(", ")}</p> */}
