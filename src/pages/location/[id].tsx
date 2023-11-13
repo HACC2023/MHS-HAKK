@@ -211,11 +211,11 @@ const LocationDestination: NextPage<{ id: string }> = ({ id }) => {
                             const num = JSON.stringify(data.healthCenterNumbers[0]);
                             return (
                               "(" +
-                              num.slice(0, 3) +
+                              num.slice(1, 4) +
                               ") " +
-                              num.slice(3, 6) +
+                              num.slice(4, 7) +
                               "-" +
-                              num.slice(6)
+                              num.slice(7, 11)
                             );
                           })()}
                         </p>                      

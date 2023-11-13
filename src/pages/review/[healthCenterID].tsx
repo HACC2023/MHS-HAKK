@@ -13,6 +13,10 @@ const activeNoBtnCSS = "bg-red-400 hover:bg-red-500";
 export const ReviewPage: NextPage<{ healthCenterID: string }> = ({
   healthCenterID,
 }) => {
+  const [, setCenterType] = useState("⬇️ Select a fruit ⬇️")
+  const handleCenterChange = (e: { target: { value: React.SetStateAction<string>; }; }) => {
+    setCenterType(e.target.value)
+  }
   const [status, setStatus] = useState("");
   const formRef =
     useRef() as unknown as React.MutableRefObject<HTMLFormElement>;
@@ -38,15 +42,17 @@ export const ReviewPage: NextPage<{ healthCenterID: string }> = ({
   }
 
   
+  // const centerTypes = foundHealthCenter.procedureTypes.map((procedureType) => procedureType.name);
+  // const centerTypeOption = centerTypes.map((x) => { return { label: x, value: x } });
+  
+ 
+  // const handleCenterChange = (e: { target: { value: React.SetStateAction<string>; }; }) => {}
 
-  // let [centerType, setCenterType] = useState("⬇️ Select a fruit ⬇️")
-  // const handleCenterChange = (e: { target: { value: React.SetStateAction<string>; }; }) => {
-  //   setCenterType(e.target.value)
-  // }
-  function setValue(value: React.SetStateAction<string>) {
-    throw new Error("Function not implemented.");
-  }
-
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    try {
+      setStatus("Processing...");
+      const form = formRef.current;
 
 
   // const reviewTags = foundHealthCenter.procedureReviews.map((procedureReviews: { name: any; }) => procedureReviews.name);
@@ -62,11 +68,7 @@ export const ReviewPage: NextPage<{ healthCenterID: string }> = ({
 
 
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    try {
-      setStatus("Processing...");
-      const form = formRef.current;
+  
 
       // TS has no idea what our page looks like, so expect some red squiggly errors.
       // TODO: use states or something? Migrate this to a React.Component class so it looks nicer to other people working on the backend.
@@ -128,7 +130,7 @@ export const ReviewPage: NextPage<{ healthCenterID: string }> = ({
           Were you able to get care?
         </h3>
         <div className="pb-2 text-xl text-center">
-          {"Reviewing " + foundHealthCenter.address + ". "}<br />
+          {"Reviewing " + foundHealthCenter.names[0] + ". "}<br />
         </div>
         <div className="w-full flex justify-center">
           <Link href="/Search" className="text-blue-400 underline">
@@ -148,9 +150,8 @@ export const ReviewPage: NextPage<{ healthCenterID: string }> = ({
                 </td>
                 <td>
                   {/* <input type="text" id="procedureType" name="procedureType" className="input input-bordered w-full" /> */}
-                  <select onChange={(e: { target: { value: React.SetStateAction<string>; }; }) => {
-                    setValue(e.target.value)
-                  }} name="procedureType" className="border border-gray-300 w-full h-12 bg-white text-center rounded-lg">
+                  <select onChange={handleCenterChange} name="procedureType" className="border border-gray-300 w-full h-12 bg-white text-center rounded-lg">
+                  {/* <select onChange={(e: { target: { value}; }) => {handleCenterChange(e.target.value)}} name="procedureType" className="border border-gray-300 w-full h-12 bg-white text-center rounded-lg"> */}
                     <option value="" className="text-center" hidden > -- Select a Clinic -- </option>
                     {/* Mapping through each fruit object in our fruits array
                       and returning an option element with the appropriate attributes / values.
@@ -158,8 +159,8 @@ export const ReviewPage: NextPage<{ healthCenterID: string }> = ({
                     {/* const centerTypes = foundHealthCenter.procedureTypes.map((procedureType: { name: string; }) => procedureType.name);
                         const centerTypeOption = centerTypes.map((x: string) => { return { label: x, value: x } }); */}
                         {/* {foundHealthCenter!.procedureReviews.map((procedureReviews) => procedureReviews.name).join(", ")} */}
+                        {/* {centerTypeOption.map((centerType) => <option value={centerType.value}>{centerType.label}</option>)} */}
                     {foundHealthCenter.procedureTypes.map((procedureTypes) => <option key={procedureTypes.id} value={procedureTypes.name}>{procedureTypes.name}</option>)}
-                    {/* {centerTypeOption.map((centerType) => <option value={centerType.value}>{centerType.label}</option>)} */}
 
                   </select>
 
