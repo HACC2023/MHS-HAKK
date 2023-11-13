@@ -1,12 +1,14 @@
-# Create T3 App
+# HelpCare by MHS-HAKK
 
-This is a [T3 Stack](https://create.t3.gg/) project bootstrapped with `create-t3-app`.
+Application link: [mhs-hakk.vercel.app](mhs-hakk.vercel.app)
 
-## What's next? How do I make an app with this?
+## App function
 
-We try to keep this project as simple as possible, so you can start with just the scaffolding we set up for you, and add additional things later when they become necessary.
+Welcome to HelpCare by MHS-HAKK, compiling Hawaii’s affordable healthcare options so you can find the care you need. Our app works on desktop and mobile.
 
-If you are not familiar with the different technologies used in this project, please refer to the respective docs. If you still are in the wind, please join our [Discord](https://t3.gg/discord) and ask for help.
+
+
+
 
 - [Next.js](https://nextjs.org)
 - [NextAuth.js](https://next-auth.js.org)
