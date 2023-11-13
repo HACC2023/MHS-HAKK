@@ -255,13 +255,10 @@ function ClinicResults(props: {
         <Link
           href={"/location/" + c.id}
           shallow={true}
-          className={
-            c.supportedInsurances.includes("QI")
-              ? "text-dark-blue"
-              : "text-dark-blue"
-          }
+          className={"text-dark-blue"
+}
         >
-          {c.names[0] + " (" + (false || "Comprehensive Care") + ")"}
+          {c.names} ({c.procedureTypeNames.join(", ")})
         </Link>
       </div>
 
