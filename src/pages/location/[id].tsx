@@ -37,8 +37,9 @@ const LocationDestination: NextPage<{ id: string }> = ({ id }) => {
                   enableHighAccuracy: true,
                 },
               ),
-            )) || map,
-          );
+            )) || "&saddr=21.5004057,-158.0393896" + "&daddr=" + data.address
+                  
+          )
         }
       }}
       className={
