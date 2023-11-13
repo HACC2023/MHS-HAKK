@@ -75,7 +75,7 @@ const LocationDestination: NextPage<{ id: string }> = ({ id }) => {
                 {data.names[0]}
               </div>
               <div className="items-center text-center text-xl font-bold lg:text-left">
-                {data.procedureTypeNames.join(" ")}
+                {data.procedureTypeNames.join(", ")}
               </div>
               <div className="mr-1 flex w-full space-x-4 pt-0">
                 <div className="join mx-auto lg:mx-0">
@@ -241,7 +241,7 @@ const LocationDestination: NextPage<{ id: string }> = ({ id }) => {
                         <h2 className="text-xl font-semibold">Insurance Type</h2>
                       </td>
                       <td>
-                        <p className="text-lg">{data.supportedInsurances.includes("QI") && "Quest Insured"}{data.supportedInsurances.includes("FQHC") && "Federally Qualified Health Center"}</p>
+                        <p className="text-lg">{data.supportedInsurances.join(", ").replace("QI", "Quest Insured").replace("FQHC", "Federally Qualified Health Center")}</p>
                       </td>
                     </tr>
                     {data.supportedInsurances.includes("FQHC") &&
