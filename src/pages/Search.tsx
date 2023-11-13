@@ -1,11 +1,16 @@
 import React, { useEffect, useState } from "react";
 import dynamic from "next/dynamic";
 import "leaflet/dist/leaflet.css";
-import type { InsuranceProviders } from "~/server/api/routers/HealthcareRouter";
+import type {
+  CenterResult,
+  InsuranceProviders,
+  ProcedureProviders,
+} from "~/server/api/routers/HealthcareRouter";
 import { api } from "~/utils/api";
 import Navbar from "~/components/Navbar";
 import { LoadingSpinner } from "~/components/Loading";
 import Link from "next/link";
+import { useRouter } from "next/router";
 const LeafletMap = dynamic(() => import("../components/LeafletMap"), {
   ssr: false,
 });
@@ -13,19 +18,47 @@ const LeafletMap = dynamic(() => import("../components/LeafletMap"), {
 const SearchPage: React.FC = () => {
   // this is used for filtering.
   // allow user to set insurance status (QUEST, none, or both)
-  const [insurance, setInsurance] = useState<InsuranceProviders | undefined>();
-  const [procedure, setProcedure] = useState<string | undefined>();
-
+  const [insurance, setInsurance] = useState<InsuranceProviders>();
+  const [procedure, setProcedure] = useState<ProcedureProviders>();
+  // used to grab url parameters from the URL: e.g. ?q=1 would be q: 1
+  const router = useRouter();
+  const query = typeof router.query.q === "string" && router.query.q.length ? router.query.q : undefined;
   const [mobileOnResultsView, setMORV] = useState(true);
 
   // if no insurance selected, select first 100 clinics.
   // if there is, plug it into our api.
   // this really needs to be one procedure with the insurance being optional.
   // this is unsorted. it is sorted however mongodb wants to sort it :)
-  const { data: centers, isLoading } =
-    insurance !== undefined
-      ? api.healthcare.getByPlan.useQuery({ insurance })
-      : api.healthcare.getSome.useQuery();
+
+  const {
+    data: centers,
+    isLoading,
+    isError,
+  } = api.healthcare.getByPlan.useQuery({ insurance, procedure, query });
+
+  const InsuranceOptions = <SelectInsurance setInsurance={setInsurance} />;
+  const ProcedureOptions = <SelectProcedure setProcedure={setProcedure} />;
+
+  const Results =
+    isLoading || !centers?.length || isError ? (
+      <div className="mt-12 grid justify-items-center justify-self-center text-center text-3xl">
+        {isError ? (
+          <p className="mx-3">
+            An internal error occurred. Please try again later.
+          </p>
+        ) : isLoading ? (
+          <LoadingSpinner />
+        ) : (
+          <p className="mx-3">
+            {/* query?.at - An unorthodox way of essentially saying 'typeof query === string'
+             even though at is also a method on arrays. We've already checked if this was a string, so I don't care too much. */}
+            No centers were found{query?.at ? " matching \"" + query + '"' : ''}. Try adjusting your filters.
+          </p>
+        )}
+      </div>
+    ) : (
+      <ClinicResults centers={centers as CenterResult} />
+    );
 
   return (
     <div
@@ -50,13 +83,13 @@ const SearchPage: React.FC = () => {
                 Insurance type
               </span>
             </label>
-            <SelectInsurance setInsurance={setInsurance} />
+            {InsuranceOptions}
             <label className="label">
               <span className="label-text text-base font-semibold">
                 Procedure type
               </span>
             </label>
-            <SelectProcedure setProcedure={setProcedure} />
+            {ProcedureOptions}
           </div>
 
         </div>
@@ -71,17 +104,7 @@ const SearchPage: React.FC = () => {
                     DO NOT USE STATIC SITE GENERATION BECAUSE YOUTUBE DOESN'T DO THIS WHEN YOU SEARCH FOR VIDEOS
                     then, when we get the data we can map it out into a DIV for each center. rn we are missing a more info <button className=""></button>
                     */}
-          {isLoading || !centers ? (
-            <div className="mt-12 grid justify-items-center justify-self-center">
-              {isLoading ? (
-                <LoadingSpinner />
-              ) : (
-                "Could not find any centers. Try clearing filters?"
-              )}
-            </div>
-          ) : (
-            <ClinicResults centers={centers} />
-          )}
+          {Results}
         </div>
         {/* possibly feed the list of locations into here, it was requested/needed that the leaflet map should only show endpoints
                 that are in the search results, but I bring up the problem of pagination again. */}
@@ -99,15 +122,15 @@ const SearchPage: React.FC = () => {
             </form>
             <div>
               <h3 className="text-lg font-bold">Select Insurance Provider</h3>
-              <SelectInsurance setInsurance={setInsurance} />
+              {InsuranceOptions}
             </div>
             <div>
               <h3 className="text-lg font-bold">Select Procedure Type</h3>
-              <SelectProcedure setProcedure={setProcedure} />
+              {ProcedureOptions}
             </div>
           </div>
           <form method="dialog" className="modal-backdrop">
-            <button/>
+            <button />
           </form>
         </dialog>
         <div className="flex max-h-fit pb-1 pl-5 pt-3">
@@ -150,26 +173,10 @@ const SearchPage: React.FC = () => {
         </div>
         <div
           className={
-            mobileOnResultsView
-              ? "flex-1 pb-4"
-              : "h-full flex-1 overflow-y-hidden"
+            mobileOnResultsView ? "flex-1" : "h-full flex-1 overflow-y-hidden"
           }
         >
-          {mobileOnResultsView ? (
-            isLoading || !centers ? (
-              <div className="mt-12 grid justify-items-center justify-self-center">
-                {isLoading ? (
-                  <LoadingSpinner />
-                ) : (
-                  "Could not find any centers. Try clearing filters?"
-                )}
-              </div>
-            ) : (
-              <ClinicResults centers={centers} />
-            )
-          ) : (
-            <LeafletMap key={0} />
-          )}
+          {mobileOnResultsView ? Results : <LeafletMap key={0} />}
         </div>
       </div>
     </div>
@@ -179,54 +186,63 @@ const SearchPage: React.FC = () => {
 export default SearchPage;
 
 function SelectInsurance(props: {
-  setInsurance: (
-    value: React.SetStateAction<InsuranceProviders | undefined>,
-  ) => void;
+  setInsurance: (value: React.SetStateAction<InsuranceProviders>) => void;
 }) {
   return (
     <select
       className="select select-bordered w-full text-base"
       defaultValue={"Pick one"}
       onChange={(sel) =>
-        props.setInsurance(sel.target.value as InsuranceProviders | undefined)
+        props.setInsurance(
+          (sel.target.value === "Any"
+            ? undefined
+            : sel.target.value) as InsuranceProviders,
+        )
       }
     >
       <option disabled>Pick one</option>
       <option value={"FQHC"}>Uninsured</option>
       <option value={"QI"}>Med-QUEST</option>
-      <option value={undefined}>Any</option>
+      <option>Any</option>
     </select>
   );
 }
 
 function SelectProcedure(props: {
-  setProcedure: (value: React.SetStateAction<string | undefined>) => void;
+  setProcedure: (value: React.SetStateAction<ProcedureProviders>) => void;
 }) {
   return (
     <select
       className="select select-bordered w-full text-base"
       defaultValue={"Pick one"}
-      onChange={(sel) => props.setProcedure(sel.target.value)}
+      onChange={(sel) =>
+        props.setProcedure(
+          (sel.target.value === "Any"
+            ? undefined
+            : sel.target.value) as ProcedureProviders,
+        )
+      }
     >
       <option disabled>Pick one</option>
       <option value={"Comprehensive Care"}>Comprehensive Care</option>
-      <option value={undefined}>Any</option>
+      <option value={"Obstetrician and Gynecologist"}>
+        Obstetrician and Gynecologist
+      </option>
+      <option value={"Internal Medicine"}>Internal Medicine</option>
+      <option value={"RN Family Nurse Practitioner"}>
+        RN Family Nurse Practitioner
+      </option>
+      <option value={"Family Medicine"}>Family Medicine</option>
+      <option value={"Pediatrician"}>Pediatrician</option>
+      <option value={"Podiatrist"}>Podiatrist</option>
+      <option value={"Nephrologist"}>Nephrologist</option>
+      <option>Any</option>
     </select>
   );
 }
 
 function ClinicResults(props: {
-  centers: {
-    id: string;
-    address: string;
-    names: string[];
-    website: string | null;
-    healthCenterNumbers: string[];
-    supportedInsurances: string[];
-    procedureTypeNames: string[];
-    procedureTypeIDs: string[];
-    doctorIDs: string[];
-  }[];
+  centers: CenterResult;
 }) {
   return props.centers.map((c) => (
     <div
@@ -238,6 +254,7 @@ function ClinicResults(props: {
       <div className="l-20 text-2xl font-semibold">
         <Link
           href={"/location/" + c.id}
+          shallow={true}
           className={
             c.supportedInsurances.includes("QI")
               ? "text-dark-blue"
@@ -275,9 +292,16 @@ function ClinicResults(props: {
             </div>
           )}
           <div>
-            {c.supportedInsurances.includes("QI") && "Quest Insured"}
-            {c.supportedInsurances.includes("FQHC") &&
-              "Federally Qualified Health Center"}
+            {c.supportedInsurances
+              .map((ins) =>
+                ins === "QI"
+                  ? "Quest Insured"
+                  : ins === "FQHC"
+                  ? "Federally Qualified Health Center"
+                  : "",
+              )
+              .sort()
+              .join(" & ")}
           </div>
         </div>
       </div>

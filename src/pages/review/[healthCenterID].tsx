@@ -8,7 +8,7 @@ import getServerSideHelper from "~/server/helpers/ServerSideHelper";
 import Link from "next/link";
 
 const activeYesBtnCSS = "bg-light-green hover:bg-hover-green";
-const activeNoBtnCSS = "bg-red-400 hover:bg-red-500";
+const activeNoBtnCSS  = "bg-red-400 hover:bg-red-500";
 
 export const ReviewPage: NextPage<{ healthCenterID: string }> = ({
   healthCenterID,
@@ -125,7 +125,7 @@ export const ReviewPage: NextPage<{ healthCenterID: string }> = ({
 
   return (
     <div className="h-fit overflow-hidden " >
-      <div className="ml-auto mr-auto w-fit p-7 sm:p-3 sm:py-24">
+      <div className="ml-auto mr-auto w-fit p-7 pt-0 sm:p-3 sm:py-24">
         <h3 className="pb-3 text-center text-5xl sm:text-6xl font-bold text-green-gray">
           Were you able to get care?
         </h3>
@@ -152,7 +152,7 @@ export const ReviewPage: NextPage<{ healthCenterID: string }> = ({
                   {/* <input type="text" id="procedureType" name="procedureType" className="input input-bordered w-full" /> */}
                   <select onChange={handleCenterChange} name="procedureType" className="border border-gray-300 w-full h-12 bg-white text-center rounded-lg">
                   {/* <select onChange={(e: { target: { value}; }) => {handleCenterChange(e.target.value)}} name="procedureType" className="border border-gray-300 w-full h-12 bg-white text-center rounded-lg"> */}
-                    <option value="" className="text-center" hidden > -- Select a Procedure -- </option>
+                    <option value="" className="text-center" hidden >Select a procedure type</option>
                     {/* Mapping through each fruit object in our fruits array
                       and returning an option element with the appropriate attributes / values.
                     */}

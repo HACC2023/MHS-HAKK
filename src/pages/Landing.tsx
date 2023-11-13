@@ -15,7 +15,7 @@ export default function searchPage() {
                 2xl:px-60 xl:px-40 lg:px-20 px-10">
                     <h1 className="text-white text-6xl font-bold">Tyler Healthcare Hawaii</h1>
                     <p className="text-white text-3xl mt-6 font-semi-bold">Healthcare clinic finder for the uninsured and underinsured</p>
-                    <Link href="/Search" className="normal-case mt-6 btn w-40 h-14 text-xl bg-light-green hover:bg-hover-green text-green-gray border-0">Start Now</Link>
+                    <Link shallow={true} href="/Search" className="normal-case mt-6 btn w-40 h-14 text-xl bg-light-green hover:bg-hover-green text-green-gray border-0">Start Now</Link>
                 </div>
 
                 <div className="flex flex-co mb-10 pt-14 ">
