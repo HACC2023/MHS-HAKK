@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import dynamic from "next/dynamic";
 import "leaflet/dist/leaflet.css";
 import type {
+  CenterResult,
   InsuranceProviders,
   ProcedureProviders,
 } from "~/server/api/routers/HealthcareRouter";
@@ -56,7 +57,7 @@ const SearchPage: React.FC = () => {
         )}
       </div>
     ) : (
-      <ClinicResults centers={centers} />
+      <ClinicResults centers={centers as CenterResult} />
     );
 
   return (
@@ -240,17 +241,7 @@ function SelectProcedure(props: {
 }
 
 function ClinicResults(props: {
-  centers: {
-    id: string;
-    address: string;
-    names: string[];
-    website: string | null;
-    healthCenterNumbers: string[];
-    supportedInsurances: string[];
-    procedureTypeNames: string[];
-    procedureTypeIDs: string[];
-    doctorIDs: string[];
-  }[];
+  centers: CenterResult;
 }) {
   return props.centers.map((c) => (
     <div
