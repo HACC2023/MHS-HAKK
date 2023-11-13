@@ -13,7 +13,7 @@
 
 ## Why HelpCare?
 
-HelpCare compiles Hawaii’s affordable healthcare options so you can find the care you need. Accessible on both desktop and mobile.
+HelpCare compiles Hawaii’s affordable healthcare options so you can find the care you need. Accessible on both desktop and mobile. **We advise your system theme to be on light mode as a dark mode is being developed for our app.**
 
 ### Search Filters
 
