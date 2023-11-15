@@ -68,12 +68,11 @@ const SearchPage: React.FC = () => {
         (!mobileOnResultsView && "fixed overflow-y-hidden")
       }
     >
-      <Navbar />
+      <Navbar/>
       {/* Desktop view */}
       <div className="hidden h-[calc(100%-5rem)] w-screen md:flex">
         <div
-          className="0 
-                h-full w-1/5 flex-col bg-gray-100"
+          className="h-full w-1/5 flex-col bg-gray-100"
         >
           <p className="mb-2 mt-4 text-center text-xl font-semibold">
             Search Filters:
@@ -147,7 +146,7 @@ const SearchPage: React.FC = () => {
               ).showModal()
             }
           >
-            Click for options
+            {insurance ?? procedure ? insurance && procedure ? "Both filters applied" : "1 filter applied" : "Click for options"}
           </button>
           <div className="join">
             <a
@@ -174,7 +173,7 @@ const SearchPage: React.FC = () => {
         </div>
         <div
           className={
-            mobileOnResultsView ? "flex-1" : "h-full flex-1 overflow-y-hidden"
+            mobileOnResultsView ? "flex-1" : "h-fit flex-1 overflow-y-hidden"
           }
         >
           {mobileOnResultsView ? Results : <LeafletMap key={0} />}

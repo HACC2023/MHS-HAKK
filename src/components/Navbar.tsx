@@ -7,9 +7,8 @@ export default function Navbar() {
   // this state is used for autocomplete.
   const [input, setInput] = useState("");
 
-  return (
-    <div className="navbar top-0 flex h-20 flex-row border-b-2 bg-white">
-      {/* untested on mobile ^ got rid of sticky because leaflet map on search hid the search results from the dropdown in here. navbar will not stay at the top, PLEASE FIX SOMEONE!! */}
+  return (<>
+    <div className="navbar flex top-0 h-20 flex-row border-b-2 bg-white absolute">
       <div className="navbar-start w-fit sm:w-1/2 mr-5 sm:mr-0">
         <Link href="/Landing" className="btn btn-ghost my-auto h-16">
           {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -60,5 +59,6 @@ export default function Navbar() {
         </a> */}
       </div>
     </div>
-  );
+    <div className="h-20"/>
+  </>);
 }
