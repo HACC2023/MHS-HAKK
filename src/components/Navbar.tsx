@@ -15,12 +15,13 @@ export default function Navbar() {
           <img
             alt="tyler Hawaii logo"
             className="hidden h-12 sm:block"
-            src="https://upload.wikimedia.org/wikipedia/en/thumb/b/bf/Tyler_Technologies_logo.svg/640px-Tyler_Technologies_logo.svg.png"
+            src="full-logo.svg"
           />
+          {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             alt="tyler Hawaii logo compact"
             className="block h-12 sm:hidden"
-            src="/Shrink_Tyler_Technologies_logo.svg.png"
+            src="mini-logo.svg"
           />
         </Link>
       </div>
