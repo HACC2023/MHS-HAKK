@@ -5,10 +5,14 @@ import Navbar from "~/components/Navbar";
 import Footer from "~/components/Footer";
 import islandImage from "~/assets/img/index-image-island.jpg"
 import Link from "next/link";
+import Head from "next/head";
 
 export default function searchPage() {
     return (
         <>
+            <Head>
+                <title>Welcome! - HelpCare</title>
+            </Head>
             <Navbar />
             <div className="font-tyler">
                 <div className="bg-dark-blue py-16 text-center lg:text-left

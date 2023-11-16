@@ -11,6 +11,7 @@ import Navbar from "~/components/Navbar";
 import { LoadingSpinner } from "~/components/Loading";
 import Link from "next/link";
 import { useRouter } from "next/router";
+import Head from "next/head";
 export const FormatURL = (url: string) => url.replace(/^https?:\/\//, '');
 const LeafletMap = dynamic(() => import("../components/LeafletMap"), {
   ssr: false,
@@ -61,7 +62,10 @@ const SearchPage: React.FC = () => {
       <ClinicResults centers={centers as CenterResult} />
     );
 
-  return (
+  return (<>
+    <Head>
+      <title>{(query?.length ? "Search results for '" + query + '\'' : "Search") + " - HelpCare"}</title>
+    </Head>
     <div
       className={
         "h-screen overflow-x-hidden font-tyler md:block md:overflow-y-auto " +
@@ -183,7 +187,7 @@ const SearchPage: React.FC = () => {
         </div>
       </div>
     </div>
-  );
+  </>);
 };
 
 export default SearchPage;

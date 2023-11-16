@@ -6,6 +6,7 @@ import { ReviewPage } from "~/pages/review/[healthCenterID]";
 import getServerSideHelper from "~/server/helpers/ServerSideHelper";
 import { api } from "~/utils/api";
 import { FormatURL } from "../Search";
+import Head from "next/head";
 
 const LocationDestination: NextPage<{ id: string }> = ({ id }) => {
   const { data } = api.healthcare.getById.useQuery({ id });
@@ -45,7 +46,10 @@ const LocationDestination: NextPage<{ id: string }> = ({ id }) => {
     />
   );
 
-  return (
+  return (<>
+    <Head>
+      <title>{(data ? data.names[0] : "Clinic not found") + " - HelpCare"}</title>
+    </Head>
     <div
       className={
         "w-full font-tyler lg:block lg:overflow-y-auto " +
@@ -408,7 +412,7 @@ const LocationDestination: NextPage<{ id: string }> = ({ id }) => {
         )}
       </div>
     </div>
-  );
+  </>);
 };
 
 {
