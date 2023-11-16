@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { useState } from "react";
 import SearchBarAutocomplete from "~/components/SearchBar/Autocomplete";
 
@@ -11,17 +12,21 @@ export default function Navbar() {
     <div className="navbar flex top-0 h-20 flex-row border-b-2 bg-white absolute">
       <div className="navbar-start w-fit sm:w-1/2 mr-5 sm:mr-0">
         <Link href="/Landing" className="btn btn-ghost my-auto h-16">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            alt="tyler Hawaii logo"
-            className="hidden h-12 sm:block"
+          <Image
             src="/full-logo.svg"
+            width={139}
+            height={16}
+            alt="Tyler Hawaii Logo"
+            priority={true}
+            className="hidden h-12 sm:block"
           />
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            alt="tyler Hawaii logo compact"
-            className="block h-12 sm:hidden"
+          <Image
             src="/mini-logo.svg"
+            width={48}
+            height={16}
+            alt="Tyler Hawaii Logo (icon)"
+            priority={true}
+            className="block h-12 sm:hidden"
           />
         </Link>
       </div>
@@ -32,10 +37,10 @@ export default function Navbar() {
         <div className="indicator">
 
           {/* shallow makes it so if the user types in another clinic, it wont wipe the filters they set (update the path of the current page without rerunning stuff) */}
-          <Link 
-          href={{pathname: "/Search", query: { q: input }}}
-          shallow={true}
-          className="btn btn-secondary join-item h-10 w-12 border-0 bg-med-blue text-white hover:bg-dark-blue">
+          <Link
+            href={{ pathname: "/Search", query: { q: input } }}
+            shallow={true}
+            className="btn btn-secondary join-item h-10 w-12 border-0 bg-med-blue text-white hover:bg-dark-blue">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -60,6 +65,6 @@ export default function Navbar() {
         </a> */}
       </div>
     </div>
-    <div className="h-20"/>
+    <div className="h-20" />
   </>);
 }
