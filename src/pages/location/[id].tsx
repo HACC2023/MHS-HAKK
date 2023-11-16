@@ -40,9 +40,7 @@ const LocationDestination: NextPage<{ id: string }> = ({ id }) => {
           );
         }
       }}
-      className={
-        "h-full w-full " + (mobileView === "desc" ? "rounded-r-xl" : "")
-      }
+      className="h-full w-full lg:rounded-r-xl lg:rounded-l-none"
       src={"https://www.google.com/maps/?output=embed" + map}
     />
   );
