@@ -242,7 +242,7 @@ const LocationDestination: NextPage<{ id: string }> = ({ id }) => {
                 (mobileView === "desc" ? "mb-3 flex" : "hidden")
               }
             >
-              <div className="static mx-3 w-full rounded-xl bg-gray-100 lg:mr-0 lg:min-w-[55%] lg:max-w-[55%] lg:rounded-r-none lg:border-r-4">
+              <div className="static mx-3 lg:mx-4 w-full rounded-xl bg-gray-100 lg:mr-0 lg:min-w-[55%] lg:max-w-[55%] lg:rounded-r-none lg:border-r-4">
                 <div className="min-h-96 px-4 py-7 sm:p-7">
                   <div className="text-center text-3xl font-semibold lg:text-start">
                     Clinic Description
@@ -379,7 +379,7 @@ const LocationDestination: NextPage<{ id: string }> = ({ id }) => {
                   )}
                 </div>
               </div>
-              <div className="mr-3 hidden w-full rounded-r-xl lg:flex">
+              <div className="hidden pr-3 lg:pr-4 w-full rounded-r-xl lg:flex">
                 {MapFrame}
               </div>
             </div>
