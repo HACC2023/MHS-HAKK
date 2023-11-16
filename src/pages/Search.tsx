@@ -146,7 +146,10 @@ const SearchPage: React.FC = () => {
               ).showModal()
             }
           >
-            {insurance ?? procedure ? insurance && procedure ? "Both filters applied" : "1 filter applied" : "Click for options"}
+            {(()=>{
+              const i = [insurance, procedure].reduce((count, param) => param === undefined ? count : ++count, 0);
+              return i === 0 ? "No filters applied" : i !== 1 ? i + " filters applied" : "1 filter applied";
+            })()}
           </button>
           <div className="join">
             <a
@@ -251,14 +254,18 @@ function ClinicResults(props: {
       }
       key={c.id}
     >
-      <div className="l-20 text-2xl font-semibold">
+      <div className="l-20 text-2xl font-semibold" title={
+                  c.names.length > 1
+                    ? "Also known as " + c.names.slice(1).join(", ")
+                    : undefined
+                }>
         <Link
           href={"/location/" + c.id}
           shallow={true}
           className={"text-dark-blue"
 }
         >
-          {c.names} ({c.procedureTypeNames.join(", ")})
+          {c.names[0]} ({c.procedureTypeNames.join(", ")})
         </Link>
       </div>
 

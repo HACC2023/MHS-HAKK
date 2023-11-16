@@ -113,14 +113,16 @@ const LocationDestination: NextPage<{ id: string }> = ({ id }) => {
                   <a
                     onClick={() => window.history.back()}
                     className={
-                      "border-1 btn join-item mt-6 h-full w-1/2 bg-light-green text-xl normal-case text-green-gray hover:bg-hover-green"
+                      "btn join-item mt-6 h-full border-0 bg-light-green text-xl normal-case text-green-gray hover:bg-hover-green"
                     }
                   >
                     Go Back
                   </a>
+                  {/*
+                  planning to visit clinic button scrapped because of ambiguous implementation
                   <a
                     onClick={() =>
-                      /* ACCESS USING JSON.parse(localStorage.getItem("visiting")) */
+                      /* ACCESS USING JSON.parse(localStorage.getItem("visiting")) * /
                       localStorage.setItem(
                         "visiting",
                         JSON.stringify({ id: data.id, time: Date.now() }),
@@ -131,18 +133,6 @@ const LocationDestination: NextPage<{ id: string }> = ({ id }) => {
                     }
                   >
                     Planning to visit this clinic
-                  </a>
-                  {/*
-                  this can be added later.
-                  <a
-                    onClick={() => {
-                      /* We need to do something here!!! * /
-                    }}
-                    className={
-                      "btn join-item mt-5 h-20 w-40 border-white bg-light-green text-2xl normal-case text-green-gray hover:bg-hover-green "
-                    }
-                  >
-                    Planning to visit clinic
                   </a>
                   */}
                 </div>
