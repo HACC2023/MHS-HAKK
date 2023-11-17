@@ -76,7 +76,7 @@ const SearchPage: React.FC = () => {
       {/* Desktop view */}
       <div className="hidden h-[calc(100%-5rem)] w-screen md:flex">
         <div
-          className="h-full w-1/5 flex-col bg-gray-100"
+          className="h-full w-13/5 flex-col bg-slate-100 dark:bg-global-dim"
         >
           <p className="mb-2 mt-4 text-center text-xl font-semibold">
             Search Filters:
@@ -99,7 +99,7 @@ const SearchPage: React.FC = () => {
         </div>
         <div
           className="h-full w-1/2 flex-col overflow-y-scroll
-                border-l-2 border-r-2 bg-white"
+                border-l-2 border-r-2 bg-global border-global"
         >
           <p className="mb-6 mt-4 rounded-xl text-center text-4xl font-semibold">
             Search Results:
@@ -160,7 +160,7 @@ const SearchPage: React.FC = () => {
               onClick={() => setMORV(true)}
               className={
                 (mobileOnResultsView
-                  ? "bg-slate-200"
+                  ? "bg-slate-200 dark:bg-gray-700"
                   : "flex-grow bg-transparent") +
                 " join-item select-bordered flex flex-col content-center justify-center border border-[hsl(var(--bc)/var(--tw-border-opacity))] p-2 px-2 text-center"
               }
@@ -170,7 +170,7 @@ const SearchPage: React.FC = () => {
             <a
               onClick={() => setMORV(false)}
               className={
-                (!mobileOnResultsView ? "bg-slate-200" : "bg-transparent") +
+                (!mobileOnResultsView ? "bg-slate-200 dark:bg-gray-700" : "bg-transparent") +
                 " join-item select-bordered flex flex-col content-center justify-center border border-[hsl(var(--bc)/var(--tw-border-opacity))] p-2 px-2 text-center"
               }
             >
@@ -254,7 +254,7 @@ function ClinicResults(props: {
   return props.centers.map((c) => (
     <div
       className={
-        "mx-4 mb-4 rounded-xl border-2 border-gray-100 bg-gray-100 p-4"
+        "mx-4 mb-4 rounded-xl border-2 bg-global-dim dark:border-slate-800 p-4"
       }
       key={c.id}
     >
@@ -266,7 +266,7 @@ function ClinicResults(props: {
         <Link
           href={"/location/" + c.id}
           shallow={true}
-          className={"text-dark-blue"
+          className={"text-dark-blue dark:text-white"
 }
         >
           {c.names[0]} ({c.procedureTypeNames.join(", ")})
@@ -277,7 +277,7 @@ function ClinicResults(props: {
         <div className="min-w-full break-words text-justify">
           {c.website && (
             <Link
-              className="italic text-blue-700 underline"
+              className="italic text-blue-700 dark:text-blue-400 underline"
               href={"https://" + FormatURL(c.website)}
               target="_blank"
             >

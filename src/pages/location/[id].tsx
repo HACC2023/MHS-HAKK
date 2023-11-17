@@ -53,7 +53,7 @@ const LocationDestination: NextPage<{ id: string }> = ({ id }) => {
     <div
       className={
         "w-full font-tyler lg:block lg:overflow-y-auto " +
-        (mobileView === "map" ? "fixed overflow-y-hidden" : "")
+        (mobileView === "map" ? "fixed overflow-y-hidden lg:relative" : "")
       }
     >
       <Navbar />
@@ -63,7 +63,7 @@ const LocationDestination: NextPage<{ id: string }> = ({ id }) => {
             <div
               className={
                 "flex w-full flex-col gap-4 bg-dark-blue px-[calc(5%)] py-16 pb-10 text-white lg:px-[calc(15%)] " +
-                (mobileView === "map" ? "hidden" : "")
+                (mobileView === "map" ? "hidden lg:flex" : "")
               }
             >
               <h1
@@ -181,9 +181,9 @@ const LocationDestination: NextPage<{ id: string }> = ({ id }) => {
             {/**
              * SELECT VIEW FOR MOBILE
              */}
-            <div className="mb-5 flex h-full w-screen flex-col lg:hidden ">
+            <div className={"mb-5 flex h-full w-screen flex-col lg:hidden " + (mobileView === "map" ? "border-global-dim border-t-2" : '')}>
               <div className="mx-auto h-full">
-                <div className="pb-1 pt-5 text-center text-3xl font-semibold">
+                <div className="pb-2 pt-5 text-center text-3xl font-semibold dark:text-white">
                   Select View
                 </div>
                 <div className="mx-auto flex w-full space-x-4 pt-0">
@@ -192,7 +192,7 @@ const LocationDestination: NextPage<{ id: string }> = ({ id }) => {
                       onClick={() => setMORV("desc")}
                       className={
                         (mobileView === "desc"
-                          ? "bg-slate-200"
+                          ? "bg-global-dim"
                           : "bg-transparent") +
                         " join-item select-bordered flex flex-col content-center justify-center border border-[hsl(var(--bc)/var(--tw-border-opacity))] p-2 px-2 text-center"
                       }
@@ -203,7 +203,7 @@ const LocationDestination: NextPage<{ id: string }> = ({ id }) => {
                       onClick={() => setMORV("map")}
                       className={
                         (mobileView === "map"
-                          ? "bg-slate-200"
+                          ? "bg-global-dim"
                           : "bg-transparent") +
                         " join-item select-bordered flex flex-col content-center justify-center border border-[hsl(var(--bc)/var(--tw-border-opacity))] p-2 px-2 text-center"
                       }
@@ -214,7 +214,7 @@ const LocationDestination: NextPage<{ id: string }> = ({ id }) => {
                       onClick={() => setMORV("review")}
                       className={
                         (mobileView === "review"
-                          ? "bg-slate-200"
+                          ? "bg-global-dim"
                           : "bg-transparent") +
                         " join-item select-bordered flex flex-col content-center justify-center border border-[hsl(var(--bc)/var(--tw-border-opacity))] p-2 px-2 text-center"
                       }
@@ -236,9 +236,9 @@ const LocationDestination: NextPage<{ id: string }> = ({ id }) => {
                 (mobileView === "desc" ? "mb-3 flex" : "hidden")
               }
             >
-              <div className="static mx-3 lg:mx-4 w-full rounded-xl bg-gray-100 lg:mr-0 lg:min-w-[55%] lg:max-w-[55%] lg:rounded-r-none lg:border-r-4">
+              <div className="static mx-3 lg:mx-4 w-full rounded-xl bg-global-dim lg:mr-0 lg:min-w-[55%] lg:max-w-[55%] lg:rounded-r-none lg:border-r-4">
                 <div className="min-h-96 px-4 py-7 sm:p-7">
-                  <div className="text-center text-3xl font-semibold lg:text-start">
+                  <div className="text-center text-3xl font-semibold lg:text-start dark:text-white">
                     Clinic Description
                   </div>
                   <div className="divider mb-0 mt-2" />
@@ -326,7 +326,7 @@ const LocationDestination: NextPage<{ id: string }> = ({ id }) => {
                   </table>
                   {data.doctors.length > 0 && (
                     <>
-                      <div className="text-center text-3xl font-semibold lg:text-start">
+                      <div className="text-center text-3xl font-semibold lg:text-start dark:text-white">
                         Doctors
                       </div>
                       <div className="divider mb-0 mt-2" />
