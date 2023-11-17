@@ -13,7 +13,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import Head from "next/head";
 export const FormatURL = (url: string) => url.replace(/^https?:\/\//, '');
-const LeafletMap = dynamic(() => import("../components/LeafletMap"), {
+const LeafletMap = dynamic(() => import("../components/LeafletMap/map"), {
   ssr: false,
 });
 
