@@ -347,7 +347,7 @@ const LocationDestination: NextPage<{ id: string }> = ({ id }) => {
                                       (
                                       {doctor.procedureTypes.map(
                                         (procedureType) => procedureType.name,
-                                      )}
+                                      ).join(", ")}
                                       )
                                     </p>
                                   </h2>
