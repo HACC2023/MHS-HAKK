@@ -131,7 +131,7 @@ export const ReviewPage: NextPage<{ healthCenterID: string }> = ({
             <button />
           </form>
       </dialog>
-      <div className="ml-auto mr-auto w-fit p-7 pt-0 sm:p-3 sm:py-24">
+      <div id="review" className="ml-auto mr-auto w-fit p-7 pt-0 sm:p-3 sm:py-24">
         <h3 className="pb-3 text-center text-5xl sm:text-6xl font-bold text-green-gray dark:text-white">
           Were you able to get care?
         </h3>
