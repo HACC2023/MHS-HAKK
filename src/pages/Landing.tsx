@@ -1,9 +1,7 @@
-// import { useState } from "react";
-// import SearchBarAutocomplete from "~/components/SearchBar/AutoComplete";
 import Image from "next/image";
 import Navbar from "~/components/Navbar";
 import Footer from "~/components/Footer";
-import islandImage from "~/assets/img/index-image-island.jpg"
+import islandImage from "~/assets/images/index-image-island.jpg"
 import Link from "next/link";
 import Head from "next/head";
 
