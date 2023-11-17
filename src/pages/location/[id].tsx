@@ -23,11 +23,11 @@ const LocationDestination: NextPage<{ id: string }> = ({ id }) => {
                 (p) =>
                   res(
                     "&saddr=" +
-                      p.coords.latitude +
-                      "," +
-                      p.coords.longitude +
-                      "&daddr=" +
-                      data.address,
+                    p.coords.latitude +
+                    "," +
+                    p.coords.longitude +
+                    "&daddr=" +
+                    data.address,
                   ),
                 (_err) =>
                   res(
@@ -146,38 +146,40 @@ const LocationDestination: NextPage<{ id: string }> = ({ id }) => {
             {/**
              * Was Your Care Covered? TOOLTIP
              */}
-            <div
-              className={
-                "w-full lg:block " + (mobileView === "map" ? "hidden" : "")
-              }
-            >
-              <div className="flex">
-                <div className="toast toast-end opacity-90">
-                  <div
-                    className={
-                      (mobileView === "review" ? "hidden md:flex" : "flex") +
-                      " alert alert-info tooltip tooltip-top bg-dark-blue text-white"
-                    }
-                    data-tip="Let us know if your care was covered"
-                  >
-                    <div>Was Your Care Covered?</div>
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      className="h-6 w-6 shrink-0 stroke-current"
+            <a href="#review">
+              <div
+                className={
+                  "w-full lg:block " + (mobileView === "map" ? "hidden" : "")
+                }
+              >
+                <div className="flex">
+                  <div className="toast toast-end opacity-90">
+                    <div
+                      className={
+                        (mobileView === "review" ? "hidden md:flex" : "flex") +
+                        " alert alert-info tooltip tooltip-top bg-dark-blue text-white"
+                      }
+                      data-tip="Let us know if your care was covered"
                     >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth="2"
-                        d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-                      ></path>
-                    </svg>
+                      <div>Was Your Care Covered?</div>
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        className="h-6 w-6 shrink-0 stroke-current"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth="2"
+                          d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                        ></path>
+                      </svg>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
+            </a>
             {/**
              * SELECT VIEW FOR MOBILE
              */}
@@ -356,11 +358,11 @@ const LocationDestination: NextPage<{ id: string }> = ({ id }) => {
                                   <h2>
                                     {number
                                       ? "(" +
-                                        number.slice(0, 3) +
-                                        ") " +
-                                        number.slice(3, 6) +
-                                        "-" +
-                                        number.slice(6)
+                                      number.slice(0, 3) +
+                                      ") " +
+                                      number.slice(3, 6) +
+                                      "-" +
+                                      number.slice(6)
                                       : ""}
                                   </h2>
                                 </td>
