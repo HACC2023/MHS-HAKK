@@ -5,14 +5,14 @@
 
 @font-face {
     font-family: "Raleway";
-    src: url("../../public/Raleway-VariableFont_wght.ttf") format("truetype");
+    src: url("../../src/assets/fonts/Raleway-VariableFont_wght.woff2") format("woff2-variations");
     font-style: normal;
     font-display: swap;
 }
 
 @font-face {
     font-family: "Raleway";
-    src: url("../../public/Raleway-Italic-VariableFont_wght.ttf") format("truetype");
+    src: url("../../src/assets/fonts/Raleway-Italic-VariableFont_wght.woff2") format("woff2-variations");
     font-style: italic;
     font-display: swap;
 }
