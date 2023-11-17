@@ -9,7 +9,7 @@ export default function Navbar() {
   const [input, setInput] = useState("");
 
   return (<>
-    <div className="navbar flex top-0 h-20 flex-row border-b-2 bg-white absolute">
+    <div className="navbar flex top-0 h-20 flex-row border-b-2 bg-global border-b-global-dim absolute z-50">
       <div className="navbar-start w-fit sm:w-1/2 mr-5 sm:mr-0">
         <Link href="/Landing" className="btn btn-ghost my-auto h-16">
           <Image

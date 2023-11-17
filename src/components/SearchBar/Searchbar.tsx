@@ -38,7 +38,7 @@ const Autocomplete = (props: Props) => {
                 tabIndex={0}
             />
             {/* add this part */}
-            <div className="w-full dropdown-content bg-gray-100 top-14 max-h-96 overflow-auto flex-col rounded-md border">
+            <div className="w-full dropdown-content bg-global-dim dark:bg-sy top-14 max-h-96 overflow-auto flex-col rounded-md border dark:border-global">
                 <ul
                     className="menu menu-compact"
 
