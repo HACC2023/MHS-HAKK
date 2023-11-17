@@ -28,15 +28,15 @@ export default function searchPage() {
                         <p className="text-2xl font-semibold pt-4 text-dark-blue">1) Search by Clinic Name or Procedure Type</p>
                         <p className="text-xl font-medium pt-2 pl-10">Use the search bar above and enter a clinic name or the type of procedure</p>
                         <p className="text-2xl font-semibold pt-4 text-dark-blue">2) Check Information</p>
-                        <p className="text-xl font-medium pt-2 pl-10">Review the list of the clinics and their information</p>
+                        <p className="text-xl font-medium pt-2 pl-10">Review the list of clinics and their information</p>
                         <p className="text-2xl font-semibold pt-4 text-dark-blue">3) Contact Clinic</p>
                         <p className="text-xl font-medium pt-2 pl-10">Use the listed information to learn more about the clinic and to contact them directly</p>
 
                         <h1 className="text-4xl  font-semibold pt-8 text-center md:text-left">What is Med-QUEST?</h1>
-                        <p className="text-xl  font-medium pt-4">Med-QUEST is a government health insurance plan for the uninsured. QUEST covers a wide variety of healthcare services, so check if you may qualify for these benefits by checking</p>
+                        <p className="text-xl  font-medium pt-4">Med-QUEST is a government health insurance plan for the uninsured. QUEST covers a wide variety of healthcare services. Check if you qualify:</p>
                         <div className="flex justify-center">
                             <a className="normal-case btn text-lg font-semibold mt-6 h-14 bg-light-green hover:bg-hover-green text-green-gray border-0"
-                                target="_blank" href="https://medquest.hawaii.gov/en/contact-us.html">Med-QUEST Eligibilty</a>
+                                target="_blank" href="https://medquest.hawaii.gov/en/contact-us.html">Med-QUEST Eligibility</a>
                         </div>
                     </div>
                     <div className="hidden xl:block w-1/2">
