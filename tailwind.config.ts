@@ -18,6 +18,8 @@ export default {
         'dark-blue': '#2C6191',
         'med-blue': '#50AEC6',
         'hover-blue': '#4292a6',
+        "global": "var(--fallback-b1,oklch(var(--b1)/1))",
+        "global-dim": "var(--fallback-b2,oklch(var(--b2)/1))"
       },
       fontFamily: {
         sans: ['"Raleway"', ...fontFamily.sans],
@@ -25,5 +27,8 @@ export default {
       },
     },
   },
-  plugins: [require("@tailwindcss/typography"),require("daisyui")],
+  plugins: [
+    require("@tailwindcss/typography"),
+    require("daisyui")
+  ],
 } satisfies Config;

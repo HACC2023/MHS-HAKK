@@ -11,8 +11,9 @@ import Navbar from "~/components/Navbar";
 import { LoadingSpinner } from "~/components/Loading";
 import Link from "next/link";
 import { useRouter } from "next/router";
+import Head from "next/head";
 export const FormatURL = (url: string) => url.replace(/^https?:\/\//, '');
-const LeafletMap = dynamic(() => import("../components/LeafletMap"), {
+const LeafletMap = dynamic(() => import("../components/LeafletMap/map"), {
   ssr: false,
 });
 
@@ -61,19 +62,21 @@ const SearchPage: React.FC = () => {
       <ClinicResults centers={centers as CenterResult} />
     );
 
-  return (
+  return (<>
+    <Head>
+      <title>{(query?.length ? "Search results for '" + query + '\'' : "Search") + " - HelpCare"}</title>
+    </Head>
     <div
       className={
         "h-screen overflow-x-hidden font-tyler md:block md:overflow-y-auto " +
         (!mobileOnResultsView && "fixed overflow-y-hidden")
       }
     >
-      <Navbar />
+      <Navbar/>
       {/* Desktop view */}
       <div className="hidden h-[calc(100%-5rem)] w-screen md:flex">
         <div
-          className="0 
-                h-full w-1/5 flex-col bg-gray-100"
+          className="h-full w-13/5 flex-col bg-slate-100 dark:bg-global-dim"
         >
           <p className="mb-2 mt-4 text-center text-xl font-semibold">
             Search Filters:
@@ -96,7 +99,7 @@ const SearchPage: React.FC = () => {
         </div>
         <div
           className="h-full w-1/2 flex-col overflow-y-scroll
-                border-l-2 border-r-2 bg-white"
+                border-l-2 border-r-2 bg-global border-global"
         >
           <p className="mb-6 mt-4 rounded-xl text-center text-4xl font-semibold">
             Search Results:
@@ -147,14 +150,17 @@ const SearchPage: React.FC = () => {
               ).showModal()
             }
           >
-            Click for options
+            {(()=>{
+              const i = [insurance, procedure].reduce((count, param) => param === undefined ? count : ++count, 0);
+              return i === 0 ? "No filters applied" : i !== 1 ? i + " filters applied" : "1 filter applied";
+            })()}
           </button>
           <div className="join">
             <a
               onClick={() => setMORV(true)}
               className={
                 (mobileOnResultsView
-                  ? "bg-slate-200"
+                  ? "bg-slate-200 dark:bg-gray-700"
                   : "flex-grow bg-transparent") +
                 " join-item select-bordered flex flex-col content-center justify-center border border-[hsl(var(--bc)/var(--tw-border-opacity))] p-2 px-2 text-center"
               }
@@ -164,7 +170,7 @@ const SearchPage: React.FC = () => {
             <a
               onClick={() => setMORV(false)}
               className={
-                (!mobileOnResultsView ? "bg-slate-200" : "bg-transparent") +
+                (!mobileOnResultsView ? "bg-slate-200 dark:bg-gray-700" : "bg-transparent") +
                 " join-item select-bordered flex flex-col content-center justify-center border border-[hsl(var(--bc)/var(--tw-border-opacity))] p-2 px-2 text-center"
               }
             >
@@ -174,14 +180,14 @@ const SearchPage: React.FC = () => {
         </div>
         <div
           className={
-            mobileOnResultsView ? "flex-1" : "h-full flex-1 overflow-y-hidden"
+            mobileOnResultsView ? "flex-1" : "h-fit flex-1 overflow-y-hidden"
           }
         >
           {mobileOnResultsView ? Results : <LeafletMap key={0} />}
         </div>
       </div>
     </div>
-  );
+  </>);
 };
 
 export default SearchPage;
@@ -248,18 +254,22 @@ function ClinicResults(props: {
   return props.centers.map((c) => (
     <div
       className={
-        "mx-4 mb-4 rounded-xl border-2 border-gray-100 bg-gray-100 p-4"
+        "mx-4 mb-4 rounded-xl border-2 bg-global-dim dark:border-slate-800 p-4"
       }
       key={c.id}
     >
-      <div className="l-20 text-2xl font-semibold">
+      <div className="l-20 text-2xl font-semibold" title={
+                  c.names.length > 1
+                    ? "Also known as " + c.names.slice(1).join(", ")
+                    : undefined
+                }>
         <Link
           href={"/location/" + c.id}
           shallow={true}
-          className={"text-dark-blue"
+          className={"text-dark-blue dark:text-white"
 }
         >
-          {c.names} ({c.procedureTypeNames.join(", ")})
+          {c.names[0]} ({c.procedureTypeNames.join(", ")})
         </Link>
       </div>
 
@@ -267,7 +277,7 @@ function ClinicResults(props: {
         <div className="min-w-full break-words text-justify">
           {c.website && (
             <Link
-              className="italic text-blue-700 underline"
+              className="italic text-blue-700 dark:text-blue-400 underline"
               href={"https://" + FormatURL(c.website)}
               target="_blank"
             >
