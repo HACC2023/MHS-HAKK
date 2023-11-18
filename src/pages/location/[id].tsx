@@ -80,7 +80,7 @@ const LocationDestination: NextPage<{ id: string }> = ({ id }) => {
                 {data.procedureTypeNames.join(", ")}
               </div>
               <div className="flex w-full flex-wrap justify-center lg:justify-normal">
-                {data.procedureReviews.filter(procedure => procedure.hadQuest)
+                {data.procedureReviews.filter(procedure => procedure.covered)
                   .map((procedureReviews, index) => (
                     <div
                       key={index + 1}
